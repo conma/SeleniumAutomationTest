@@ -1,0 +1,5 @@
+begin
+    get http://google.com
+    get https://192.168.46.1/web-serviemanager/loginForm
+    get http://192.168.7.3/web-servicemanager/companyList/a/b/c/d/9
+end

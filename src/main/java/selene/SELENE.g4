@@ -22,8 +22,7 @@ assertTitle                         : 'assertTitle' TITLE;
 verifyText                          : 'verifyText' ELEMENT TEXT;
 verifyTitle                         : 'verifyTitle' TITLE;
 
-
-URL         : [.]+ ;
+URL         : [a-zA-Z:/.0-9-]+|[0-9+] ;
 ID          : [a-zA-Z_]+ ;
 NAME        : [a-zA-Z_]+ ;
 VARIABLENAME: [a-zA-Z_]+ ;
@@ -33,4 +32,4 @@ PARTIALLINKTEXT:[a-zA-Z_]+ ;
 TEXT        : [.]+ ;
 TITLE       : [.]+ ;
 NUMBER     : [0-9]+ ;
-WS     : [ \n\t]+ -> skip;
+WS     : [ \r\n\t]+ -> skip;
