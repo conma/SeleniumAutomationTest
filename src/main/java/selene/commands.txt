@@ -1,3 +1,7 @@
 begin
-    get http://google.com
+    get http://google.com:500?excution=e2s3
+    click a-43636bc47def
+    sendKeys aaaaaaa bbbbbbbbbb
+    verifyText abcde fghijal
+    verifyTitle fou3rw 0426fiowe
 end

@@ -3,7 +3,11 @@ package selene;
 import java.util.HashMap;
 import java.util.Map;
 
+import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
+import selene.SELENEParser.SendKeysContext;
+import selene.SELENEParser.VerifyTextContext;
+import selene.SELENEParser.VerifyTitleContext;
 
 public class MyListener extends SELENEBaseListener {
 
@@ -22,5 +26,28 @@ public class MyListener extends SELENEBaseListener {
     	System.out.println("url: " + url);
     	variables.put("name", "url");
     }
+    
+    @Override
+    public void exitClick(ClickContext ctx)
+    {
+    	System.out.println("click: " + ctx.string().getText());
+    }
+    
+    @Override
+    public void exitSendKeys(SendKeysContext ctx)
+    {
+    	System.out.println("sendKeys: " + ctx.string(0).getText() + " " + ctx.string(1).getText());
+    }
 
+    @Override
+    public void exitVerifyText(VerifyTextContext ctx)
+    {
+    	System.out.println("verifyText: " + ctx.string(0).getText() + " " + ctx.string(1).getText());
+    }
+
+    @Override
+    public void exitVerifyTitle(VerifyTitleContext ctx)
+    {
+    	System.out.println("verifyText: " + ctx.string(0).getText() + " " + ctx.string(1).getText());
+    }
 }

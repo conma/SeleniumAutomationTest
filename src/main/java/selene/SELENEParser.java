@@ -18,26 +18,30 @@ public class SELENEParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, T__11=12, DIGITS=13, HEX=14, STRING=15, WS=16;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, DIGITS=17, 
+		HEX=18, STRING=19, WS=20;
 	public static final int
-		RULE_program = 0, RULE_statement = 1, RULE_get = 2, RULE_url = 3, RULE_uri = 4, 
-		RULE_scheme = 5, RULE_host = 6, RULE_hostname = 7, RULE_hostnumber = 8, 
-		RULE_port = 9, RULE_path = 10, RULE_user = 11, RULE_login = 12, RULE_password = 13, 
-		RULE_frag = 14, RULE_query = 15, RULE_search = 16, RULE_searchparameter = 17, 
-		RULE_string = 18;
+		RULE_program = 0, RULE_statement = 1, RULE_get = 2, RULE_click = 3, RULE_sendKeys = 4, 
+		RULE_verifyText = 5, RULE_verifyTitle = 6, RULE_url = 7, RULE_uri = 8, 
+		RULE_scheme = 9, RULE_host = 10, RULE_hostname = 11, RULE_hostnumber = 12, 
+		RULE_port = 13, RULE_path = 14, RULE_user = 15, RULE_login = 16, RULE_password = 17, 
+		RULE_frag = 18, RULE_query = 19, RULE_search = 20, RULE_searchparameter = 21, 
+		RULE_element = 22, RULE_title = 23, RULE_string = 24;
 	public static final String[] ruleNames = {
-		"program", "statement", "get", "url", "uri", "scheme", "host", "hostname", 
-		"hostnumber", "port", "path", "user", "login", "password", "frag", "query", 
-		"search", "searchparameter", "string"
+		"program", "statement", "get", "click", "sendKeys", "verifyText", "verifyTitle", 
+		"url", "uri", "scheme", "host", "hostname", "hostnumber", "port", "path", 
+		"user", "login", "password", "frag", "query", "search", "searchparameter", 
+		"element", "title", "string"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'begin'", "'end'", "'get'", "'://'", "':'", "'/'", "'.'", "'@'", 
-		"'#'", "'?'", "'&'", "'='"
+		null, "'begin'", "'end'", "'get'", "'click'", "'sendKeys'", "'verifyText'", 
+		"'verifyTitle'", "'://'", "':'", "'/'", "'.'", "'@'", "'#'", "'?'", "'&'", 
+		"'='"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, "DIGITS", "HEX", "STRING", "WS"
+		null, null, null, null, null, "DIGITS", "HEX", "STRING", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -116,23 +120,23 @@ public class SELENEParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(38);
+			setState(50);
 			match(T__0);
-			setState(40); 
+			setState(52); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(39);
+				setState(51);
 				statement();
 				}
 				}
-				setState(42); 
+				setState(54); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__2 );
-			setState(44);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__6))) != 0) );
+			setState(56);
 			match(T__1);
 			}
 		}
@@ -150,6 +154,18 @@ public class SELENEParser extends Parser {
 	public static class StatementContext extends ParserRuleContext {
 		public GetContext get() {
 			return getRuleContext(GetContext.class,0);
+		}
+		public ClickContext click() {
+			return getRuleContext(ClickContext.class,0);
+		}
+		public SendKeysContext sendKeys() {
+			return getRuleContext(SendKeysContext.class,0);
+		}
+		public VerifyTextContext verifyText() {
+			return getRuleContext(VerifyTextContext.class,0);
+		}
+		public VerifyTitleContext verifyTitle() {
+			return getRuleContext(VerifyTitleContext.class,0);
 		}
 		public StatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -169,10 +185,46 @@ public class SELENEParser extends Parser {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_statement);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(46);
-			get();
+			setState(63);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__2:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(58);
+				get();
+				}
+				break;
+			case T__3:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(59);
+				click();
+				}
+				break;
+			case T__4:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(60);
+				sendKeys();
+				}
+				break;
+			case T__5:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(61);
+				verifyText();
+				}
+				break;
+			case T__6:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(62);
+				verifyTitle();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -210,10 +262,189 @@ public class SELENEParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(48);
+			setState(65);
 			match(T__2);
-			setState(49);
+			setState(66);
 			url();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ClickContext extends ParserRuleContext {
+		public StringContext string() {
+			return getRuleContext(StringContext.class,0);
+		}
+		public ClickContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_click; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).enterClick(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).exitClick(this);
+		}
+	}
+
+	public final ClickContext click() throws RecognitionException {
+		ClickContext _localctx = new ClickContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_click);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(68);
+			match(T__3);
+			setState(69);
+			string();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class SendKeysContext extends ParserRuleContext {
+		public List<StringContext> string() {
+			return getRuleContexts(StringContext.class);
+		}
+		public StringContext string(int i) {
+			return getRuleContext(StringContext.class,i);
+		}
+		public SendKeysContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_sendKeys; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).enterSendKeys(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).exitSendKeys(this);
+		}
+	}
+
+	public final SendKeysContext sendKeys() throws RecognitionException {
+		SendKeysContext _localctx = new SendKeysContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_sendKeys);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(71);
+			match(T__4);
+			setState(72);
+			string();
+			setState(73);
+			string();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class VerifyTextContext extends ParserRuleContext {
+		public List<StringContext> string() {
+			return getRuleContexts(StringContext.class);
+		}
+		public StringContext string(int i) {
+			return getRuleContext(StringContext.class,i);
+		}
+		public VerifyTextContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_verifyText; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).enterVerifyText(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).exitVerifyText(this);
+		}
+	}
+
+	public final VerifyTextContext verifyText() throws RecognitionException {
+		VerifyTextContext _localctx = new VerifyTextContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_verifyText);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(75);
+			match(T__5);
+			setState(76);
+			string();
+			setState(77);
+			string();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class VerifyTitleContext extends ParserRuleContext {
+		public List<StringContext> string() {
+			return getRuleContexts(StringContext.class);
+		}
+		public StringContext string(int i) {
+			return getRuleContext(StringContext.class,i);
+		}
+		public VerifyTitleContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_verifyTitle; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).enterVerifyTitle(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).exitVerifyTitle(this);
+		}
+	}
+
+	public final VerifyTitleContext verifyTitle() throws RecognitionException {
+		VerifyTitleContext _localctx = new VerifyTitleContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_verifyTitle);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(79);
+			match(T__6);
+			setState(80);
+			string();
+			setState(81);
+			string();
 			}
 		}
 		catch (RecognitionException re) {
@@ -247,11 +478,11 @@ public class SELENEParser extends Parser {
 
 	public final UrlContext url() throws RecognitionException {
 		UrlContext _localctx = new UrlContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_url);
+		enterRule(_localctx, 14, RULE_url);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51);
+			setState(83);
 			uri();
 			}
 		}
@@ -305,77 +536,77 @@ public class SELENEParser extends Parser {
 
 	public final UriContext uri() throws RecognitionException {
 		UriContext _localctx = new UriContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_uri);
+		enterRule(_localctx, 16, RULE_uri);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
+			setState(85);
 			scheme();
-			setState(54);
-			match(T__3);
-			setState(56);
+			setState(86);
+			match(T__7);
+			setState(88);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				{
-				setState(55);
+				setState(87);
 				login();
 				}
 				break;
 			}
-			setState(58);
+			setState(90);
 			host();
-			setState(61);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==T__4) {
-				{
-				setState(59);
-				match(T__4);
-				setState(60);
-				port();
-				}
-			}
-
-			setState(65);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==T__5) {
-				{
-				setState(63);
-				match(T__5);
-				setState(64);
-				path();
-				}
-			}
-
-			setState(68);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==T__9) {
-				{
-				setState(67);
-				query();
-				}
-			}
-
-			setState(71);
+			setState(93);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__8) {
 				{
-				setState(70);
+				setState(91);
+				match(T__8);
+				setState(92);
+				port();
+				}
+			}
+
+			setState(97);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T__9) {
+				{
+				setState(95);
+				match(T__9);
+				setState(96);
+				path();
+				}
+			}
+
+			setState(100);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T__13) {
+				{
+				setState(99);
+				query();
+				}
+			}
+
+			setState(103);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T__12) {
+				{
+				setState(102);
 				frag();
 				}
 			}
 
-			setState(74);
+			setState(106);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WS) {
 				{
-				setState(73);
+				setState(105);
 				match(WS);
 				}
 			}
@@ -413,11 +644,11 @@ public class SELENEParser extends Parser {
 
 	public final SchemeContext scheme() throws RecognitionException {
 		SchemeContext _localctx = new SchemeContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_scheme);
+		enterRule(_localctx, 18, RULE_scheme);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(76);
+			setState(108);
 			string();
 			}
 		}
@@ -455,33 +686,33 @@ public class SELENEParser extends Parser {
 
 	public final HostContext host() throws RecognitionException {
 		HostContext _localctx = new HostContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_host);
+		enterRule(_localctx, 20, RULE_host);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(79);
+			setState(111);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__5) {
+			if (_la==T__9) {
 				{
-				setState(78);
-				match(T__5);
+				setState(110);
+				match(T__9);
 				}
 			}
 
-			setState(83);
+			setState(115);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING:
 				{
-				setState(81);
+				setState(113);
 				hostname();
 				}
 				break;
 			case DIGITS:
 				{
-				setState(82);
+				setState(114);
 				hostnumber();
 				}
 				break;
@@ -524,26 +755,26 @@ public class SELENEParser extends Parser {
 
 	public final HostnameContext hostname() throws RecognitionException {
 		HostnameContext _localctx = new HostnameContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_hostname);
+		enterRule(_localctx, 22, RULE_hostname);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(117);
 			string();
-			setState(90);
+			setState(122);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__6) {
+			while (_la==T__10) {
 				{
 				{
-				setState(86);
-				match(T__6);
-				setState(87);
+				setState(118);
+				match(T__10);
+				setState(119);
 				string();
 				}
 				}
-				setState(92);
+				setState(124);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -581,23 +812,23 @@ public class SELENEParser extends Parser {
 
 	public final HostnumberContext hostnumber() throws RecognitionException {
 		HostnumberContext _localctx = new HostnumberContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_hostnumber);
+		enterRule(_localctx, 24, RULE_hostnumber);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(93);
+			setState(125);
 			match(DIGITS);
-			setState(94);
-			match(T__6);
-			setState(95);
+			setState(126);
+			match(T__10);
+			setState(127);
 			match(DIGITS);
-			setState(96);
-			match(T__6);
-			setState(97);
+			setState(128);
+			match(T__10);
+			setState(129);
 			match(DIGITS);
-			setState(98);
-			match(T__6);
-			setState(99);
+			setState(130);
+			match(T__10);
+			setState(131);
 			match(DIGITS);
 			}
 		}
@@ -630,11 +861,11 @@ public class SELENEParser extends Parser {
 
 	public final PortContext port() throws RecognitionException {
 		PortContext _localctx = new PortContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_port);
+		enterRule(_localctx, 26, RULE_port);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(101);
+			setState(133);
 			match(DIGITS);
 			}
 		}
@@ -672,26 +903,26 @@ public class SELENEParser extends Parser {
 
 	public final PathContext path() throws RecognitionException {
 		PathContext _localctx = new PathContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_path);
+		enterRule(_localctx, 28, RULE_path);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(103);
+			setState(135);
 			string();
-			setState(108);
+			setState(140);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__5) {
+			while (_la==T__9) {
 				{
 				{
-				setState(104);
-				match(T__5);
-				setState(105);
+				setState(136);
+				match(T__9);
+				setState(137);
 				string();
 				}
 				}
-				setState(110);
+				setState(142);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -728,11 +959,11 @@ public class SELENEParser extends Parser {
 
 	public final UserContext user() throws RecognitionException {
 		UserContext _localctx = new UserContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_user);
+		enterRule(_localctx, 30, RULE_user);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(111);
+			setState(143);
 			string();
 			}
 		}
@@ -770,18 +1001,18 @@ public class SELENEParser extends Parser {
 
 	public final LoginContext login() throws RecognitionException {
 		LoginContext _localctx = new LoginContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_login);
+		enterRule(_localctx, 32, RULE_login);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(113);
+			setState(145);
 			user();
-			setState(114);
-			match(T__4);
-			setState(115);
+			setState(146);
+			match(T__8);
+			setState(147);
 			password();
-			setState(116);
-			match(T__7);
+			setState(148);
+			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -815,11 +1046,11 @@ public class SELENEParser extends Parser {
 
 	public final PasswordContext password() throws RecognitionException {
 		PasswordContext _localctx = new PasswordContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_password);
+		enterRule(_localctx, 34, RULE_password);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(118);
+			setState(150);
 			string();
 			}
 		}
@@ -854,14 +1085,14 @@ public class SELENEParser extends Parser {
 
 	public final FragContext frag() throws RecognitionException {
 		FragContext _localctx = new FragContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_frag);
+		enterRule(_localctx, 36, RULE_frag);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(120);
-			match(T__8);
-			setState(121);
+			setState(152);
+			match(T__12);
+			setState(153);
 			string();
 			}
 			}
@@ -897,14 +1128,14 @@ public class SELENEParser extends Parser {
 
 	public final QueryContext query() throws RecognitionException {
 		QueryContext _localctx = new QueryContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_query);
+		enterRule(_localctx, 38, RULE_query);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(123);
-			match(T__9);
-			setState(124);
+			setState(155);
+			match(T__13);
+			setState(156);
 			search();
 			}
 			}
@@ -943,26 +1174,26 @@ public class SELENEParser extends Parser {
 
 	public final SearchContext search() throws RecognitionException {
 		SearchContext _localctx = new SearchContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_search);
+		enterRule(_localctx, 40, RULE_search);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(126);
+			setState(158);
 			searchparameter();
-			setState(131);
+			setState(163);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__10) {
+			while (_la==T__14) {
 				{
 				{
-				setState(127);
-				match(T__10);
-				setState(128);
+				setState(159);
+				match(T__14);
+				setState(160);
 				searchparameter();
 				}
 				}
-				setState(133);
+				setState(165);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1004,38 +1235,38 @@ public class SELENEParser extends Parser {
 
 	public final SearchparameterContext searchparameter() throws RecognitionException {
 		SearchparameterContext _localctx = new SearchparameterContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_searchparameter);
+		enterRule(_localctx, 42, RULE_searchparameter);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(134);
+			setState(166);
 			string();
-			setState(141);
+			setState(173);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__11) {
+			if (_la==T__15) {
 				{
-				setState(135);
-				match(T__11);
-				setState(139);
+				setState(167);
+				match(T__15);
+				setState(171);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case STRING:
 					{
-					setState(136);
+					setState(168);
 					string();
 					}
 					break;
 				case DIGITS:
 					{
-					setState(137);
+					setState(169);
 					match(DIGITS);
 					}
 					break;
 				case HEX:
 					{
-					setState(138);
+					setState(170);
 					match(HEX);
 					}
 					break;
@@ -1045,6 +1276,100 @@ public class SELENEParser extends Parser {
 				}
 			}
 
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ElementContext extends ParserRuleContext {
+		public StringContext string() {
+			return getRuleContext(StringContext.class,0);
+		}
+		public ElementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_element; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).enterElement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).exitElement(this);
+		}
+	}
+
+	public final ElementContext element() throws RecognitionException {
+		ElementContext _localctx = new ElementContext(_ctx, getState());
+		enterRule(_localctx, 44, RULE_element);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(175);
+			string();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class TitleContext extends ParserRuleContext {
+		public List<StringContext> string() {
+			return getRuleContexts(StringContext.class);
+		}
+		public StringContext string(int i) {
+			return getRuleContext(StringContext.class,i);
+		}
+		public TitleContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_title; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).enterTitle(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SELENEListener ) ((SELENEListener)listener).exitTitle(this);
+		}
+	}
+
+	public final TitleContext title() throws RecognitionException {
+		TitleContext _localctx = new TitleContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_title);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(178); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(177);
+				string();
+				}
+				}
+				setState(180); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==STRING );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1076,11 +1401,11 @@ public class SELENEParser extends Parser {
 
 	public final StringContext string() throws RecognitionException {
 		StringContext _localctx = new StringContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_string);
+		enterRule(_localctx, 48, RULE_string);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(143);
+			setState(182);
 			match(STRING);
 			}
 		}
@@ -1096,44 +1421,59 @@ public class SELENEParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\22\u0094\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\26\u00bb\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\3\2\3\2\6\2+\n\2\r\2\16\2,\3\2\3\2\3\3\3\3\3\4\3"+
-		"\4\3\4\3\5\3\5\3\6\3\6\3\6\5\6;\n\6\3\6\3\6\3\6\5\6@\n\6\3\6\3\6\5\6D"+
-		"\n\6\3\6\5\6G\n\6\3\6\5\6J\n\6\3\6\5\6M\n\6\3\7\3\7\3\b\5\bR\n\b\3\b\3"+
-		"\b\5\bV\n\b\3\t\3\t\3\t\7\t[\n\t\f\t\16\t^\13\t\3\n\3\n\3\n\3\n\3\n\3"+
-		"\n\3\n\3\n\3\13\3\13\3\f\3\f\3\f\7\fm\n\f\f\f\16\fp\13\f\3\r\3\r\3\16"+
-		"\3\16\3\16\3\16\3\16\3\17\3\17\3\20\3\20\3\20\3\21\3\21\3\21\3\22\3\22"+
-		"\3\22\7\22\u0084\n\22\f\22\16\22\u0087\13\22\3\23\3\23\3\23\3\23\3\23"+
-		"\5\23\u008e\n\23\5\23\u0090\n\23\3\24\3\24\3\24\2\2\25\2\4\6\b\n\f\16"+
-		"\20\22\24\26\30\32\34\36 \"$&\2\2\2\u008f\2(\3\2\2\2\4\60\3\2\2\2\6\62"+
-		"\3\2\2\2\b\65\3\2\2\2\n\67\3\2\2\2\fN\3\2\2\2\16Q\3\2\2\2\20W\3\2\2\2"+
-		"\22_\3\2\2\2\24g\3\2\2\2\26i\3\2\2\2\30q\3\2\2\2\32s\3\2\2\2\34x\3\2\2"+
-		"\2\36z\3\2\2\2 }\3\2\2\2\"\u0080\3\2\2\2$\u0088\3\2\2\2&\u0091\3\2\2\2"+
-		"(*\7\3\2\2)+\5\4\3\2*)\3\2\2\2+,\3\2\2\2,*\3\2\2\2,-\3\2\2\2-.\3\2\2\2"+
-		"./\7\4\2\2/\3\3\2\2\2\60\61\5\6\4\2\61\5\3\2\2\2\62\63\7\5\2\2\63\64\5"+
-		"\b\5\2\64\7\3\2\2\2\65\66\5\n\6\2\66\t\3\2\2\2\678\5\f\7\28:\7\6\2\29"+
-		";\5\32\16\2:9\3\2\2\2:;\3\2\2\2;<\3\2\2\2<?\5\16\b\2=>\7\7\2\2>@\5\24"+
-		"\13\2?=\3\2\2\2?@\3\2\2\2@C\3\2\2\2AB\7\b\2\2BD\5\26\f\2CA\3\2\2\2CD\3"+
-		"\2\2\2DF\3\2\2\2EG\5 \21\2FE\3\2\2\2FG\3\2\2\2GI\3\2\2\2HJ\5\36\20\2I"+
-		"H\3\2\2\2IJ\3\2\2\2JL\3\2\2\2KM\7\22\2\2LK\3\2\2\2LM\3\2\2\2M\13\3\2\2"+
-		"\2NO\5&\24\2O\r\3\2\2\2PR\7\b\2\2QP\3\2\2\2QR\3\2\2\2RU\3\2\2\2SV\5\20"+
-		"\t\2TV\5\22\n\2US\3\2\2\2UT\3\2\2\2V\17\3\2\2\2W\\\5&\24\2XY\7\t\2\2Y"+
-		"[\5&\24\2ZX\3\2\2\2[^\3\2\2\2\\Z\3\2\2\2\\]\3\2\2\2]\21\3\2\2\2^\\\3\2"+
-		"\2\2_`\7\17\2\2`a\7\t\2\2ab\7\17\2\2bc\7\t\2\2cd\7\17\2\2de\7\t\2\2ef"+
-		"\7\17\2\2f\23\3\2\2\2gh\7\17\2\2h\25\3\2\2\2in\5&\24\2jk\7\b\2\2km\5&"+
-		"\24\2lj\3\2\2\2mp\3\2\2\2nl\3\2\2\2no\3\2\2\2o\27\3\2\2\2pn\3\2\2\2qr"+
-		"\5&\24\2r\31\3\2\2\2st\5\30\r\2tu\7\7\2\2uv\5\34\17\2vw\7\n\2\2w\33\3"+
-		"\2\2\2xy\5&\24\2y\35\3\2\2\2z{\7\13\2\2{|\5&\24\2|\37\3\2\2\2}~\7\f\2"+
-		"\2~\177\5\"\22\2\177!\3\2\2\2\u0080\u0085\5$\23\2\u0081\u0082\7\r\2\2"+
-		"\u0082\u0084\5$\23\2\u0083\u0081\3\2\2\2\u0084\u0087\3\2\2\2\u0085\u0083"+
-		"\3\2\2\2\u0085\u0086\3\2\2\2\u0086#\3\2\2\2\u0087\u0085\3\2\2\2\u0088"+
-		"\u008f\5&\24\2\u0089\u008d\7\16\2\2\u008a\u008e\5&\24\2\u008b\u008e\7"+
-		"\17\2\2\u008c\u008e\7\20\2\2\u008d\u008a\3\2\2\2\u008d\u008b\3\2\2\2\u008d"+
-		"\u008c\3\2\2\2\u008e\u0090\3\2\2\2\u008f\u0089\3\2\2\2\u008f\u0090\3\2"+
-		"\2\2\u0090%\3\2\2\2\u0091\u0092\7\21\2\2\u0092\'\3\2\2\2\20,:?CFILQU\\"+
-		"n\u0085\u008d\u008f";
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
+		"\4\32\t\32\3\2\3\2\6\2\67\n\2\r\2\16\28\3\2\3\2\3\3\3\3\3\3\3\3\3\3\5"+
+		"\3B\n\3\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\b\3"+
+		"\b\3\b\3\b\3\t\3\t\3\n\3\n\3\n\5\n[\n\n\3\n\3\n\3\n\5\n`\n\n\3\n\3\n\5"+
+		"\nd\n\n\3\n\5\ng\n\n\3\n\5\nj\n\n\3\n\5\nm\n\n\3\13\3\13\3\f\5\fr\n\f"+
+		"\3\f\3\f\5\fv\n\f\3\r\3\r\3\r\7\r{\n\r\f\r\16\r~\13\r\3\16\3\16\3\16\3"+
+		"\16\3\16\3\16\3\16\3\16\3\17\3\17\3\20\3\20\3\20\7\20\u008d\n\20\f\20"+
+		"\16\20\u0090\13\20\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\23\3\23\3\24\3"+
+		"\24\3\24\3\25\3\25\3\25\3\26\3\26\3\26\7\26\u00a4\n\26\f\26\16\26\u00a7"+
+		"\13\26\3\27\3\27\3\27\3\27\3\27\5\27\u00ae\n\27\5\27\u00b0\n\27\3\30\3"+
+		"\30\3\31\6\31\u00b5\n\31\r\31\16\31\u00b6\3\32\3\32\3\32\2\2\33\2\4\6"+
+		"\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\2\2\2\u00b5\2\64\3\2"+
+		"\2\2\4A\3\2\2\2\6C\3\2\2\2\bF\3\2\2\2\nI\3\2\2\2\fM\3\2\2\2\16Q\3\2\2"+
+		"\2\20U\3\2\2\2\22W\3\2\2\2\24n\3\2\2\2\26q\3\2\2\2\30w\3\2\2\2\32\177"+
+		"\3\2\2\2\34\u0087\3\2\2\2\36\u0089\3\2\2\2 \u0091\3\2\2\2\"\u0093\3\2"+
+		"\2\2$\u0098\3\2\2\2&\u009a\3\2\2\2(\u009d\3\2\2\2*\u00a0\3\2\2\2,\u00a8"+
+		"\3\2\2\2.\u00b1\3\2\2\2\60\u00b4\3\2\2\2\62\u00b8\3\2\2\2\64\66\7\3\2"+
+		"\2\65\67\5\4\3\2\66\65\3\2\2\2\678\3\2\2\28\66\3\2\2\289\3\2\2\29:\3\2"+
+		"\2\2:;\7\4\2\2;\3\3\2\2\2<B\5\6\4\2=B\5\b\5\2>B\5\n\6\2?B\5\f\7\2@B\5"+
+		"\16\b\2A<\3\2\2\2A=\3\2\2\2A>\3\2\2\2A?\3\2\2\2A@\3\2\2\2B\5\3\2\2\2C"+
+		"D\7\5\2\2DE\5\20\t\2E\7\3\2\2\2FG\7\6\2\2GH\5\62\32\2H\t\3\2\2\2IJ\7\7"+
+		"\2\2JK\5\62\32\2KL\5\62\32\2L\13\3\2\2\2MN\7\b\2\2NO\5\62\32\2OP\5\62"+
+		"\32\2P\r\3\2\2\2QR\7\t\2\2RS\5\62\32\2ST\5\62\32\2T\17\3\2\2\2UV\5\22"+
+		"\n\2V\21\3\2\2\2WX\5\24\13\2XZ\7\n\2\2Y[\5\"\22\2ZY\3\2\2\2Z[\3\2\2\2"+
+		"[\\\3\2\2\2\\_\5\26\f\2]^\7\13\2\2^`\5\34\17\2_]\3\2\2\2_`\3\2\2\2`c\3"+
+		"\2\2\2ab\7\f\2\2bd\5\36\20\2ca\3\2\2\2cd\3\2\2\2df\3\2\2\2eg\5(\25\2f"+
+		"e\3\2\2\2fg\3\2\2\2gi\3\2\2\2hj\5&\24\2ih\3\2\2\2ij\3\2\2\2jl\3\2\2\2"+
+		"km\7\26\2\2lk\3\2\2\2lm\3\2\2\2m\23\3\2\2\2no\5\62\32\2o\25\3\2\2\2pr"+
+		"\7\f\2\2qp\3\2\2\2qr\3\2\2\2ru\3\2\2\2sv\5\30\r\2tv\5\32\16\2us\3\2\2"+
+		"\2ut\3\2\2\2v\27\3\2\2\2w|\5\62\32\2xy\7\r\2\2y{\5\62\32\2zx\3\2\2\2{"+
+		"~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\31\3\2\2\2~|\3\2\2\2\177\u0080\7\23\2\2"+
+		"\u0080\u0081\7\r\2\2\u0081\u0082\7\23\2\2\u0082\u0083\7\r\2\2\u0083\u0084"+
+		"\7\23\2\2\u0084\u0085\7\r\2\2\u0085\u0086\7\23\2\2\u0086\33\3\2\2\2\u0087"+
+		"\u0088\7\23\2\2\u0088\35\3\2\2\2\u0089\u008e\5\62\32\2\u008a\u008b\7\f"+
+		"\2\2\u008b\u008d\5\62\32\2\u008c\u008a\3\2\2\2\u008d\u0090\3\2\2\2\u008e"+
+		"\u008c\3\2\2\2\u008e\u008f\3\2\2\2\u008f\37\3\2\2\2\u0090\u008e\3\2\2"+
+		"\2\u0091\u0092\5\62\32\2\u0092!\3\2\2\2\u0093\u0094\5 \21\2\u0094\u0095"+
+		"\7\13\2\2\u0095\u0096\5$\23\2\u0096\u0097\7\16\2\2\u0097#\3\2\2\2\u0098"+
+		"\u0099\5\62\32\2\u0099%\3\2\2\2\u009a\u009b\7\17\2\2\u009b\u009c\5\62"+
+		"\32\2\u009c\'\3\2\2\2\u009d\u009e\7\20\2\2\u009e\u009f\5*\26\2\u009f)"+
+		"\3\2\2\2\u00a0\u00a5\5,\27\2\u00a1\u00a2\7\21\2\2\u00a2\u00a4\5,\27\2"+
+		"\u00a3\u00a1\3\2\2\2\u00a4\u00a7\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a6"+
+		"\3\2\2\2\u00a6+\3\2\2\2\u00a7\u00a5\3\2\2\2\u00a8\u00af\5\62\32\2\u00a9"+
+		"\u00ad\7\22\2\2\u00aa\u00ae\5\62\32\2\u00ab\u00ae\7\23\2\2\u00ac\u00ae"+
+		"\7\24\2\2\u00ad\u00aa\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ad\u00ac\3\2\2\2"+
+		"\u00ae\u00b0\3\2\2\2\u00af\u00a9\3\2\2\2\u00af\u00b0\3\2\2\2\u00b0-\3"+
+		"\2\2\2\u00b1\u00b2\5\62\32\2\u00b2/\3\2\2\2\u00b3\u00b5\5\62\32\2\u00b4"+
+		"\u00b3\3\2\2\2\u00b5\u00b6\3\2\2\2\u00b6\u00b4\3\2\2\2\u00b6\u00b7\3\2"+
+		"\2\2\u00b7\61\3\2\2\2\u00b8\u00b9\7\25\2\2\u00b9\63\3\2\2\2\228AZ_cfi"+
+		"lqu|\u008e\u00a5\u00ad\u00af\u00b6";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
