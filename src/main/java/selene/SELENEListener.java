@@ -38,123 +38,163 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitGet(SELENEParser.GetContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#quit}.
+	 * Enter a parse tree produced by {@link SELENEParser#url}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuit(SELENEParser.QuitContext ctx);
+	void enterUrl(SELENEParser.UrlContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#quit}.
+	 * Exit a parse tree produced by {@link SELENEParser#url}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuit(SELENEParser.QuitContext ctx);
+	void exitUrl(SELENEParser.UrlContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#findElementById}.
+	 * Enter a parse tree produced by {@link SELENEParser#uri}.
 	 * @param ctx the parse tree
 	 */
-	void enterFindElementById(SELENEParser.FindElementByIdContext ctx);
+	void enterUri(SELENEParser.UriContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#findElementById}.
+	 * Exit a parse tree produced by {@link SELENEParser#uri}.
 	 * @param ctx the parse tree
 	 */
-	void exitFindElementById(SELENEParser.FindElementByIdContext ctx);
+	void exitUri(SELENEParser.UriContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#findElementByName}.
+	 * Enter a parse tree produced by {@link SELENEParser#scheme}.
 	 * @param ctx the parse tree
 	 */
-	void enterFindElementByName(SELENEParser.FindElementByNameContext ctx);
+	void enterScheme(SELENEParser.SchemeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#findElementByName}.
+	 * Exit a parse tree produced by {@link SELENEParser#scheme}.
 	 * @param ctx the parse tree
 	 */
-	void exitFindElementByName(SELENEParser.FindElementByNameContext ctx);
+	void exitScheme(SELENEParser.SchemeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#findElementByLinkText}.
+	 * Enter a parse tree produced by {@link SELENEParser#host}.
 	 * @param ctx the parse tree
 	 */
-	void enterFindElementByLinkText(SELENEParser.FindElementByLinkTextContext ctx);
+	void enterHost(SELENEParser.HostContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#findElementByLinkText}.
+	 * Exit a parse tree produced by {@link SELENEParser#host}.
 	 * @param ctx the parse tree
 	 */
-	void exitFindElementByLinkText(SELENEParser.FindElementByLinkTextContext ctx);
+	void exitHost(SELENEParser.HostContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#findElementByPartialLinkText}.
+	 * Enter a parse tree produced by {@link SELENEParser#hostname}.
 	 * @param ctx the parse tree
 	 */
-	void enterFindElementByPartialLinkText(SELENEParser.FindElementByPartialLinkTextContext ctx);
+	void enterHostname(SELENEParser.HostnameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#findElementByPartialLinkText}.
+	 * Exit a parse tree produced by {@link SELENEParser#hostname}.
 	 * @param ctx the parse tree
 	 */
-	void exitFindElementByPartialLinkText(SELENEParser.FindElementByPartialLinkTextContext ctx);
+	void exitHostname(SELENEParser.HostnameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#clear}.
+	 * Enter a parse tree produced by {@link SELENEParser#hostnumber}.
 	 * @param ctx the parse tree
 	 */
-	void enterClear(SELENEParser.ClearContext ctx);
+	void enterHostnumber(SELENEParser.HostnumberContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#clear}.
+	 * Exit a parse tree produced by {@link SELENEParser#hostnumber}.
 	 * @param ctx the parse tree
 	 */
-	void exitClear(SELENEParser.ClearContext ctx);
+	void exitHostnumber(SELENEParser.HostnumberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#sendKeys}.
+	 * Enter a parse tree produced by {@link SELENEParser#port}.
 	 * @param ctx the parse tree
 	 */
-	void enterSendKeys(SELENEParser.SendKeysContext ctx);
+	void enterPort(SELENEParser.PortContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#sendKeys}.
+	 * Exit a parse tree produced by {@link SELENEParser#port}.
 	 * @param ctx the parse tree
 	 */
-	void exitSendKeys(SELENEParser.SendKeysContext ctx);
+	void exitPort(SELENEParser.PortContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#click}.
+	 * Enter a parse tree produced by {@link SELENEParser#path}.
 	 * @param ctx the parse tree
 	 */
-	void enterClick(SELENEParser.ClickContext ctx);
+	void enterPath(SELENEParser.PathContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#click}.
+	 * Exit a parse tree produced by {@link SELENEParser#path}.
 	 * @param ctx the parse tree
 	 */
-	void exitClick(SELENEParser.ClickContext ctx);
+	void exitPath(SELENEParser.PathContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#assertText}.
+	 * Enter a parse tree produced by {@link SELENEParser#user}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssertText(SELENEParser.AssertTextContext ctx);
+	void enterUser(SELENEParser.UserContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#assertText}.
+	 * Exit a parse tree produced by {@link SELENEParser#user}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssertText(SELENEParser.AssertTextContext ctx);
+	void exitUser(SELENEParser.UserContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#assertTitle}.
+	 * Enter a parse tree produced by {@link SELENEParser#login}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssertTitle(SELENEParser.AssertTitleContext ctx);
+	void enterLogin(SELENEParser.LoginContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#assertTitle}.
+	 * Exit a parse tree produced by {@link SELENEParser#login}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssertTitle(SELENEParser.AssertTitleContext ctx);
+	void exitLogin(SELENEParser.LoginContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#verifyText}.
+	 * Enter a parse tree produced by {@link SELENEParser#password}.
 	 * @param ctx the parse tree
 	 */
-	void enterVerifyText(SELENEParser.VerifyTextContext ctx);
+	void enterPassword(SELENEParser.PasswordContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#verifyText}.
+	 * Exit a parse tree produced by {@link SELENEParser#password}.
 	 * @param ctx the parse tree
 	 */
-	void exitVerifyText(SELENEParser.VerifyTextContext ctx);
+	void exitPassword(SELENEParser.PasswordContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#verifyTitle}.
+	 * Enter a parse tree produced by {@link SELENEParser#frag}.
 	 * @param ctx the parse tree
 	 */
-	void enterVerifyTitle(SELENEParser.VerifyTitleContext ctx);
+	void enterFrag(SELENEParser.FragContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#verifyTitle}.
+	 * Exit a parse tree produced by {@link SELENEParser#frag}.
 	 * @param ctx the parse tree
 	 */
-	void exitVerifyTitle(SELENEParser.VerifyTitleContext ctx);
+	void exitFrag(SELENEParser.FragContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#query}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuery(SELENEParser.QueryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#query}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuery(SELENEParser.QueryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#search}.
+	 * @param ctx the parse tree
+	 */
+	void enterSearch(SELENEParser.SearchContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#search}.
+	 * @param ctx the parse tree
+	 */
+	void exitSearch(SELENEParser.SearchContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#searchparameter}.
+	 * @param ctx the parse tree
+	 */
+	void enterSearchparameter(SELENEParser.SearchparameterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#searchparameter}.
+	 * @param ctx the parse tree
+	 */
+	void exitSearchparameter(SELENEParser.SearchparameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(SELENEParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(SELENEParser.StringContext ctx);
 }

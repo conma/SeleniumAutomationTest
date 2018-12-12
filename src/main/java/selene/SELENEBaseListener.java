@@ -52,145 +52,193 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQuit(SELENEParser.QuitContext ctx) { }
+	@Override public void enterUrl(SELENEParser.UrlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuit(SELENEParser.QuitContext ctx) { }
+	@Override public void exitUrl(SELENEParser.UrlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFindElementById(SELENEParser.FindElementByIdContext ctx) { }
+	@Override public void enterUri(SELENEParser.UriContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFindElementById(SELENEParser.FindElementByIdContext ctx) { }
+	@Override public void exitUri(SELENEParser.UriContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFindElementByName(SELENEParser.FindElementByNameContext ctx) { }
+	@Override public void enterScheme(SELENEParser.SchemeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFindElementByName(SELENEParser.FindElementByNameContext ctx) { }
+	@Override public void exitScheme(SELENEParser.SchemeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFindElementByLinkText(SELENEParser.FindElementByLinkTextContext ctx) { }
+	@Override public void enterHost(SELENEParser.HostContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFindElementByLinkText(SELENEParser.FindElementByLinkTextContext ctx) { }
+	@Override public void exitHost(SELENEParser.HostContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFindElementByPartialLinkText(SELENEParser.FindElementByPartialLinkTextContext ctx) { }
+	@Override public void enterHostname(SELENEParser.HostnameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFindElementByPartialLinkText(SELENEParser.FindElementByPartialLinkTextContext ctx) { }
+	@Override public void exitHostname(SELENEParser.HostnameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClear(SELENEParser.ClearContext ctx) { }
+	@Override public void enterHostnumber(SELENEParser.HostnumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClear(SELENEParser.ClearContext ctx) { }
+	@Override public void exitHostnumber(SELENEParser.HostnumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSendKeys(SELENEParser.SendKeysContext ctx) { }
+	@Override public void enterPort(SELENEParser.PortContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSendKeys(SELENEParser.SendKeysContext ctx) { }
+	@Override public void exitPort(SELENEParser.PortContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClick(SELENEParser.ClickContext ctx) { }
+	@Override public void enterPath(SELENEParser.PathContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClick(SELENEParser.ClickContext ctx) { }
+	@Override public void exitPath(SELENEParser.PathContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssertText(SELENEParser.AssertTextContext ctx) { }
+	@Override public void enterUser(SELENEParser.UserContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssertText(SELENEParser.AssertTextContext ctx) { }
+	@Override public void exitUser(SELENEParser.UserContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssertTitle(SELENEParser.AssertTitleContext ctx) { }
+	@Override public void enterLogin(SELENEParser.LoginContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssertTitle(SELENEParser.AssertTitleContext ctx) { }
+	@Override public void exitLogin(SELENEParser.LoginContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVerifyText(SELENEParser.VerifyTextContext ctx) { }
+	@Override public void enterPassword(SELENEParser.PasswordContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVerifyText(SELENEParser.VerifyTextContext ctx) { }
+	@Override public void exitPassword(SELENEParser.PasswordContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVerifyTitle(SELENEParser.VerifyTitleContext ctx) { }
+	@Override public void enterFrag(SELENEParser.FragContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVerifyTitle(SELENEParser.VerifyTitleContext ctx) { }
+	@Override public void exitFrag(SELENEParser.FragContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterQuery(SELENEParser.QueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitQuery(SELENEParser.QueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSearch(SELENEParser.SearchContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSearch(SELENEParser.SearchContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSearchparameter(SELENEParser.SearchparameterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSearchparameter(SELENEParser.SearchparameterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString(SELENEParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(SELENEParser.StringContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
