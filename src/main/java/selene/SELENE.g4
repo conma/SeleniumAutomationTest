@@ -1,13 +1,14 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get | click | sendKeys | verifyText | verifyTitle;
+statement : get | click | sendKeys | verifyText | verifyTitle | updateDB;
 
-get       : 'get' url;
-click     : 'click' string;
+get           : 'get' url;
+click         : 'click' string;
 sendKeys      : 'sendKeys' string string;
-verifyText    : 'verifyText' string string;
-verifyTitle   : 'verifyTitle' string string;
+verifyText    : 'verifyText' element string;
+verifyTitle   : 'verifyTitle' string;
+updateDB      : 'updateDB' string;
 
 /*
 https://github.com/antlr/grammars-v4/blob/master/url/url.g4

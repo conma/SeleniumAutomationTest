@@ -17,7 +17,9 @@ public class SELENE {
 
             // Start parsing
             parser.program();
-        } catch (IOException e) {
+        }
+        catch ( IOException e )
+        {
             e.printStackTrace();
         }
 
