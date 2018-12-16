@@ -1,46 +1,36 @@
 package selenium;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumFirefox {
-    public static void main( String[] args )
-    {
-        System.setProperty( "webdriver.gecko.driver", "driver/geckodriver.exe" );
+    public static void main(String[] args) {
+        System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
         // Create a new instance of the Firefox driver
 
         WebDriver firefoxDriver = new FirefoxDriver();
-        // And now use this to visit Google
-        firefoxDriver.get( "http://www.google.com" );
+        firefoxDriver.get("http://localhost:8888/web-servicemanager/loginForm");
 
         // Find the text input element by its name
-        WebElement element = firefoxDriver.findElement( By.name( "q" ) );
+        WebElement inputUserName = firefoxDriver.findElement(By.name("j_username"));
+        WebElement inputPassword = firefoxDriver.findElement(By.name("j_password"));
+        WebElement btnLogin = firefoxDriver.findElement(By.name("login"));
 
-        // Enter something to search for
-        element.sendKeys( "Cheese!" );
-
-        // Now submit the form. WebDriver will find the form for us from the element
-        element.submit();
-
+        inputUserName.sendKeys("test");
+        inputPassword.sendKeys("abc@1235");
+        btnLogin.click();
+        List<WebElement> elements = firefoxDriver.findElements(By.tagName("input"));
+        for (WebElement element : elements) {
+            System.out.println(element.getAttribute("type"));
+        }
+        WebElement companyDetail10013 = firefoxDriver.findElement(By.xpath("//tbody//tr[10]//td[5]//input[1]"));
+        companyDetail10013.click();
         // Check the title of the page
-        System.out.println( "Page title is: " + firefoxDriver.getTitle() );
-
-        // Google's search is rendered dynamically with JavaScript.
-        // Wait for the page to load, timeout after 10 seconds
-        ( new WebDriverWait( firefoxDriver, 10 ) ).until( new ExpectedCondition<Boolean>()
-        {
-            public Boolean apply( WebDriver d )
-            {
-                return d.getTitle().toLowerCase().startsWith( "cheese!" );
-            }
-        } );
-
-        // Should see: "cheese! - Google Search"
-        System.out.println( "Page title is: " + firefoxDriver.getTitle() );
+        System.out.println("Page title is: " + firefoxDriver.getTitle());
 
         // Close the browser
         firefoxDriver.quit();
