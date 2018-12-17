@@ -1,16 +1,18 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get | click | sendKeys | verifyText | verifyTitle | updateDB | updateTCs;
+statement : get | click | sendKeys | verifyText | verifyTitle | updateDB |
+            updateTCs | testcaseId;
 
 updateTCs     : 'updateTCs' string;
-
 get           : 'get' url;
 click         : 'click' string;
 sendKeys      : 'sendKeys' element string;
 verifyText    : 'verifyText' element string;
 verifyTitle   : 'verifyTitle' string;
 updateDB      : 'updateDB' string;
+testcaseId    : 'testcaseId' string;
+
 
 /*
 https://github.com/antlr/grammars-v4/blob/master/url/url.g4

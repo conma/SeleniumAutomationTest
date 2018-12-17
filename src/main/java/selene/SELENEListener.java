@@ -98,6 +98,16 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitUpdateDB(SELENEParser.UpdateDBContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SELENEParser#testcaseId}.
+	 * @param ctx the parse tree
+	 */
+	void enterTestcaseId(SELENEParser.TestcaseIdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#testcaseId}.
+	 * @param ctx the parse tree
+	 */
+	void exitTestcaseId(SELENEParser.TestcaseIdContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SELENEParser#url}.
 	 * @param ctx the parse tree
 	 */
