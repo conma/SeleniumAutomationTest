@@ -3,9 +3,11 @@ program   : 'begin' statement+ 'end';
 
 statement : get | click | sendKeys | verifyText | verifyTitle | updateDB;
 
+updateTCs     : 'updateTCs' string;
+
 get           : 'get' url;
 click         : 'click' string;
-sendKeys      : 'sendKeys' string string;
+sendKeys      : 'sendKeys' element string;
 verifyText    : 'verifyText' element string;
 verifyTitle   : 'verifyTitle' string;
 updateDB      : 'updateDB' string;
