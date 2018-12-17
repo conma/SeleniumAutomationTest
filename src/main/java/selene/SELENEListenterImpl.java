@@ -11,12 +11,12 @@ import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 
-public class MyListener extends SELENEBaseListener
+public class SELENEListenterImpl extends SELENEBaseListener
 {
 
     private Map<String, String> variables;
 
-    public MyListener()
+    public SELENEListenterImpl()
     {
         variables = new HashMap<>();
     }

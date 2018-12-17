@@ -13,7 +13,7 @@ public class SELENE {
 
             SELENELexer lexer = new SELENELexer(input);
             SELENEParser parser = new SELENEParser(new CommonTokenStream(lexer));
-            parser.addParseListener(new MyListener());
+            parser.addParseListener(new SELENEListenterImpl());
 
             // Start parsing
             parser.program();
