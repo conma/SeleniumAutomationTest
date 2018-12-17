@@ -1,7 +1,7 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get | click | sendKeys | verifyText | verifyTitle | updateDB;
+statement : get | click | sendKeys | verifyText | verifyTitle | updateDB | updateTCs;
 
 updateTCs     : 'updateTCs' string;
 

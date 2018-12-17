@@ -28,6 +28,16 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitStatement(SELENEParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SELENEParser#updateTCs}.
+	 * @param ctx the parse tree
+	 */
+	void enterUpdateTCs(SELENEParser.UpdateTCsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#updateTCs}.
+	 * @param ctx the parse tree
+	 */
+	void exitUpdateTCs(SELENEParser.UpdateTCsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SELENEParser#get}.
 	 * @param ctx the parse tree
 	 */

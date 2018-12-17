@@ -40,6 +40,18 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUpdateTCs(SELENEParser.UpdateTCsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUpdateTCs(SELENEParser.UpdateTCsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGet(SELENEParser.GetContext ctx) { }
 	/**
 	 * {@inheritDoc}

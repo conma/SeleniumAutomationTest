@@ -7,6 +7,7 @@ import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.UpdateDBContext;
+import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 
@@ -40,7 +41,7 @@ public class MyListener extends SELENEBaseListener
     @Override
     public void exitSendKeys( SendKeysContext ctx )
     {
-        System.out.println( "sendKeys: " + ctx.string( 0 ).getText() + " " + ctx.string( 1 ).getText() );
+        System.out.println( "sendKeys: " + ctx.element().getText() + " " + ctx.string().getText() );
     }
 
     @Override
@@ -59,5 +60,11 @@ public class MyListener extends SELENEBaseListener
     public void exitUpdateDB( UpdateDBContext ctx )
     {
         System.out.println( "updateDB: " + ctx.string().getText() );
+    }
+
+    @Override
+    public void exitUpdateTCs( UpdateTCsContext ctx )
+    {
+        System.out.println( "updateTCs: " + ctx.string().getText() );
     }
 }
