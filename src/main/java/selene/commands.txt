@@ -1,9 +1,8 @@
 begin
-	updateDB false
 	updateTCs false
-	get http://192.168.7.3:1119/web-servicemanager/companyList?execution=e1s1
-	click a-43636bc47def
-	sendKeys aaaaaaa bbbbbbbbbb
-	verifyText abcde fghijal
-	verifyTitle fou3rw
+	get "http://192.168.7.3:1119/web-servicemanager/companyList?execution=e1s1"
+	click "a-43636bc47def"
+	sendKeys "aaaaaaa" "bbbbbbbbbb"
+	verifyText "abcde" "fghijal"
+	verifyTitle "fou3rw"
 end

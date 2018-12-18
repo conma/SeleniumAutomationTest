@@ -88,16 +88,6 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitVerifyTitle(SELENEParser.VerifyTitleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#updateDB}.
-	 * @param ctx the parse tree
-	 */
-	void enterUpdateDB(SELENEParser.UpdateDBContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SELENEParser#updateDB}.
-	 * @param ctx the parse tree
-	 */
-	void exitUpdateDB(SELENEParser.UpdateDBContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SELENEParser#testcaseId}.
 	 * @param ctx the parse tree
 	 */
@@ -108,6 +98,16 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitTestcaseId(SELENEParser.TestcaseIdContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SELENEParser#testcaseAuto}.
+	 * @param ctx the parse tree
+	 */
+	void enterTestcaseAuto(SELENEParser.TestcaseAutoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#testcaseAuto}.
+	 * @param ctx the parse tree
+	 */
+	void exitTestcaseAuto(SELENEParser.TestcaseAutoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SELENEParser#url}.
 	 * @param ctx the parse tree
 	 */
@@ -117,6 +117,16 @@ public interface SELENEListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUrl(SELENEParser.UrlContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#url_with_q}.
+	 * @param ctx the parse tree
+	 */
+	void enterUrl_with_q(SELENEParser.Url_with_qContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#url_with_q}.
+	 * @param ctx the parse tree
+	 */
+	void exitUrl_with_q(SELENEParser.Url_with_qContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SELENEParser#uri}.
 	 * @param ctx the parse tree
@@ -268,6 +278,16 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitElement(SELENEParser.ElementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SELENEParser#element_with_q}.
+	 * @param ctx the parse tree
+	 */
+	void enterElement_with_q(SELENEParser.Element_with_qContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#element_with_q}.
+	 * @param ctx the parse tree
+	 */
+	void exitElement_with_q(SELENEParser.Element_with_qContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SELENEParser#title}.
 	 * @param ctx the parse tree
 	 */
@@ -287,4 +307,14 @@ public interface SELENEListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitString(SELENEParser.StringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#string_with_q}.
+	 * @param ctx the parse tree
+	 */
+	void enterString_with_q(SELENEParser.String_with_qContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#string_with_q}.
+	 * @param ctx the parse tree
+	 */
+	void exitString_with_q(SELENEParser.String_with_qContext ctx);
 }

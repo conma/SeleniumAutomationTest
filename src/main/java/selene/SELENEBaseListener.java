@@ -112,18 +112,6 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUpdateDB(SELENEParser.UpdateDBContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUpdateDB(SELENEParser.UpdateDBContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTestcaseId(SELENEParser.TestcaseIdContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -136,6 +124,18 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterUrl(SELENEParser.UrlContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,6 +143,18 @@ public class SELENEBaseListener implements SELENEListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUrl(SELENEParser.UrlContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUrl_with_q(SELENEParser.Url_with_qContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUrl_with_q(SELENEParser.Url_with_qContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -328,6 +340,18 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElement_with_q(SELENEParser.Element_with_qContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElement_with_q(SELENEParser.Element_with_qContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTitle(SELENEParser.TitleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -347,6 +371,18 @@ public class SELENEBaseListener implements SELENEListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitString(SELENEParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString_with_q(SELENEParser.String_with_qContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString_with_q(SELENEParser.String_with_qContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

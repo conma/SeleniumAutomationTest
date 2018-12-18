@@ -1,17 +1,17 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get | click | sendKeys | verifyText | verifyTitle | updateDB |
+statement : get | click | sendKeys | verifyText | verifyTitle |
             updateTCs | testcaseId;
 
 updateTCs     : 'updateTCs' string;
-get           : 'get' url;
-click         : 'click' string;
-sendKeys      : 'sendKeys' element string;
-verifyText    : 'verifyText' element string;
-verifyTitle   : 'verifyTitle' string;
-updateDB      : 'updateDB' string;
+get           : 'get' url_with_q;
+click         : 'click' string_with_q;
+sendKeys      : 'sendKeys' element_with_q string_with_q;
+verifyText    : 'verifyText' element_with_q string_with_q;
+verifyTitle   : 'verifyTitle' string_with_q;
 testcaseId    : 'testcaseId' string;
+testcaseAuto  : 'testcaseAuto' string;
 
 
 /*
@@ -25,6 +25,10 @@ https://github.com/antlr/grammars-v4/blob/master/url/url.g4
 
 url
    : uri
+   ;
+
+url_with_q
+   : QUOTATION_MARKS uri QUOTATION_MARKS
    ;
 
 uri
@@ -87,6 +91,10 @@ element
    : string
    ;
 
+element_with_q
+   : QUOTATION_MARKS string QUOTATION_MARKS
+   ;
+
 title
    : string+
    ;
@@ -95,6 +103,9 @@ string
    : STRING
    ;
 
+string_with_q
+   : QUOTATION_MARKS STRING QUOTATION_MARKS
+   ;
 
 DIGITS
    : [0-9] +
@@ -110,7 +121,8 @@ STRING
    : ([a-zA-Z~0-9] | HEX) ([a-zA-Z0-9.-] | HEX)*
    ;
 
+QUOTATION_MARKS: ["];
 
 WS
-   : [\r\n] + -> skip
+   : [ \r\n\t] + -> skip
    ;
