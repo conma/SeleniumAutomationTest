@@ -38,6 +38,26 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitUpdateTCs(SELENEParser.UpdateTCsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SELENEParser#testcaseId}.
+	 * @param ctx the parse tree
+	 */
+	void enterTestcaseId(SELENEParser.TestcaseIdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#testcaseId}.
+	 * @param ctx the parse tree
+	 */
+	void exitTestcaseId(SELENEParser.TestcaseIdContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#testcaseAuto}.
+	 * @param ctx the parse tree
+	 */
+	void enterTestcaseAuto(SELENEParser.TestcaseAutoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#testcaseAuto}.
+	 * @param ctx the parse tree
+	 */
+	void exitTestcaseAuto(SELENEParser.TestcaseAutoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SELENEParser#get}.
 	 * @param ctx the parse tree
 	 */
@@ -48,15 +68,25 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitGet(SELENEParser.GetContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#click}.
+	 * Enter a parse tree produced by {@link SELENEParser#clickButton}.
 	 * @param ctx the parse tree
 	 */
-	void enterClick(SELENEParser.ClickContext ctx);
+	void enterClickButton(SELENEParser.ClickButtonContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#click}.
+	 * Exit a parse tree produced by {@link SELENEParser#clickButton}.
 	 * @param ctx the parse tree
 	 */
-	void exitClick(SELENEParser.ClickContext ctx);
+	void exitClickButton(SELENEParser.ClickButtonContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#clickLink}.
+	 * @param ctx the parse tree
+	 */
+	void enterClickLink(SELENEParser.ClickLinkContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#clickLink}.
+	 * @param ctx the parse tree
+	 */
+	void exitClickLink(SELENEParser.ClickLinkContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SELENEParser#sendKeys}.
 	 * @param ctx the parse tree
@@ -88,25 +118,25 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitVerifyTitle(SELENEParser.VerifyTitleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#testcaseId}.
+	 * Enter a parse tree produced by {@link SELENEParser#button}.
 	 * @param ctx the parse tree
 	 */
-	void enterTestcaseId(SELENEParser.TestcaseIdContext ctx);
+	void enterButton(SELENEParser.ButtonContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#testcaseId}.
+	 * Exit a parse tree produced by {@link SELENEParser#button}.
 	 * @param ctx the parse tree
 	 */
-	void exitTestcaseId(SELENEParser.TestcaseIdContext ctx);
+	void exitButton(SELENEParser.ButtonContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#testcaseAuto}.
+	 * Enter a parse tree produced by {@link SELENEParser#endTC}.
 	 * @param ctx the parse tree
 	 */
-	void enterTestcaseAuto(SELENEParser.TestcaseAutoContext ctx);
+	void enterEndTC(SELENEParser.EndTCContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#testcaseAuto}.
+	 * Exit a parse tree produced by {@link SELENEParser#endTC}.
 	 * @param ctx the parse tree
 	 */
-	void exitTestcaseAuto(SELENEParser.TestcaseAutoContext ctx);
+	void exitEndTC(SELENEParser.EndTCContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SELENEParser#url}.
 	 * @param ctx the parse tree

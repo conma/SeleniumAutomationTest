@@ -52,6 +52,30 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTestcaseId(SELENEParser.TestcaseIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTestcaseId(SELENEParser.TestcaseIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGet(SELENEParser.GetContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -64,13 +88,25 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClick(SELENEParser.ClickContext ctx) { }
+	@Override public void enterClickButton(SELENEParser.ClickButtonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClick(SELENEParser.ClickContext ctx) { }
+	@Override public void exitClickButton(SELENEParser.ClickButtonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterClickLink(SELENEParser.ClickLinkContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitClickLink(SELENEParser.ClickLinkContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -112,25 +148,25 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTestcaseId(SELENEParser.TestcaseIdContext ctx) { }
+	@Override public void enterButton(SELENEParser.ButtonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTestcaseId(SELENEParser.TestcaseIdContext ctx) { }
+	@Override public void exitButton(SELENEParser.ButtonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
+	@Override public void enterEndTC(SELENEParser.EndTCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
+	@Override public void exitEndTC(SELENEParser.EndTCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -3,7 +3,8 @@ package selene;
 import java.util.HashMap;
 import java.util.Map;
 
-import selene.SELENEParser.ClickContext;
+import selene.SELENEParser.ClickButtonContext;
+import selene.SELENEParser.ClickLinkContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.UpdateTCsContext;
@@ -32,9 +33,15 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
-    public void exitClick( ClickContext ctx )
+    public void exitClickButton( ClickButtonContext ctx )
     {
-        System.out.println( "click: " + ctx.string_with_q().getText() );
+        System.out.println( "clickButton: " + ctx.string_with_q().getText() );
+    }
+
+    @Override
+    public void exitClickLink( ClickLinkContext ctx )
+    {
+        System.out.println( "clickButton: " + ctx.string_with_q().getText() );
     }
 
     @Override
