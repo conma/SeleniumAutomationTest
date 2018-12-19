@@ -2,16 +2,23 @@ grammar SELENE;
 program   : 'begin' statement+ 'end';
 
 statement : get | click | sendKeys | verifyText | verifyTitle |
-            updateTCs | testcaseId;
+            updateTCs | testcaseId | button | buttonid | buttonname |
+            link | linkid | elementid | 
+            endTC ;
 
 updateTCs     : 'updateTCs' string;
+
+testcaseId    : 'testcaseId' string;
+testcaseAuto  : 'testcaseAuto' string;
 get           : 'get' url_with_q;
 click         : 'click' string_with_q;
 sendKeys      : 'sendKeys' element_with_q string_with_q;
 verifyText    : 'verifyText' element_with_q string_with_q;
 verifyTitle   : 'verifyTitle' string_with_q;
-testcaseId    : 'testcaseId' string;
-testcaseAuto  : 'testcaseAuto' string;
+button        : 'button';
+buttonid      : 'buttonid'
+link          : 'link';
+endTC         : 'endTC';
 
 
 /*

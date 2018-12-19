@@ -72,11 +72,21 @@ public class ScriptGenerator
 
             scriptFileWriter.write( NEW_LINE +  TAB + "testcaseId: " + testcaseId );
             scriptFileWriter.write( TAB + "testcaseAuto: " + testcaseAuto + NEW_LINE);
-            scriptFileWriter.write( TAB + "testcaseStep: " + testcaseStep + NEW_LINE);
+            String steps = testcaseStep; //.replaceAll( "^1\\.\\s+", "\t\t" ); 
+            steps = steps.replaceAll( "\\d+\\.\\s+", "\t\t" );
+            steps = steps.replaceAll( "(?i)mở trang", "get" );
+            steps = steps.replaceAll( "(?i)[Đđ]iền", "sendKeys" );
+            steps = steps.replaceAll( "(?i)click", "click" );
+            steps = steps.replaceAll( "(?i)mở trang", "get" );
             
+            scriptFileWriter.write( steps + "\n\tendTC" + NEW_LINE);
+
             System.out.print( "\nid " + testcaseId );
             System.out.print( "\tauto:" + testcaseAuto );
-            System.out.print( "\n\tstep:" + testcaseStep );
+            System.out.print( "\n\tstep:" + steps );
+            String target = "FOOBar";
+            target = target.replaceAll("(?i)foo", "");
+            System.out.println(NEW_LINE + target);
         }
 
         scriptFileWriter.write( "end" );
