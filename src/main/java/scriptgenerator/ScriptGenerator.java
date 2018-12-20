@@ -74,10 +74,11 @@ public class ScriptGenerator
             scriptFileWriter.write( TAB + "testcaseAuto: " + testcaseAuto + NEW_LINE);
             String steps = testcaseStep; //.replaceAll( "^1\\.\\s+", "\t\t" ); 
             steps = steps.replaceAll( "\\d+\\.\\s+", "\t\t" );
-            steps = steps.replaceAll( "(?i)mở trang", "get" );
+            steps = steps.replaceFirst( "(?i)mở trang", "get" );
             steps = steps.replaceAll( "(?i)[Đđ]iền", "sendKeys" );
-            steps = steps.replaceAll( "(?i)click", "click" );
-            steps = steps.replaceAll( "(?i)mở trang", "get" );
+            steps = steps.replaceAll( "(?i)click\\s+button\\s+", "clickButton " );
+            steps = steps.replaceAll( "(?i)click\\s+link\\s+", "clickLink " );
+            steps = steps.replaceAll( "(?i)vào\\s+textbox\\s+", " " );
             
             scriptFileWriter.write( steps + "\n\tendTC" + NEW_LINE);
 
