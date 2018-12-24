@@ -1,23 +1,24 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get | clickButton |clickLink | sendKeys | verifyText | verifyTitle |
-            updateTCs | testcaseId | 
-            endTC ;
+statement : updateTCs |  get | click | sendKeys | verifyText | verifyTitle |
+            testcaseId | hover | verifyEnable | access |
+            endTC | quit;
 
 updateTCs     : 'updateTCs' string;
 
 testcaseId    : 'testcaseId' string;
 testcaseAuto  : 'testcaseAuto' string;
 get           : 'get' url_with_q;
-clickButton   : 'clickButton' string_with_q;
-clickLink     : 'clickLink' string_with_q;
+access        : 'access' url_with_q;
+click         : 'click' element_with_q;
 sendKeys      : 'sendKeys' element_with_q string_with_q;
 verifyText    : 'verifyText' element_with_q string_with_q;
 verifyTitle   : 'verifyTitle' string_with_q;
-button        : 'button';
+hover         : 'hover' element_with_q;
+verifyEnable  : 'verifyEnable' element_with_q;
 endTC         : 'endTC';
-
+quit          : 'quit';
 
 /*
 https://github.com/antlr/grammars-v4/blob/master/url/url.g4

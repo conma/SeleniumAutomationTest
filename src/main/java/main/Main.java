@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import selenium.SELENERunner;
 import spring.config.AppConfiguration;
-import test.Add;
 
 public class Main {
 	@Autowired
-	private Add add;
+	private SELENERunner scriptRunner;
 
 	private static ApplicationContext context;
 
@@ -20,6 +20,6 @@ public class Main {
 	}
 
 	private void run() {
-		add.print();
+		scriptRunner.access("");
 	}
 }

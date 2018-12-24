@@ -3,8 +3,7 @@ package selene;
 import java.util.HashMap;
 import java.util.Map;
 
-import selene.SELENEParser.ClickButtonContext;
-import selene.SELENEParser.ClickLinkContext;
+import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.UpdateTCsContext;
@@ -22,6 +21,12 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
+    public void exitUpdateTCs( UpdateTCsContext ctx )
+    {
+        System.out.println( "updateTCs: " + ctx.string().getText() );
+    }
+
+    @Override
     public void exitGet( GetContext ctx )
     {
         // This method is called when the parser has finished
@@ -33,15 +38,9 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
-    public void exitClickButton( ClickButtonContext ctx )
+    public void exitClick( ClickContext ctx )
     {
-        System.out.println( "clickButton: " + ctx.string_with_q().getText() );
-    }
-
-    @Override
-    public void exitClickLink( ClickLinkContext ctx )
-    {
-        System.out.println( "clickButton: " + ctx.string_with_q().getText() );
+        System.out.println( "clickButton: " + ctx.element_with_q().getText() );
     }
 
     @Override
@@ -62,9 +61,4 @@ public class SELENEListenterImpl extends SELENEBaseListener
         System.out.println( "verifyTitle: " + ctx.string_with_q().getText() );
     }
 
-    @Override
-    public void exitUpdateTCs( UpdateTCsContext ctx )
-    {
-        System.out.println( "updateTCs: " + ctx.string().getText() );
-    }
 }

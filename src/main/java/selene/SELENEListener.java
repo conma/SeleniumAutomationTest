@@ -68,25 +68,15 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitGet(SELENEParser.GetContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#clickButton}.
+	 * Enter a parse tree produced by {@link SELENEParser#click}.
 	 * @param ctx the parse tree
 	 */
-	void enterClickButton(SELENEParser.ClickButtonContext ctx);
+	void enterClick(SELENEParser.ClickContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#clickButton}.
+	 * Exit a parse tree produced by {@link SELENEParser#click}.
 	 * @param ctx the parse tree
 	 */
-	void exitClickButton(SELENEParser.ClickButtonContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SELENEParser#clickLink}.
-	 * @param ctx the parse tree
-	 */
-	void enterClickLink(SELENEParser.ClickLinkContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SELENEParser#clickLink}.
-	 * @param ctx the parse tree
-	 */
-	void exitClickLink(SELENEParser.ClickLinkContext ctx);
+	void exitClick(SELENEParser.ClickContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SELENEParser#sendKeys}.
 	 * @param ctx the parse tree
@@ -118,15 +108,25 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitVerifyTitle(SELENEParser.VerifyTitleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SELENEParser#button}.
+	 * Enter a parse tree produced by {@link SELENEParser#hover}.
 	 * @param ctx the parse tree
 	 */
-	void enterButton(SELENEParser.ButtonContext ctx);
+	void enterHover(SELENEParser.HoverContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SELENEParser#button}.
+	 * Exit a parse tree produced by {@link SELENEParser#hover}.
 	 * @param ctx the parse tree
 	 */
-	void exitButton(SELENEParser.ButtonContext ctx);
+	void exitHover(SELENEParser.HoverContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#verifyEnable}.
+	 * @param ctx the parse tree
+	 */
+	void enterVerifyEnable(SELENEParser.VerifyEnableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#verifyEnable}.
+	 * @param ctx the parse tree
+	 */
+	void exitVerifyEnable(SELENEParser.VerifyEnableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SELENEParser#endTC}.
 	 * @param ctx the parse tree

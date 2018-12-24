@@ -18,6 +18,8 @@ public class ScriptGenerator
 
     private static final String NEW_LINE = "\n";
 
+    private static final String START = NEW_LINE + TAB + TAB;
+
     public static void main( String[] args )
     {
         try
@@ -47,7 +49,7 @@ public class ScriptGenerator
         int lastRowOfTestcase = (int) secondRowMaster.getCell( 1 ).getNumericCellValue() - 1;
         int autoColumn = firstRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
         int stepColumn = secondRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
-        // int expectColumn = thirdRowMaster.getCell(4).getStringCellValue().toCharArray()[0] - 'A';
+        int expectColumn = thirdRowMaster.getCell(4).getStringCellValue().toCharArray()[0] - 'A';
         // int resultColumn = fourthRowMaster.getCell(4).getStringCellValue().toCharArray()[0] - 'A';
         // int noteColumn = fifthRowMaster.getCell(4).getStringCellValue().toCharArray()[0] - 'A';
 
@@ -69,6 +71,7 @@ public class ScriptGenerator
             String testcaseId = tcRow.getCell( 0 ).getStringCellValue();
             String testcaseAuto = tcRow.getCell( autoColumn ).getStringCellValue();
             String testcaseStep = tcRow.getCell( stepColumn ).getStringCellValue();
+            String testcaseExpect = tcRow.getCell(expectColumn).getStringCellValue();
 
             scriptFileWriter.write( NEW_LINE +  TAB + "testcaseId: " + testcaseId );
             scriptFileWriter.write( TAB + "testcaseAuto: " + testcaseAuto + NEW_LINE);
@@ -79,15 +82,15 @@ public class ScriptGenerator
             steps = steps.replaceAll( "(?i)click\\s+button\\s+", "clickButton " );
             steps = steps.replaceAll( "(?i)click\\s+link\\s+", "clickLink " );
             steps = steps.replaceAll( "(?i)vào\\s+textbox\\s+", " " );
-            
-            scriptFileWriter.write( steps + "\n\tendTC" + NEW_LINE);
+
+            scriptFileWriter.write( steps );
+            scriptFileWriter.write( START + testcaseExpect);
+            scriptFileWriter.write( "\n\tendTC" + NEW_LINE);
 
             System.out.print( "\nid " + testcaseId );
             System.out.print( "\tauto:" + testcaseAuto );
             System.out.print( "\n\tstep:" + steps );
-            String target = "FOOBar";
-            target = target.replaceAll("(?i)foo", "");
-            System.out.println(NEW_LINE + target);
+
         }
 
         scriptFileWriter.write( "end" );

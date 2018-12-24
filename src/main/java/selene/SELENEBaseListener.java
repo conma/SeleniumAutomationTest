@@ -88,25 +88,13 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClickButton(SELENEParser.ClickButtonContext ctx) { }
+	@Override public void enterClick(SELENEParser.ClickContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClickButton(SELENEParser.ClickButtonContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterClickLink(SELENEParser.ClickLinkContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitClickLink(SELENEParser.ClickLinkContext ctx) { }
+	@Override public void exitClick(SELENEParser.ClickContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -148,13 +136,25 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterButton(SELENEParser.ButtonContext ctx) { }
+	@Override public void enterHover(SELENEParser.HoverContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitButton(SELENEParser.ButtonContext ctx) { }
+	@Override public void exitHover(SELENEParser.HoverContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVerifyEnable(SELENEParser.VerifyEnableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVerifyEnable(SELENEParser.VerifyEnableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
