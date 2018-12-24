@@ -55,16 +55,8 @@ public class SELENERunner {
         return webElement.isEnabled();
     }
 
-    public void access(String element) {
-        WebElement webElement;
-        try {
-            webElement = webDriver.findElement(By.id(element));
-        } catch (NoSuchElementException e) {
-            webElement = webDriver.findElement(By.name(element));
-        }
-        if (webElement == null) {
-            throw new NoSuchElementException("");
-        }
+    public void access(String url) {
+        webDriver.navigate().to(url);
     }
 
     public void endTC() {

@@ -16,7 +16,7 @@ public class SeleniumFirefox {
         firefoxDriver.get("http://localhost:8888/web-servicemanager/loginForm");
 
         // Find the text input element by its name
-        WebElement inputUserName = firefoxDriver.findElement(By.name("j_usernamee"));
+        WebElement inputUserName = firefoxDriver.findElement(By.name("j_username"));
         WebElement inputPassword = firefoxDriver.findElement(By.name("j_password"));
         WebElement btnLogin = firefoxDriver.findElement(By.name("login"));
 
