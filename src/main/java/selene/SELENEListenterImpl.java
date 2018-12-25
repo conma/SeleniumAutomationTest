@@ -1,7 +1,8 @@
 package selene;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
@@ -9,15 +10,38 @@ import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
+import selenium.SELENERunner;
 
 public class SELENEListenterImpl extends SELENEBaseListener
 {
+    private Actions action;
 
-    private Map<String, String> variables;
+    @Autowired
+    private SELENERunner seleneRunner;
 
-    public SELENEListenterImpl()
+    public SELENEListenterImpl(WebDriver driver) {
+        seleneRunner = new SELENERunner( driver );
+        action = new Actions( driver );
+    }
+
+    public Actions getAction()
     {
-        variables = new HashMap<>();
+        return action;
+    }
+
+    public void setAction( Actions action )
+    {
+        this.action = action;
+    }
+
+    public SELENERunner getSeleneRunner()
+    {
+        return seleneRunner;
+    }
+
+    public void setSeleneRunner( SELENERunner seleneRunner )
+    {
+        this.seleneRunner = seleneRunner;
     }
 
     @Override
@@ -29,24 +53,20 @@ public class SELENEListenterImpl extends SELENEBaseListener
     @Override
     public void exitGet( GetContext ctx )
     {
-        // This method is called when the parser has finished
-        // parsing the add statement
-        // tính tổng
-        String url = ctx.url_with_q().getText();
-        System.out.println( "url: " + url );
-        variables.put( "name", "url" );
+        String url = ctx.url_with_q().getText().replaceAll( "\"", "" );
+        seleneRunner.get( url );
     }
 
     @Override
     public void exitClick( ClickContext ctx )
     {
-        System.out.println( "clickButton: " + ctx.element_with_q().getText() );
+        seleneRunner.click( ctx.element_with_q().getText().replaceAll( "\"", "" ) );
     }
 
     @Override
     public void exitSendKeys( SendKeysContext ctx )
     {
-        System.out.println( "sendKeys: " + ctx.element_with_q().getText() + " " + ctx.string_with_q().getText() );
+        seleneRunner.sendKeys( ctx.element_with_q().getText().replaceAll( "\"", "" ), ctx.string_with_q().getText().replaceAll( "\"", "" ) );
     }
 
     @Override

@@ -68,6 +68,16 @@ public interface SELENEListener extends ParseTreeListener {
 	 */
 	void exitGet(SELENEParser.GetContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SELENEParser#access}.
+	 * @param ctx the parse tree
+	 */
+	void enterAccess(SELENEParser.AccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#access}.
+	 * @param ctx the parse tree
+	 */
+	void exitAccess(SELENEParser.AccessContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SELENEParser#click}.
 	 * @param ctx the parse tree
 	 */
@@ -137,6 +147,16 @@ public interface SELENEListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEndTC(SELENEParser.EndTCContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SELENEParser#quit}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuit(SELENEParser.QuitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SELENEParser#quit}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuit(SELENEParser.QuitContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SELENEParser#url}.
 	 * @param ctx the parse tree

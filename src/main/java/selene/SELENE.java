@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SELENE {
     public static void main(String[] args) {
@@ -13,7 +14,9 @@ public class SELENE {
 
             SELENELexer lexer = new SELENELexer(input);
             SELENEParser parser = new SELENEParser(new CommonTokenStream(lexer));
-            parser.addParseListener(new SELENEListenterImpl());
+
+            System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
+            parser.addParseListener(new SELENEListenterImpl(new FirefoxDriver()));
 
             // Start parsing
             parser.program();

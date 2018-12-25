@@ -128,7 +128,7 @@ STRING
    ;
 
 QUOTATION_MARKS: ["];
-
+UNDERSCORE: [_]; 
 WS
    : [ \r\n\t] + -> skip
    ;

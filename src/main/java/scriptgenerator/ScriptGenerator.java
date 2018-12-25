@@ -82,6 +82,8 @@ public class ScriptGenerator
             steps = steps.replaceAll( "(?i)click\\s+button\\s+", "clickButton " );
             steps = steps.replaceAll( "(?i)click\\s+link\\s+", "clickLink " );
             steps = steps.replaceAll( "(?i)vào\\s+textbox\\s+", " " );
+            steps = steps.replaceAll( "“", "\"" );
+            steps = steps.replaceAll( "”", "\"" );
 
             scriptFileWriter.write( steps );
             scriptFileWriter.write( START + testcaseExpect);
