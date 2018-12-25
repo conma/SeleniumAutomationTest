@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
+import selene.SELENEParser.HoverContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
@@ -81,4 +82,8 @@ public class SELENEListenterImpl extends SELENEBaseListener
         System.out.println( "verifyTitle: " + ctx.string_with_q().getText() );
     }
 
+    @Override
+    public void exitHover(HoverContext ctx) {
+        seleneRunner.hover(ctx.element_with_q().getText().replaceAll("\"", ""));
+    }
 }

@@ -1,5 +1,7 @@
 package selenium;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +29,7 @@ public class SELENERunner {
 
     public void click(String element) {
         WebElement webElement = getElement( element);
-        webElement.click();
+        action.click(webElement).build().perform();
     }
 
     public void sendKeys(String element, String keywords) {
@@ -37,17 +39,18 @@ public class SELENERunner {
 
     public boolean verifyText(String element, String text) {
         WebElement webElement = getElement( element);
+        System.out.println(webElement.getText());
         return webElement.getText().equals(text);
     }
 
     public boolean verifyTitle(String title) {
+        System.out.println(webDriver.getTitle());
         return webDriver.getTitle().equals(title);
     }
 
     public void hover(String element) {
         WebElement webElement = getElement( element);
         action.moveToElement(webElement).build().perform();
-        
     }
 
     public boolean verifyEnable(String element) {
@@ -71,11 +74,13 @@ public class SELENERunner {
         try {
             webElement = webDriver.findElement(By.id(element));
         } catch (NoSuchElementException e) {
+            webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
             webElement = webDriver.findElement(By.name(element));
         }
         if (webElement == null) {
             throw new NoSuchElementException("");
         }
+        webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         return webElement;
     }
 }
