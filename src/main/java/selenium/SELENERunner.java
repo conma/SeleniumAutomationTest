@@ -39,7 +39,6 @@ public class SELENERunner {
 
     public boolean verifyText(String element, String text) {
         WebElement webElement = getElement( element);
-        System.out.println(webElement.getText());
         return webElement.getText().equals(text);
     }
 

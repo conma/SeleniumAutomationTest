@@ -4,9 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.HoverContext;
+import selene.SELENEParser.QuitContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
@@ -59,6 +61,13 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
+    public void exitAccess( AccessContext ctx )
+    {
+        String url = ctx.url_with_q().getText().replaceAll( "\"", "" );
+        seleneRunner.access( url );
+    }
+
+    @Override
     public void exitClick( ClickContext ctx )
     {
         seleneRunner.click( ctx.element_with_q().getText().replaceAll( "\"", "" ) );
@@ -85,5 +94,10 @@ public class SELENEListenterImpl extends SELENEBaseListener
     @Override
     public void exitHover(HoverContext ctx) {
         seleneRunner.hover(ctx.element_with_q().getText().replaceAll("\"", ""));
+    }
+
+    @Override
+    public void exitQuit(QuitContext ctx) {
+        seleneRunner.quit();
     }
 }

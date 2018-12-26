@@ -2,7 +2,7 @@ begin
 	updateTCs: true
 
 	testcaseId: ID001	testcaseAuto: yes
-		get "http://localhost:8888/web-servicemanager/loginForm"
+		get "http://localhost/web-servicemanager/loginForm"
 		sendKeys  "j_username" "coder"
 		sendKeys "j_password" "hr-s1111"
 		click "login"
@@ -16,13 +16,13 @@ begin
 
 	testcaseId: ID003	testcaseAuto: yes
 		hover "middle_category_1"
-		hover "small_category_1"
-		click "small_category_1"
+		access "http://localhost/web-servicemanager/jobfind/basicauthentication/configuration"
 		verifyTitle "- homePage -"
 	endTC
 
 	testcaseId: ID004	testcaseAuto: yes
-		click "_eventId_edit"
+		click "_edit"
 		verifyEnable "_eventId_edit"
 	endTC
+	quit
 end
