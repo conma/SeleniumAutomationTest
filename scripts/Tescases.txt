@@ -7,22 +7,23 @@ begin
 		sendKeys "j_password" "hr-s1111"
 		click "login"
 		verifyTitle "- companyList -"
-	endTC
+	endTC ID001
 
 	testcaseId: ID002	testcaseAuto: yes
 		click "detail10001"
 		verifyTitle "- companyDetail -"
-	endTC
+	endTC ID002
 
 	testcaseId: ID003	testcaseAuto: yes
 		hover "middle_category_1"
 		access "http://localhost/web-servicemanager/jobfind/basicauthentication/configuration"
 		verifyTitle "- homePage -"
-	endTC
+	endTC ID003
 
 	testcaseId: ID004	testcaseAuto: yes
 		click "_edit"
 		verifyEnable "_eventId_edit"
-	endTC
+	endTC ID004
+
 	quit
 end

@@ -1,5 +1,7 @@
 package selene;
 
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import selenium.SELENERunner;
 public class SELENEListenterImpl extends SELENEBaseListener
 {
     private Actions action;
+    private Map<String, String> variables;
 
     @Autowired
     private SELENERunner seleneRunner;
@@ -51,6 +54,7 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitUpdateTCs( UpdateTCsContext ctx )
     {
         System.out.println( "updateTCs: " + ctx.string().getText() );
+        variables.put( "updateTCs", ctx.string().getText() );
     }
 
     @Override

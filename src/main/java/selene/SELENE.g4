@@ -17,7 +17,7 @@ verifyText    : 'verifyText' element_with_q string_with_q;
 verifyTitle   : 'verifyTitle' string_with_q;
 hover         : 'hover' element_with_q;
 verifyEnable  : 'verifyEnable' element_with_q;
-endTC         : 'endTC';
+endTC         : 'endTC' string;
 quit          : 'quit';
 
 /*
