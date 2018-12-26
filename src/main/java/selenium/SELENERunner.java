@@ -30,6 +30,7 @@ public class SELENERunner {
     public void click(String element) {
         WebElement webElement = getElement( element);
         action.click(webElement).build().perform();
+        webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
     public void sendKeys(String element, String keywords) {

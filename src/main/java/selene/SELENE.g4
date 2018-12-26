@@ -1,7 +1,7 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : updateTCs |  get | click | sendKeys | verifyText | verifyTitle |
+statement : updateTCs | testcaseAuto | get | click | sendKeys | verifyText | verifyTitle |
             testcaseId | hover | verifyEnable | access |
             endTC | quit;
 

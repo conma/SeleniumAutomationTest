@@ -1,28 +1,30 @@
 begin
-	updateTCs: true
+	updateTCs true
 
-	testcaseId: ID001	testcaseAuto: yes
-		get "http://localhost/web-servicemanager/loginForm"
+	testcaseId ID001 testcaseAuto yes
+		get "http://localhost:8888/web-servicemanager/loginForm"
 		sendKeys  "j_username" "coder"
 		sendKeys "j_password" "hr-s1111"
 		click "login"
-		verifyTitle "- companyList -"
+		verifyTitle "--login--"
 	endTC ID001
 
-	testcaseId: ID002	testcaseAuto: yes
+	testcaseId ID002
+		testcaseAuto yes
 		click "detail10001"
-		verifyTitle "- companyDetail -"
+		verifyTitle "- companyList -"
 	endTC ID002
 
-	testcaseId: ID003	testcaseAuto: yes
+	testcaseId ID003	testcaseAuto yes
 		hover "middle_category_1"
-		access "http://localhost/web-servicemanager/jobfind/basicauthentication/configuration"
-		verifyTitle "- homePage -"
+		access "http://localhost:8888/web-servicemanager/jobfind/basicauthentication/configuration"
+		verifyTitle "- companyDetail -"
 	endTC ID003
 
-	testcaseId: ID004	testcaseAuto: yes
+	testcaseId ID004	testcaseAuto yes
 		click "_edit"
 		verifyEnable "_eventId_edit"
+		verifyTitle "- homePage -"
 	endTC ID004
 
 	quit

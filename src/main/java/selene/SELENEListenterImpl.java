@@ -1,5 +1,6 @@
 package selene;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -8,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
+import selene.SELENEParser.EndTCContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.HoverContext;
 import selene.SELENEParser.QuitContext;
 import selene.SELENEParser.SendKeysContext;
+import selene.SELENEParser.TestcaseAutoContext;
+import selene.SELENEParser.TestcaseIdContext;
 import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
@@ -28,6 +32,7 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public SELENEListenterImpl(WebDriver driver) {
         seleneRunner = new SELENERunner( driver );
         action = new Actions( driver );
+        variables = new HashMap<>();
     }
 
     public Actions getAction()
@@ -53,8 +58,16 @@ public class SELENEListenterImpl extends SELENEBaseListener
     @Override
     public void exitUpdateTCs( UpdateTCsContext ctx )
     {
-        System.out.println( "updateTCs: " + ctx.string().getText() );
         variables.put( "updateTCs", ctx.string().getText() );
+    }
+
+    @Override
+    public void exitTestcaseAuto(TestcaseAutoContext ctx) {
+        variables.put("testcaseAuto" + ctx.string().getText(), "");
+    }
+
+    @Override
+    public void exitTestcaseId(TestcaseIdContext ctx) {
     }
 
     @Override
@@ -86,13 +99,14 @@ public class SELENEListenterImpl extends SELENEBaseListener
     @Override
     public void exitVerifyText( VerifyTextContext ctx )
     {
-        System.out.println( "verifyText: " + ctx.element_with_q().getText() + " " + ctx.string_with_q().getText() );
+        // System.out.println( "verifyText: " + ctx.element_with_q().getText() + " " + ctx.string_with_q().getText() );
     }
 
     @Override
     public void exitVerifyTitle( VerifyTitleContext ctx )
     {
-        System.out.println( "verifyTitle: " + ctx.string_with_q().getText() );
+        System.out.println(ctx.string_with_q().getText().replaceAll("\"", ""));
+        System.out.println("verifyTitle: " + seleneRunner.verifyTitle(ctx.string_with_q().getText().replaceAll("\"", "")));
     }
 
     @Override
@@ -100,6 +114,12 @@ public class SELENEListenterImpl extends SELENEBaseListener
         seleneRunner.hover(ctx.element_with_q().getText().replaceAll("\"", ""));
     }
 
+    @Override
+    public void exitEndTC(EndTCContext ctx) {
+//        System.out.println(variables.get("updateTCs"));
+//        System.out.println();
+    }
+    
     @Override
     public void exitQuit(QuitContext ctx) {
         seleneRunner.quit();
