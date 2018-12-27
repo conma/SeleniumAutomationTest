@@ -1,14 +1,12 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : updateTCs | testcaseAuto | get | click | sendKeys | verifyText | verifyTitle |
+statement : get | click | sendKeys | verifyText | verifyTitle |
             testcaseId | hover | verifyEnable | access |
-            endTC | quit;
+            quit;
 
 updateTCs     : 'updateTCs' string;
 
-testcaseId    : 'testcaseId' string;
-testcaseAuto  : 'testcaseAuto' string;
 get           : 'get' url_with_q;
 access        : 'access' url_with_q;
 click         : 'click' element_with_q;
@@ -17,7 +15,6 @@ verifyText    : 'verifyText' element_with_q string_with_q;
 verifyTitle   : 'verifyTitle' string_with_q;
 hover         : 'hover' element_with_q;
 verifyEnable  : 'verifyEnable' element_with_q;
-endTC         : 'endTC' string;
 quit          : 'quit';
 
 /*

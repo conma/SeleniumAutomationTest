@@ -1,31 +1,28 @@
 begin
-	updateTCs true
+	updateTCs: true
 
-	testcaseId ID001 testcaseAuto yes
-		get "http://localhost:8888/web-servicemanager/loginForm"
-		sendKeys  "j_username" "coder"
-		sendKeys "j_password" "hr-s1111"
-		click "login"
-		verifyTitle "--login--"
-	endTC ID001
+	testcaseId: ID001	testcaseAuto: yes
+		get http://localhost:8888/web-servicemanager/loginForm
+		sendKeys  j_username coder
+		sendKeys j_password hr-s1111
+		click login
+		verifyTitle - 企業一覧 -
+	endTC
 
-	testcaseId ID002
-		testcaseAuto yes
-		click "detail10001"
-		verifyTitle "- companyList -"
-	endTC ID002
+	testcaseId: ID002	testcaseAuto: yes
+		access  http://localhost:8888/web-servicemanager/loginForm
+		verifyTitle - 企業情報詳細 -
+	endTC
 
-	testcaseId ID003	testcaseAuto yes
-		hover "middle_category_1"
-		access "http://localhost:8888/web-servicemanager/jobfind/basicauthentication/configuration"
-		verifyTitle "- companyDetail -"
-	endTC ID003
+	testcaseId: ID003	testcaseAuto: yes
+		hover  middle_category_1
+		click small_category_1
+		click  _edit
+		verifyTitle - 採用ＨＰ設定 編集 -
+	endTC
 
-	testcaseId ID004	testcaseAuto yes
-		click "_edit"
-		verifyEnable "_eventId_edit"
-		verifyTitle "- homePage -"
-	endTC ID004
-
-	quit
+	testcaseId: ID004	testcaseAuto: yes
+		check _eventId_edit
+		VerifyEnable _eventId_edit
+	endTC
 end
