@@ -1,6 +1,0 @@
-begin
-	testcaseId: ID004	testcaseAuto: yes
-		check _eventId_edit
-		VerifyEnable _eventId_edit
-	endTC
-end

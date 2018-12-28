@@ -1,6 +1,0 @@
-begin
-	testcaseId: ID002	testcaseAuto: yes
-		access  http://localhost:8888/web-servicemanager/loginForm
-		verifyTitle - 企業情報詳細 -
-	endTC
-end

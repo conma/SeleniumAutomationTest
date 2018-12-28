@@ -1,8 +1,0 @@
-begin
-	testcaseId: ID003	testcaseAuto: yes
-		hover  middle_category_1
-		click small_category_1
-		click  _edit
-		verifyTitle - 採用ＨＰ設定 編集 -
-	endTC
-end

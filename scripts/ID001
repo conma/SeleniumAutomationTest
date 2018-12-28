@@ -1,7 +1,0 @@
-begin
-	get "http://localhost/web-servicemanager/loginForm"
-	sendKeys  "j_username" "coder"
-	sendKeys "j_password" "hr-s1111"
-	click "login"
-	verifyTitle "- 企業一覧 -"
-end
