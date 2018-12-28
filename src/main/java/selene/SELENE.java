@@ -11,7 +11,6 @@ public class SELENE {
     public static void main(String[] args) {
         try {
             ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(args[0]));
-
             SELENELexer lexer = new SELENELexer(input);
             SELENEParser parser = new SELENEParser(new CommonTokenStream(lexer));
 

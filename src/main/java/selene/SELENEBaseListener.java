@@ -52,30 +52,6 @@ public class SELENEBaseListener implements SELENEListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTestcaseId(SELENEParser.TestcaseIdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTestcaseId(SELENEParser.TestcaseIdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTestcaseAuto(SELENEParser.TestcaseAutoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterGet(SELENEParser.GetContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -167,18 +143,6 @@ public class SELENEBaseListener implements SELENEListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVerifyEnable(SELENEParser.VerifyEnableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEndTC(SELENEParser.EndTCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEndTC(SELENEParser.EndTCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

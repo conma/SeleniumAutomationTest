@@ -1,8 +1,8 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get | click | sendKeys | verifyText | verifyTitle |
-            testcaseId | hover | verifyEnable | access |
+statement : get  | access | click | sendKeys | verifyText | verifyTitle |
+            hover | verifyEnable|
             quit;
 
 updateTCs     : 'updateTCs' string;
@@ -114,14 +114,16 @@ DIGITS
    : [0-9] +
    ;
 
+UTF8
+   : ('\u0100' .. '\u017E')+
+   ;
 
 HEX
    : ('%' [a-fA-F0-9] [a-fA-F0-9]) +
    ;
 
-
 STRING
-   : ([a-zA-Z~0-9] | HEX) ([a-zA-Z0-9.-] | HEX)*
+   : ([a-zA-Z~0-9] | HEX | UTF8) ([a-zA-Z0-9.-] | HEX| UTF8)*
    ;
 
 QUOTATION_MARKS: ["];

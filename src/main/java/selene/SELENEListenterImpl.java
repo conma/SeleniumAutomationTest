@@ -9,13 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
-import selene.SELENEParser.EndTCContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.HoverContext;
 import selene.SELENEParser.QuitContext;
 import selene.SELENEParser.SendKeysContext;
-import selene.SELENEParser.TestcaseAutoContext;
-import selene.SELENEParser.TestcaseIdContext;
 import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
@@ -62,15 +59,6 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
-    public void exitTestcaseAuto(TestcaseAutoContext ctx) {
-        variables.put("testcaseAuto" + ctx.string().getText(), "");
-    }
-
-    @Override
-    public void exitTestcaseId(TestcaseIdContext ctx) {
-    }
-
-    @Override
     public void exitGet( GetContext ctx )
     {
         String url = ctx.url_with_q().getText().replaceAll( "\"", "" );
@@ -114,12 +102,6 @@ public class SELENEListenterImpl extends SELENEBaseListener
         seleneRunner.hover(ctx.element_with_q().getText().replaceAll("\"", ""));
     }
 
-    @Override
-    public void exitEndTC(EndTCContext ctx) {
-//        System.out.println(variables.get("updateTCs"));
-//        System.out.println();
-    }
-    
     @Override
     public void exitQuit(QuitContext ctx) {
         seleneRunner.quit();
