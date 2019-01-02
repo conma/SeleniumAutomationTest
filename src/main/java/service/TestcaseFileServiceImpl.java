@@ -46,6 +46,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
             int expectColumn = thirdRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
             int resultColumn = fourthRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
             int noteColumn = fifthRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
+            testcasesInputStream.close();
 
             return new Master( updateTC, firstRowOfTestcase, lastRowOfTestcase, autoColumn, stepColumn, expectColumn, resultColumn, noteColumn );
 

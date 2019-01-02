@@ -77,23 +77,18 @@ public class ScriptGeneratorServiceImpl
 
             scriptFileWriter.write( "begin" + NEW_LINE );
 
-            String testcaseStep = tcRow.getCell( stepColumn ).getStringCellValue();
-            String testcaseExpect = tcRow.getCell( expectColumn ).getStringCellValue();
-
             // TODO generate script here
+            String testcaseStep = tcRow.getCell( stepColumn ).getStringCellValue();
+            String scriptStep = generateStep( testcaseStep );
 
-            String steps = testcaseStep; // .replaceAll( "^1\\.\\s+", "\t\t" );
-            String scriptStep = generateStep( steps );
-
+            // TODO generate expect
+            String testcaseExpect = tcRow.getCell( expectColumn ).getStringCellValue();
             String scriptExpect = generateExpect( testcaseExpect );
+
             scriptFileWriter.write( scriptStep );
             scriptFileWriter.write( START + scriptExpect );
+
             scriptFileWriter.write( NEW_LINE );
-
-            System.out.print( "\nid " + testcaseId );
-            System.out.print( "\tauto:" + testcaseAuto );
-            System.out.print( "\n\tstep:" + steps );
-
             scriptFileWriter.write( "end" );
             // end the Testcase
             // Đóng luồng
