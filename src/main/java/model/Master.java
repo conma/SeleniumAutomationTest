@@ -2,45 +2,44 @@ package model;
 
 public class Master
 {
-    private String auto;
-    private String updateTC;
+    private boolean updateTC;
+    private int autoColumn;
     private int firstRowOfTestcase;
     private int lastRowOfTestcase;
     private int idColumn;
-    private int stepsColumn;
+    private int stepColumn;
     private int expectColumn;
     private int resultColumn;
     private int noteColumn;
 
-    public Master(String auto, String updateTC, int firstRowOfTestcase, int lastRowOfTestcase, int idColumn,
-            int stepsColumn, int expectColumn, int resultColumn, int noteColumn) {
-        this.auto = auto;
+    public Master(boolean updateTC, int firstRowOfTestcase, int lastRowOfTestcase, int auto, 
+            int stepColumn, int expectColumn, int resultColumn, int noteColumn) {
         this.updateTC = updateTC;
         this.firstRowOfTestcase = firstRowOfTestcase;
         this.lastRowOfTestcase = lastRowOfTestcase;
-        this.idColumn = idColumn;
-        this.stepsColumn = stepsColumn;
+        this.autoColumn = auto;
+        this.stepColumn = stepColumn;
         this.expectColumn = expectColumn;
         this.resultColumn = resultColumn;
         this.noteColumn = noteColumn;
     }
 
-    public String getAuto()
+    public int getAuto()
     {
-        return auto;
+        return autoColumn;
     }
 
-    public void setAuto(String auto)
+    public void setAuto(int autoColumn)
     {
-        this.auto = auto;
+        this.autoColumn = autoColumn;
     }
 
-    public String getUpdateTC()
+    public boolean getUpdateTC()
     {
         return updateTC;
     }
 
-    public void setUpdateTC(String updateTC)
+    public void setUpdateTC(boolean updateTC)
     {
         this.updateTC = updateTC;
     }
@@ -77,12 +76,12 @@ public class Master
 
     public int getStepsColumn()
     {
-        return stepsColumn;
+        return stepColumn;
     }
 
     public void setStepsColumn(int stepsColumn)
     {
-        this.stepsColumn = stepsColumn;
+        this.stepColumn = stepsColumn;
     }
 
     public int getExpectColumn()
