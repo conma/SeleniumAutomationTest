@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import model.Master;
 
 @Service
-public class ScriptGeneratorServiceImpl
+public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
 {
     private Master master;
 
@@ -38,6 +38,7 @@ public class ScriptGeneratorServiceImpl
         }
     }
 
+    @Override
     public void scriptGenerator( String testcaseFilePath, String scriptFolderPath ) throws EncryptedDocumentException, IOException
     {
         boolean tcAuto = false;
@@ -100,6 +101,7 @@ public class ScriptGeneratorServiceImpl
 
     private String generateStep( String orginalStep )
     {
+        // Đọc từ file --> replace
         String step = orginalStep;
         step = step.replaceAll( "\\d+\\.\\s+", "\t" );
         step = step.replaceFirst( "(?i)mở trang", "get" );
@@ -115,7 +117,7 @@ public class ScriptGeneratorServiceImpl
 
     private String generateExpect( String testcaseExpect )
     {
-        // TODO Auto-generated method stub
+        // Đọc từ file --> replace
         return testcaseExpect;
     }
 }
