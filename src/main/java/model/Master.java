@@ -24,12 +24,12 @@ public class Master
         this.noteColumn = noteColumn;
     }
 
-    public int getAuto()
+    public int getAutoColumn()
     {
         return autoColumn;
     }
 
-    public void setAuto(int autoColumn)
+    public void setAutoColumn(int autoColumn)
     {
         this.autoColumn = autoColumn;
     }
@@ -74,7 +74,7 @@ public class Master
         this.idColumn = idColumn;
     }
 
-    public int getStepsColumn()
+    public int getStepColumn()
     {
         return stepColumn;
     }

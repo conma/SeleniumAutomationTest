@@ -10,11 +10,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import model.Master;
 
-@Component
+@Service
 public class TestcaseFileServiceImpl implements TestcaseFileService
 {
     @Override
