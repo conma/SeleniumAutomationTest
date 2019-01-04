@@ -4,6 +4,7 @@ public class Testcase
 {
     public static Master master;
     private String id;
+    private int row;
     private String script;
 
     public Testcase(String id, String script) {
@@ -24,6 +25,16 @@ public class Testcase
     public String getId()
     {
         return id;
+    }
+
+    public int getRow()
+    {
+        return row;
+    }
+
+    public void setRow( int row )
+    {
+        this.row = row;
     }
 
     public void setId(String id)

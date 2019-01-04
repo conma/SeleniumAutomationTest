@@ -49,15 +49,15 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
 
         int firstRowOfTestcase = master.getFirstRowOfTestcase();
         int lastRowOfTestcase = master.getLastRowOfTestcase();
-        int stepColumn = master.getStepColumn();
+        int AutoStepColumn = master.getStepColumn();
 
         Sheet sheet = wb.getSheetAt( 0 );
         for ( int i = firstRowOfTestcase; i <= lastRowOfTestcase; i++ )
         {
             Row tcRow = sheet.getRow( i );
 
-            String testcaseStep = tcRow.getCell( stepColumn ).getStringCellValue();
-            if ( testcaseStep.equals( null ) || testcaseStep.equals( "" ) ) {
+            String testcaseAutoStep = tcRow.getCell( AutoStepColumn ).getStringCellValue();
+            if ( testcaseAutoStep.equals( null ) || testcaseAutoStep.equals( "" ) ) {
                 return;
             }
 
@@ -66,7 +66,7 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
             FileWriter scriptFileWriter = new FileWriter( file );
 
             scriptFileWriter.write( "begin" + NEW_LINE );
-            scriptFileWriter.write( testcaseStep.replaceAll( "^", "\t" ).replaceAll( "\n", "\n\t" ) );
+            scriptFileWriter.write( testcaseAutoStep.replaceAll( "^", "\t" ).replaceAll( "\n", "\n\t" ) );
             scriptFileWriter.write( NEW_LINE );
             scriptFileWriter.write( "end" );
 
