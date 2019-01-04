@@ -12,14 +12,12 @@ public class Master
     private int resultColumn;
     private int noteColumn;
 
-    public Master(boolean updateTC, int firstRowOfTestcase, int lastRowOfTestcase, int auto, 
-            int stepColumn, int expectColumn, int resultColumn, int noteColumn) {
+    public Master(boolean updateTC, int firstRowOfTestcase, int lastRowOfTestcase, 
+            int stepColumn, int resultColumn, int noteColumn) {
         this.updateTC = updateTC;
         this.firstRowOfTestcase = firstRowOfTestcase;
         this.lastRowOfTestcase = lastRowOfTestcase;
-        this.autoColumn = auto;
         this.stepColumn = stepColumn;
-        this.expectColumn = expectColumn;
         this.resultColumn = resultColumn;
         this.noteColumn = noteColumn;
     }
