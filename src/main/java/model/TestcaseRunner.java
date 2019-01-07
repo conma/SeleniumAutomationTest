@@ -20,6 +20,16 @@ public class TestcaseRunner
         this.testcase = new Testcase("", "");
     }
 
+    public void run() {
+        /*
+         * for(String tcIdFile : tcIdFiles) {
+         *  TCRunner = new TCRunner()
+         * 
+         * 
+         * 
+         * }
+         */
+    }
     public static String getProperty()
     {
         return property;
