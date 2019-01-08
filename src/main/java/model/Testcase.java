@@ -3,12 +3,15 @@ package model;
 public class Testcase
 {
     private String id;
-    private int row;
-    private String script;
 
-    public Testcase(String id, String script) {
+    private int row;
+
+    private String scriptFileName;
+
+    public Testcase( String id, String scriptFileName )
+    {
         this.id = id;
-        this.script = script;
+        this.scriptFileName = scriptFileName;
     }
 
     public String getId()
@@ -26,19 +29,19 @@ public class Testcase
         this.row = row;
     }
 
-    public void setId(String id)
+    public void setId( String id )
     {
         this.id = id;
     }
 
-    public String getScript()
+    public String getScriptFileName()
     {
-        return script;
+        return scriptFileName;
     }
 
-    public void setScript(String script)
+    public void setScriptFileName( String scriptFileName )
     {
-        this.script = script;
+        this.scriptFileName = scriptFileName;
     }
 
 }

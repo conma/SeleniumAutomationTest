@@ -11,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import model.Testcase;
+
 /*
  * args[0]: Loại trình duyệt 
  *      ff      | firefox
@@ -39,10 +41,11 @@ public class SELENE {
 
     public void run() {
         File scriptFolder = new File(scriptFolderPath);
-        File[] scriptFiles = scriptFolder.listFiles();
-        for(File scriptFile : scriptFiles ) {
+        String[] scriptFileNames = scriptFolder.list();
+        for(String scriptFileName : scriptFileNames ) {
+            Testcase testCase = new Testcase( scriptFileName.split( "-" )[0], scriptFileName.split( "-" )[1] );
             try {
-                ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(scriptFile));
+                ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(scriptFolder + "/" + scriptFileName));
                 SELENELexer lexer = new SELENELexer(input);
                 SELENEParser parser = new SELENEParser(new CommonTokenStream(lexer));
                 parser.addParseListener(new SELENEListenterImpl(driver));
@@ -55,7 +58,7 @@ public class SELENE {
         }
 
     }
-    
+
     private void init(String[] args) {
         String driverType = args[0];
         driverFilePathPath = args[1];
