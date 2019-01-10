@@ -16,7 +16,7 @@ import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
-import selenium.SELENERunner;
+import selenium.SeleniumRunner;
 
 public class SELENEListenterImpl extends SELENEBaseListener
 {
@@ -24,10 +24,10 @@ public class SELENEListenterImpl extends SELENEBaseListener
     private Map<String, String> variables;
 
     @Autowired
-    private SELENERunner seleneRunner;
+    private SeleniumRunner seleneRunner;
 
     public SELENEListenterImpl(WebDriver driver) {
-        seleneRunner = new SELENERunner( driver );
+        seleneRunner = new SeleniumRunner( driver );
         action = new Actions( driver );
         variables = new HashMap<>();
     }
@@ -42,12 +42,12 @@ public class SELENEListenterImpl extends SELENEBaseListener
         this.action = action;
     }
 
-    public SELENERunner getSeleneRunner()
+    public SeleniumRunner getSeleneRunner()
     {
         return seleneRunner;
     }
 
-    public void setSeleneRunner( SELENERunner seleneRunner )
+    public void setSeleneRunner( SeleniumRunner seleneRunner )
     {
         this.seleneRunner = seleneRunner;
     }

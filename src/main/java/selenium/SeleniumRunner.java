@@ -10,11 +10,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SELENERunner {
+public class SeleniumRunner {
     private WebDriver webDriver;
     private Actions action;
 
-    public SELENERunner(WebDriver webDriver) {
+    public SeleniumRunner(WebDriver webDriver) {
         this.webDriver = webDriver;
         this.action = new Actions(webDriver);
     }
@@ -69,18 +69,19 @@ public class SELENERunner {
     public void quit() {
         webDriver.quit();
     }
+
     private WebElement getElement(String element) {
         WebElement webElement = null;
         try {
             webElement = webDriver.findElement(By.id(element));
         } catch (NoSuchElementException e) {
-            webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
             webElement = webDriver.findElement(By.name(element));
+        }catch (Exception e1) {
+            webElement = webDriver.findElement(By.xpath(element));
         }
         if (webElement == null) {
             throw new NoSuchElementException("");
         }
-        webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         return webElement;
     }
 }
