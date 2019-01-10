@@ -71,16 +71,46 @@ public class SeleniumRunner {
     }
 
     private WebElement getElement(String element) {
+        System.out.println( element );
         WebElement webElement = null;
+        webElement = findElementById(element);
+        if(webElement == null)
+        webElement = findElementByName(element);
+        if(webElement == null)
+        webElement = findElementByXPath(element);
+        return webElement;
+    }
+
+    private WebElement findElementById( String element )
+    {
+        WebElement webElement;
         try {
-            webElement = webDriver.findElement(By.id(element));
+            webElement = webDriver.findElement( By.id( element ) );
         } catch (NoSuchElementException e) {
-            webElement = webDriver.findElement(By.name(element));
-        }catch (Exception e1) {
-            webElement = webDriver.findElement(By.xpath(element));
+            return null;
         }
-        if (webElement == null) {
-            throw new NoSuchElementException("");
+        return webElement;
+    }
+
+
+    private WebElement findElementByName( String element )
+    {
+        WebElement webElement;
+        try {
+            webElement = webDriver.findElement( By.name( element ) );
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+        return webElement;
+    }
+
+    private WebElement findElementByXPath( String element )
+    {
+        WebElement webElement;
+        try {
+            webElement = webDriver.findElement( By.xpath( element ) );
+        } catch (NoSuchElementException e) {
+            return null;
         }
         return webElement;
     }

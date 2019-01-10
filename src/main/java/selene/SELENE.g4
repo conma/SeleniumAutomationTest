@@ -123,7 +123,7 @@ HEX
    ;
 
 STRING
-   : ([a-zA-Z~0-9] | HEX | UTF8) ([a-zA-Z0-9.-] | HEX| UTF8)*
+   : ([a-zA-Z~0-9/] | HEX | UTF8) ([a-zA-Z0-9.-/] | HEX| UTF8)*
    ;
 
 QUOTATION_MARKS: ["];
