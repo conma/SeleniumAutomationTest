@@ -28,6 +28,7 @@ public class SeleniumRunner {
     }
 
     public void click(String element) {
+        System.out.println( "click at " + element );
         WebElement webElement = getElement( element);
         action.click(webElement).build().perform();
         webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
@@ -71,7 +72,6 @@ public class SeleniumRunner {
     }
 
     private WebElement getElement(String element) {
-        System.out.println( element );
         WebElement webElement = null;
         webElement = findElementById(element);
         if(webElement == null)

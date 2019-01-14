@@ -31,7 +31,7 @@ url
    ;
 
 url_with_q
-   : QUOTATION_MARKS uri QUOTATION_MARKS
+   : uri
    ;
 
 uri
@@ -95,7 +95,7 @@ element
    ;
 
 element_with_q
-   : QUOTATION_MARKS string QUOTATION_MARKS
+   : QUOT (string | xpath) QUOT
    ;
 
 title
@@ -107,11 +107,11 @@ string
    ;
 
 string_with_q
-   : QUOTATION_MARKS STRING QUOTATION_MARKS
+   : QUOT STRING QUOT
    ;
 
 xpath_with_q
-   : QUOTATION_MARKS xpath QUOTATION_MARKS
+   : QUOT xpath QUOT
    ;
 
 xpath
@@ -366,8 +366,6 @@ STRING
    : ([a-zA-Z~0-9] | HEX | UTF8) ([a-zA-Z0-9.-] | HEX| UTF8)*
    ;
 
-QUOTATION_MARKS: ["];
-UNDERSCORE: [_]; 
 WS
    : [ \r\n\t] + -> skip
    ;
