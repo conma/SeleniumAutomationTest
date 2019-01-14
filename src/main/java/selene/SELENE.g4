@@ -35,7 +35,7 @@ url_with_q
    ;
 
 uri
-   : scheme '://' login? host (':' port)? ('/' path)? query? frag? WS?
+   : scheme COLON ABRPATH login? host (COLON port)? (PATHSEP path)? query? frag? WS?
    ;
 
 scheme
@@ -43,7 +43,7 @@ scheme
    ;
 
 host
-   : '/'? (hostname | hostnumber)
+   : PATHSEP? (hostname | hostnumber)
    ;
 
 hostname
@@ -59,7 +59,7 @@ port
    ;
 
 path
-   : string ('/' string)*
+   : string (PATHSEP string)*
    ;
 
 user
@@ -67,7 +67,7 @@ user
    ;
 
 login
-   : user ':' password '@'
+   : user COLON password '@'
    ;
 
 password
@@ -88,10 +88,6 @@ search
 
 searchparameter
    : string ('=' (string | DIGITS | HEX))?
-   ;
-
-slash
-   : (SLASH)+
    ;
 
 element
@@ -368,10 +364,6 @@ HEX
 
 STRING
    : ([a-zA-Z~0-9] | HEX | UTF8) ([a-zA-Z0-9.-] | HEX| UTF8)*
-   ;
-
-SLASH
-   : '/'
    ;
 
 QUOTATION_MARKS: ["];
