@@ -5,4 +5,8 @@ bin/
 .project
 .settings
 scripts/ID*
-src/main/java/selene/*
+*.tokens
+*.interp
+*Parser.java
+*Listener.java
+*Lexer.java
