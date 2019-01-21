@@ -1,8 +1,5 @@
 package selene;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,6 @@ import selene.SELENEParser.GetContext;
 import selene.SELENEParser.HoverContext;
 import selene.SELENEParser.QuitContext;
 import selene.SELENEParser.SendKeysContext;
-import selene.SELENEParser.UpdateTCsContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 import selenium.SeleniumRunner;
@@ -21,7 +17,6 @@ import selenium.SeleniumRunner;
 public class SELENEListenterImpl extends SELENEBaseListener
 {
     private Actions action;
-    private Map<String, String> variables;
 
     @Autowired
     private SeleniumRunner seleneRunner;
@@ -29,7 +24,6 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public SELENEListenterImpl(WebDriver driver) {
         seleneRunner = new SeleniumRunner( driver );
         action = new Actions( driver );
-        variables = new HashMap<>();
     }
 
     public Actions getAction()
@@ -53,57 +47,56 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
-    public void exitUpdateTCs( UpdateTCsContext ctx )
-    {
-        variables.put( "updateTCs", ctx.string().getText() );
-    }
-
-    @Override
     public void exitGet( GetContext ctx )
     {
-        String url = ctx.url_with_q().getText().replaceAll( "\"", "" );
+        String url = ctx.url().getText().replaceAll( "\"", "" );
         seleneRunner.get( url );
     }
 
     @Override
     public void exitAccess( AccessContext ctx )
     {
-        String url = ctx.url_with_q().getText().replaceAll( "\"", "" );
+        String url = ctx.url().getText().replaceAll( "\"", "" );
         seleneRunner.access( url );
     }
 
     @Override
     public void exitClick( ClickContext ctx )
     {
-        seleneRunner.click( ctx.element_with_q().getText().replaceAll( "\"", "" ) );
+        seleneRunner.click( ctx.element().getText().replaceAll( "\"", "" ) );
     }
 
     @Override
     public void exitSendKeys( SendKeysContext ctx )
     {
-        seleneRunner.sendKeys( ctx.element_with_q().getText().replaceAll( "\"", "" ), ctx.string_with_q().getText().replaceAll( "\"", "" ) );
+        seleneRunner.sendKeys( ctx.element().getText().replaceAll( "\"", "" ), ctx.string().getText().replaceAll( "\"", "" ) );
     }
 
     @Override
     public void exitVerifyText( VerifyTextContext ctx )
     {
-        // System.out.println( "verifyText: " + ctx.element_with_q().getText() + " " + ctx.string_with_q().getText() );
+        // System.out.println( "verifyText: " + ctx.element().getText() + " " + ctx.string().getText() );
     }
 
     @Override
     public void exitVerifyTitle( VerifyTitleContext ctx )
     {
-        System.out.println(ctx.string_with_q().getText().replaceAll("\"", ""));
-        System.out.println("verifyTitle: " + seleneRunner.verifyTitle(ctx.string_with_q().getText().replaceAll("\"", "")));
+        System.out.println(ctx.string().getText());
+        System.out.println("verifyTitle: " + seleneRunner.verifyTitle(ctx.string().getText().replaceAll("\"", "")));
     }
 
     @Override
     public void exitHover(HoverContext ctx) {
-        seleneRunner.hover(ctx.element_with_q().getText().replaceAll("\"", ""));
+        seleneRunner.hover(ctx.element().getText().replaceAll("\"", ""));
     }
 
     @Override
     public void exitQuit(QuitContext ctx) {
         seleneRunner.quit();
+    }
+
+    private String trimHeadAndTailQuot(String input)
+    {
+        return input.replace( "^\"", "" ).replace( "\"$", "" );
     }
 }

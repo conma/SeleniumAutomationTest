@@ -1,7 +1,5 @@
 package selenium;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +29,6 @@ public class SeleniumRunner {
         System.out.println( "click at " + element );
         WebElement webElement = getElement( element);
         action.click(webElement).build().perform();
-        webDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
     public void sendKeys(String element, String keywords) {
