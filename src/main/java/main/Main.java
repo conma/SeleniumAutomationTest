@@ -24,13 +24,21 @@ public class Main
         mainApp.run( args );
         Options options = new Options();
 
-        Option input = new Option("i", "input", true, "input file path");
-        input.setRequired(true);
-        options.addOption(input);
+        Option generate = new Option("g", "generate-script-files", true, "Generate Test script files from testcases file into folder\n"
+                + "Optional: -f | --file <testcase_file.xls> -F | --Folder <output folder of Test script files>"
+                + "Default: -f Testcases.xls -F scripts"
+                + "Example: -f Testcases.xls -F scripts");
+        generate.setRequired(true);
+        options.addOption(generate);
 
-        Option output = new Option("o", "output", true, "output file");
-        output.setRequired(true);
-        options.addOption(output);
+        Option execute = new Option("x", "execute-test", true, "Execute the test.\n"
+                + "Optional:"
+                + "\t-b | --browser <chrome | googlechrome | firefox | ff | ie | internetexplorer>"
+                + "\t-d | --driver-path <path/to/driver file>"
+                + "\t-F | --Folder <path/to/script_file/folder>"
+                + "\t-f | -- file <path/to/testcase_file.xls>");
+        execute.setRequired(true);
+        options.addOption(execute);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -40,7 +48,7 @@ public class Main
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-            formatter.printHelp("utility-name", options);
+            formatter.printHelp("SeleniumAutomationTest", options);
 
             System.exit(1);
         }
@@ -54,6 +62,7 @@ public class Main
 
     private void run(String[] args)
     {
-        System.out.println( "xxxxxxxxxxxxxx" );
+        for (int i = 0; i<args.length; i++ )
+            System.out.println( i + ": " + args[i] );
     }
 }
