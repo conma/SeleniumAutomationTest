@@ -3,6 +3,7 @@ package selene;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
@@ -14,6 +15,7 @@ import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 import selenium.SeleniumRunner;
 
+@Component
 public class SELENEListenterImpl extends SELENEBaseListener
 {
     private Actions action;
