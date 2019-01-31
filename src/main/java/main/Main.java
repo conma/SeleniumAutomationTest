@@ -24,21 +24,21 @@ public class Main
         mainApp.run( args );
         Options options = new Options();
 
-        Option generate = new Option("g", "generate-script-files", true, "Generate Test script files from testcases file into folder\n"
+        Option generateOption = new Option("g", "generate-script-files", true, "Generate Test script files from testcases file into folder\n"
                 + "Optional: -f | --file <testcase_file.xls> -F | --Folder <output folder of Test script files>"
                 + "Default: -f Testcases.xls -F scripts"
                 + "Example: -f Testcases.xls -F scripts");
-        generate.setRequired(true);
-        options.addOption(generate);
+        generateOption.setRequired(true);
+        options.addOption(generateOption);
 
-        Option execute = new Option("x", "execute-test", true, "Execute the test.\n"
+        Option executeOption = new Option("x", "execute-test", true, "Execute the test.\n"
                 + "Optional:"
                 + "\t-b | --browser <chrome | googlechrome | firefox | ff | ie | internetexplorer>"
                 + "\t-d | --driver-path <path/to/driver file>"
                 + "\t-F | --Folder <path/to/script_file/folder>"
                 + "\t-f | -- file <path/to/testcase_file.xls>");
-        execute.setRequired(true);
-        options.addOption(execute);
+        executeOption.setRequired(true);
+        options.addOption(executeOption);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -53,8 +53,8 @@ public class Main
             System.exit(1);
         }
 
-        String inputFilePath = cmd.getOptionValue("input");
-        String outputFilePath = cmd.getOptionValue("output");
+        String inputFilePath = cmd.getOptionValue("generate-script-files");
+        String outputFilePath = cmd.getOptionValue("execute-test");
 
         System.out.println(inputFilePath);
         System.out.println(outputFilePath);
