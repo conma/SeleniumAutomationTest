@@ -22,16 +22,27 @@ public class Main
         context = new AnnotationConfigApplicationContext( AppConfiguration.class );
         Main mainApp = (Main) context.getBean( "main" );
         mainApp.run( args );
+    }
+
+    private void run(String[] args)
+    {
+        addOptions(args);
+        for (int i = 0; i<args.length; i++ )
+            System.out.println( i + ": " + args[i] );
+    }
+
+    private void addOptions(String[] args)
+    {
         Options options = new Options();
 
-        Option generateOption = new Option("g", "generate-script-files", true, "Generate Test script files from testcases file into folder\n"
+        Option generateOption = new Option("g", "generate-script-files", false, "Generate Test script files from testcases file into folder\n"
                 + "Optional: -f | --file <testcase_file.xls> -F | --Folder <output folder of Test script files>"
                 + "Default: -f Testcases.xls -F scripts"
                 + "Example: -f Testcases.xls -F scripts");
         generateOption.setRequired(true);
         options.addOption(generateOption);
 
-        Option executeOption = new Option("x", "execute-test", true, "Execute the test.\n"
+        Option executeOption = new Option("x", "execute-test", false, "Execute the test.\n"
                 + "Optional:"
                 + "\t-b | --browser <chrome | googlechrome | firefox | ff | ie | internetexplorer>"
                 + "\t-d | --driver-path <path/to/driver file>"
@@ -39,6 +50,22 @@ public class Main
                 + "\t-f | -- file <path/to/testcase_file.xls>");
         executeOption.setRequired(true);
         options.addOption(executeOption);
+
+        Option fileOption = new Option( "f", "file", true, "" );
+        fileOption.setRequired( false );
+        options.addOption( fileOption );
+
+        Option folderOption = new Option( "F", "Folder", true, "" );
+        folderOption.setRequired( false );
+        options.addOption( folderOption );
+
+        Option browserOption = new Option( "b", "browser", true, "" );
+        browserOption.setRequired( false );
+        options.addOption( browserOption );
+
+        Option driverOption = new Option( "d", "driver-path", true, "" );
+        driverOption.setRequired( false );
+        options.addOption( driverOption );
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -49,20 +76,14 @@ public class Main
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             formatter.printHelp("SeleniumAutomationTest", options);
-
             System.exit(1);
         }
 
         String inputFilePath = cmd.getOptionValue("generate-script-files");
         String outputFilePath = cmd.getOptionValue("execute-test");
+        System.out.println( cmd.getOptionValues( "execute-test" ) );
 
         System.out.println(inputFilePath);
         System.out.println(outputFilePath);
-    }
-
-    private void run(String[] args)
-    {
-        for (int i = 0; i<args.length; i++ )
-            System.out.println( i + ": " + args[i] );
     }
 }
