@@ -73,17 +73,17 @@ public class Main
 
         try {
             cmd = parser.parse(options, args);
+            if (cmd.hasOption("g")) {
+                System.out.println("generate");
+            }
+            if (cmd.hasOption("x")) {
+                System.out.println("execute");
+            }
         } catch (ParseException e) {
             System.out.println(e.getMessage());
             formatter.printHelp("SeleniumAutomationTest", options);
             System.exit(1);
         }
 
-        String inputFilePath = cmd.getOptionValue("generate-script-files");
-        String outputFilePath = cmd.getOptionValue("execute-test");
-        System.out.println( cmd.getOptionValues( "execute-test" ) );
-
-        System.out.println(inputFilePath);
-        System.out.println(outputFilePath);
     }
 }
