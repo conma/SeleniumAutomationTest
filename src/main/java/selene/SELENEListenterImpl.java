@@ -2,7 +2,6 @@ package selene;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import selene.SELENEParser.AccessContext;
@@ -20,7 +19,6 @@ public class SELENEListenterImpl extends SELENEBaseListener
 {
     private Actions action;
 
-    @Autowired
     private SeleniumRunner seleneRunner;
 
     public SELENEListenterImpl(WebDriver driver) {
@@ -51,45 +49,50 @@ public class SELENEListenterImpl extends SELENEBaseListener
     @Override
     public void exitGet( GetContext ctx )
     {
-        String url = ctx.url().getText().replaceAll( "\"", "" );
+        String url = trimHeadAndTailQuot(ctx.url().getText());
         seleneRunner.get( url );
     }
 
     @Override
     public void exitAccess( AccessContext ctx )
     {
-        String url = ctx.url().getText().replaceAll( "\"", "" );
+        String url = trimHeadAndTailQuot(ctx.url().getText());
         seleneRunner.access( url );
     }
 
     @Override
     public void exitClick( ClickContext ctx )
     {
-        seleneRunner.click( ctx.element().getText().replaceAll( "\"", "" ) );
+        String element = trimHeadAndTailQuot(ctx.element().getText());
+        seleneRunner.click( element );
     }
 
     @Override
     public void exitSendKeys( SendKeysContext ctx )
     {
-        seleneRunner.sendKeys( ctx.element().getText().replaceAll( "\"", "" ), ctx.string().getText().replaceAll( "\"", "" ) );
+        String element = trimHeadAndTailQuot(ctx.element().getText());
+        seleneRunner.sendKeys( element, ctx.string().getText().replaceAll( "\"", "" ) );
     }
 
     @Override
     public void exitVerifyText( VerifyTextContext ctx )
     {
-        // System.out.println( "verifyText: " + ctx.element().getText() + " " + ctx.string().getText() );
+        String element = trimHeadAndTailQuot(ctx.element().getText());
+        String string = trimHeadAndTailQuot(ctx.string().getText());
+        seleneRunner.verifyText(element, string);
     }
 
     @Override
     public void exitVerifyTitle( VerifyTitleContext ctx )
     {
-        System.out.println(ctx.string().getText());
-        System.out.println("verifyTitle: " + seleneRunner.verifyTitle(ctx.string().getText().replaceAll("\"", "")));
+        String title = trimHeadAndTailQuot(ctx.string().getText());
+        seleneRunner.verifyTitle(title);
     }
 
     @Override
     public void exitHover(HoverContext ctx) {
-        seleneRunner.hover(ctx.element().getText().replaceAll("\"", ""));
+        String element = trimHeadAndTailQuot(ctx.element().getText());
+        seleneRunner.hover(element);
     }
 
     @Override
@@ -99,6 +102,6 @@ public class SELENEListenterImpl extends SELENEBaseListener
 
     private String trimHeadAndTailQuot(String input)
     {
-        return input.replace( "^\"", "" ).replace( "\"$", "" );
+        return input.replaceAll( "^\"", "" ).replaceAll( "\"$", "" );
     }
 }
