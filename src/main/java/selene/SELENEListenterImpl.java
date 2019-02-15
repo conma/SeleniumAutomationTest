@@ -12,6 +12,7 @@ import selene.SELENEParser.QuitContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
+import selene.SELENEParser.WaitSecondContext;
 import selenium.SeleniumRunner;
 
 @Component
@@ -93,6 +94,13 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitHover(HoverContext ctx) {
         String element = trimHeadAndTailQuot(ctx.element().getText());
         seleneRunner.hover(element);
+    }
+
+    @Override
+    public void exitWaitSecond(WaitSecondContext ctx)
+    {
+        String seconds = trimHeadAndTailQuot(ctx.string().getText());
+        seleneRunner.waitSecond( seconds );
     }
 
     @Override

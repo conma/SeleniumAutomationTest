@@ -14,6 +14,7 @@ verifyTitle   : 'verifyTitle' string;
 hover         : 'hover' element;
 verifyEnable  : 'verifyEnable' element;
 enableElement : element;
+waitSecond    : 'waitSecond' string;
 
 quit          : 'quit';
 

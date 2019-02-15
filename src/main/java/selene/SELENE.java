@@ -20,8 +20,8 @@ import model.Testcase;
  *      chrome  | googlechrome
  * args[1]: Đường dẫn tuyệt đối tới file driver tương ứng
  *       D:/driver/geckodriver.exe (geckodriver.exe dành cho ff)
- * args[2]: Đường dẫn tuyệt đối tới file testcase
- *      D:/tescase/app1.xlsx
+ * args[2]: Đường dẫn tuyệt đối tới folder chứa script chạy
+ *      D:/scripts
  */
 
 public class SELENE {

@@ -1,5 +1,7 @@
 package selenium;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -110,5 +112,11 @@ public class SeleniumRunner {
             return null;
         }
         return webElement;
+    }
+
+    public void waitSecond(String seconds)
+    {
+        long time = Long.parseLong( seconds );
+        webDriver.manage().timeouts().implicitlyWait( time, TimeUnit.SECONDS );
     }
 }
