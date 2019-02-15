@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.springframework.stereotype.Component;
 
 import model.Testcase;
 
@@ -24,6 +25,7 @@ import model.Testcase;
  *      D:/scripts
  */
 
+@Component
 public class SELENE {
     private static WebDriver driver;
     private static String scriptFolderPath;
@@ -33,6 +35,8 @@ public class SELENE {
         init(args);
     }
 
+    public SELENE()
+    {}
     public static void main( String[] args )
     {
         SELENE selene = new SELENE( args );
@@ -59,7 +63,7 @@ public class SELENE {
 
     }
 
-    private void init(String[] args) {
+    public void init(String[] args) {
         String driverType = args[0];
         driverFilePathPath = args[1];
         scriptFolderPath = args[2];

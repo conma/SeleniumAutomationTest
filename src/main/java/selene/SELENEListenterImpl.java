@@ -21,7 +21,7 @@ public class SELENEListenterImpl extends SELENEBaseListener
     private Actions action;
 
     private SeleniumRunner seleneRunner;
-
+    public SELENEListenterImpl() {}
     public SELENEListenterImpl(WebDriver driver) {
         seleneRunner = new SeleniumRunner( driver );
         action = new Actions( driver );

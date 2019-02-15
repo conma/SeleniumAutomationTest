@@ -11,11 +11,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import selene.SELENE;
+import service.ScriptGeneratorService;
 import spring.config.AppConfiguration;
 
 public class Main
 {
     private static ApplicationContext context;
+
+    private Options options;
+
+    private CommandLineParser parser;
+
+    private HelpFormatter formatter;
+
+    private CommandLine cmd;
+
+    @Autowired
+    private SELENE selene;
+
+    @Autowired
+    private ScriptGeneratorService scriptGeneratorService;
 
     public static void main( String[] args )
     {
@@ -26,30 +42,47 @@ public class Main
 
     private void run(String[] args)
     {
-        addOptions(args);
-        for (int i = 0; i<args.length; i++ )
-            System.out.println( i + ": " + args[i] );
+        options = new Options();
+        parser = new DefaultParser();
+        formatter = new HelpFormatter();
+        addOptions(options, args);
+
+        try {
+            cmd = parser.parse(options, args);
+            if (cmd.hasOption("g")) {
+                System.out.println("--generate");
+                if (cmd.hasOption( "f" )) {
+                    System.out.println( "--file: " + cmd.getOptionValue( "f" ) );
+                }
+                if(cmd.hasOption( "F" )) {
+                    System.out.println( "--Folder: " + cmd.getOptionValue( "F" ) );
+                }
+            }
+            if (cmd.hasOption("x")) {
+                System.out.println("execute");
+            }
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            formatter.printHelp("SeleniumAutomationTest", options);
+            System.exit(1);
+        }
     }
 
-    private void addOptions(String[] args)
+    private void addOptions( Options options, String[] args )
     {
-        Options options = new Options();
+        Option generateOption = new Option( "g", "generate-script-files", false,
+                "Generate Test script files from testcases file into folder\n"
+                        + "Optional: -f | --file <testcase_file.xls> -F | --Folder <output folder of Test script files>"
+                        + "Default: -f Testcases.xls -F scripts" + "Example: -f Testcases.xls -F scripts" );
+        generateOption.setRequired( false );
+        options.addOption( generateOption );
 
-        Option generateOption = new Option("g", "generate-script-files", false, "Generate Test script files from testcases file into folder\n"
-                + "Optional: -f | --file <testcase_file.xls> -F | --Folder <output folder of Test script files>"
-                + "Default: -f Testcases.xls -F scripts"
-                + "Example: -f Testcases.xls -F scripts");
-        generateOption.setRequired(true);
-        options.addOption(generateOption);
-
-        Option executeOption = new Option("x", "execute-test", false, "Execute the test.\n"
-                + "Optional:"
-                + "\t-b | --browser <chrome | googlechrome | firefox | ff | ie | internetexplorer>"
-                + "\t-d | --driver-path <path/to/driver file>"
-                + "\t-F | --Folder <path/to/script_file/folder>"
-                + "\t-f | -- file <path/to/testcase_file.xls>");
-        executeOption.setRequired(true);
-        options.addOption(executeOption);
+        Option executeOption = new Option( "x", "execute-test", false,
+                "Execute the test.\n" + "Optional:" + "\t-b | --browser <chrome | googlechrome | firefox | ff | ie | internetexplorer>"
+                        + "\t-d | --driver-path <path/to/driver file>" + "\t-F | --Folder <path/to/script_file/folder>"
+                        + "\t-f | -- file <path/to/testcase_file.xls>" );
+        executeOption.setRequired( false );
+        options.addOption( executeOption );
 
         Option fileOption = new Option( "f", "file", true, "" );
         fileOption.setRequired( false );
@@ -66,24 +99,5 @@ public class Main
         Option driverOption = new Option( "d", "driver-path", true, "" );
         driverOption.setRequired( false );
         options.addOption( driverOption );
-
-        CommandLineParser parser = new DefaultParser();
-        HelpFormatter formatter = new HelpFormatter();
-        CommandLine cmd = null;
-
-        try {
-            cmd = parser.parse(options, args);
-            if (cmd.hasOption("g")) {
-                System.out.println("generate");
-            }
-            if (cmd.hasOption("x")) {
-                System.out.println("execute");
-            }
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            formatter.printHelp("SeleniumAutomationTest", options);
-            System.exit(1);
-        }
-
     }
 }

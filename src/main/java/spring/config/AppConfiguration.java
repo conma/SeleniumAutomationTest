@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import main.Main;
 
 @Configuration
-@ComponentScan({"service"})
+@ComponentScan({"service", "selene"})
 public class AppConfiguration {
 	@Bean(name = "main")
 	Main mainApp() {
