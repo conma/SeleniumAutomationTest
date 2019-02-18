@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -7,6 +9,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.poi.EncryptedDocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -26,6 +29,14 @@ public class Main
     private HelpFormatter formatter;
 
     private CommandLine cmd;
+
+    private String testcaseFilePath;
+
+    private String scriptFolderPath;
+
+    private String browserType;
+
+    private String driverDriverFilePath;
 
     @Autowired
     private SELENE selene;
@@ -50,16 +61,37 @@ public class Main
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("g")) {
-                System.out.println("--generate");
                 if (cmd.hasOption( "f" )) {
-                    System.out.println( "--file: " + cmd.getOptionValue( "f" ) );
+                    testcaseFilePath = cmd.getOptionValue( "f" );
                 }
                 if(cmd.hasOption( "F" )) {
-                    System.out.println( "--Folder: " + cmd.getOptionValue( "F" ) );
+                    scriptFolderPath = cmd.getOptionValue( "F" );
+                }
+                try
+                {
+                    scriptGeneratorService.generateScriptFiles( testcaseFilePath, scriptFolderPath );
+                    System.out.println("Generated script files in " + scriptFolderPath + " from " + testcaseFilePath);
+                }
+                catch ( EncryptedDocumentException | IOException e )
+                {
+                    // TODO Xử lý khi có lỗi
+                    e.printStackTrace();
                 }
             }
-            if (cmd.hasOption("x")) {
-                System.out.println("execute");
+            if (!cmd.hasOption( "g" ) && cmd.hasOption("x")) {
+                if(cmd.hasOption( "F" )) {
+                    scriptFolderPath = cmd.getOptionValue( "F" );
+                }
+                if(cmd.hasOption( "b" )) {
+                    browserType = cmd.getOptionValue( "b" );
+                }
+                if(cmd.hasOption( "d" )) {
+                    driverDriverFilePath = cmd.getOptionValue( "d" );
+                }
+                selene.init( args );
+                System.out.println("Executing scripts in folder " + scriptFolderPath);
+                System.out.println( "\tBrowser type: " + browserType);
+                System.out.println( "\tDriver file: " + driverDriverFilePath);
             }
         } catch (ParseException e) {
             System.out.println(e.getMessage());

@@ -7,7 +7,7 @@ import org.apache.poi.EncryptedDocumentException;
 public interface ScriptGeneratorService
 {
 
-    public void scriptGenerator(String testcaseFilePath, String scriptFolderPath)
+    public void generateScriptFiles(String testcaseFilePath, String scriptFolderPath)
             throws EncryptedDocumentException, IOException;
 
 }
