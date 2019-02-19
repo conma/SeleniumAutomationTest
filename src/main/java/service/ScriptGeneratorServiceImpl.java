@@ -35,7 +35,7 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
     }
 
     @Override
-    public void scriptGenerator( String testcaseFilePath, String scriptFolderPath ) throws EncryptedDocumentException, IOException
+    public void generateScriptFiles( String testcaseFilePath, String scriptFolderPath ) throws EncryptedDocumentException, IOException
     {
         // Xóa hết các TCs cũ
         File scriptDir = new File(scriptFolderPath);

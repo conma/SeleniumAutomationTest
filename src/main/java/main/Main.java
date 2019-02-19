@@ -36,7 +36,7 @@ public class Main
 
     private String browserType;
 
-    private String driverDriverFilePath;
+    private String driverFilePath;
 
     @Autowired
     private SELENE selene;
@@ -51,26 +51,30 @@ public class Main
         mainApp.run( args );
     }
 
-    private void run(String[] args)
+    private void run( String[] args )
     {
         options = new Options();
         parser = new DefaultParser();
         formatter = new HelpFormatter();
-        addOptions(options, args);
+        addOptions( options, args );
 
-        try {
-            cmd = parser.parse(options, args);
-            if (cmd.hasOption("g")) {
-                if (cmd.hasOption( "f" )) {
+        try
+        {
+            cmd = parser.parse( options, args );
+            if ( cmd.hasOption( "g" ) )
+            {
+                if ( cmd.hasOption( "f" ) )
+                {
                     testcaseFilePath = cmd.getOptionValue( "f" );
                 }
-                if(cmd.hasOption( "F" )) {
+                if ( cmd.hasOption( "F" ) )
+                {
                     scriptFolderPath = cmd.getOptionValue( "F" );
                 }
                 try
                 {
                     scriptGeneratorService.generateScriptFiles( testcaseFilePath, scriptFolderPath );
-                    System.out.println("Generated script files in " + scriptFolderPath + " from " + testcaseFilePath);
+                    System.out.println( "Generated script files in " + scriptFolderPath + " from " + testcaseFilePath );
                 }
                 catch ( EncryptedDocumentException | IOException e )
                 {
@@ -78,25 +82,32 @@ public class Main
                     e.printStackTrace();
                 }
             }
-            if (!cmd.hasOption( "g" ) && cmd.hasOption("x")) {
-                if(cmd.hasOption( "F" )) {
+            if ( cmd.hasOption( "x" ) )
+            {
+                if ( cmd.hasOption( "F" ) )
+                {
                     scriptFolderPath = cmd.getOptionValue( "F" );
                 }
-                if(cmd.hasOption( "b" )) {
+                if ( cmd.hasOption( "b" ) )
+                {
                     browserType = cmd.getOptionValue( "b" );
                 }
-                if(cmd.hasOption( "d" )) {
-                    driverDriverFilePath = cmd.getOptionValue( "d" );
+                if ( cmd.hasOption( "d" ) )
+                {
+                    driverFilePath = cmd.getOptionValue( "d" );
                 }
-                selene.init( args );
-                System.out.println("Executing scripts in folder " + scriptFolderPath);
-                System.out.println( "\tBrowser type: " + browserType);
-                System.out.println( "\tDriver file: " + driverDriverFilePath);
+                selene.init( browserType, driverFilePath, scriptFolderPath );
+                selene.run();
+                System.out.println( "Executing scripts in folder " + scriptFolderPath );
+                System.out.println( "\tBrowser type: " + browserType );
+                System.out.println( "\tDriver file: " + driverFilePath );
             }
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            formatter.printHelp("SeleniumAutomationTest", options);
-            System.exit(1);
+        }
+        catch ( ParseException e )
+        {
+            System.out.println( e.getMessage() );
+            formatter.printHelp( "SeleniumAutomationTest", options );
+            System.exit( 1 );
         }
     }
 

@@ -29,19 +29,6 @@ import model.Testcase;
 public class SELENE {
     private static WebDriver driver;
     private static String scriptFolderPath;
-    private static String driverFilePathPath;
-
-    public SELENE(String args[]) {
-        init(args);
-    }
-
-    public SELENE()
-    {}
-    public static void main( String[] args )
-    {
-        SELENE selene = new SELENE( args );
-        selene.run(  );
-    }
 
     public void run() {
         File scriptFolder = new File(scriptFolderPath);
@@ -60,22 +47,20 @@ public class SELENE {
                 e.printStackTrace();
             }
         }
-
     }
 
-    public void init(String[] args) {
-        String driverType = args[0];
-        driverFilePathPath = args[1];
-        scriptFolderPath = args[2];
+    public void init(String browserType, String driverFilePath, String scriptFolderPath) {
+        String driverType = browserType;
+        SELENE.scriptFolderPath = scriptFolderPath;
 
         if ( driverType.equalsIgnoreCase( "firefox" ) || driverType.equalsIgnoreCase( "ff" ) )
         {
-            System.setProperty( "webdriver.gecko.driver", driverFilePathPath );
+            System.setProperty( "webdriver.gecko.driver", driverFilePath );
             driver = new FirefoxDriver();
         }
         else if ( driverType.equalsIgnoreCase( "internetexplorer" ) || driverType.equalsIgnoreCase( "ie" ) )
         {
-            System.setProperty( "webdriver.ie.driver", driverFilePathPath );
+            System.setProperty( "webdriver.ie.driver", driverFilePath );
             System.setProperty( "webdriver.ie.driver.host", "127.0.0.1" );
             driver = new InternetExplorerDriver();
             // System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
@@ -83,7 +68,7 @@ public class SELENE {
         }
         else if ( driverType.equalsIgnoreCase( "googlechrome" ) || driverType.equalsIgnoreCase( "chrome" ) )
         {
-            System.setProperty( "webdriver.chrome.driver", driverFilePathPath );
+            System.setProperty( "webdriver.chrome.driver", driverFilePath );
             driver = new ChromeDriver();
         }
     }
