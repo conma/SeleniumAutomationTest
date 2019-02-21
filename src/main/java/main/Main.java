@@ -20,6 +20,11 @@ import spring.config.AppConfiguration;
 
 public class Main
 {
+    private final String DEFAULT_TESTCASE_FILE_PATH = "Testcase.xls";
+    private final String DEFAULT_SCRIPT_FOLDER_PATH = "script";
+    private final String DEFAULT_BROWSER_TYPE = "chrome";
+    private final String DEFAULT_DRIVER_FILE_PATH = "chromedriver.exe";
+
     private static ApplicationContext context;
 
     private Options options;
@@ -30,13 +35,13 @@ public class Main
 
     private CommandLine cmd;
 
-    private String testcaseFilePath;
+    private String testcaseFilePath = DEFAULT_TESTCASE_FILE_PATH;
 
-    private String scriptFolderPath;
+    private String scriptFolderPath = DEFAULT_SCRIPT_FOLDER_PATH;
 
-    private String browserType;
+    private String browserType = DEFAULT_BROWSER_TYPE;
 
-    private String driverFilePath;
+    private String driverFilePath = DEFAULT_DRIVER_FILE_PATH;
 
     @Autowired
     private SELENE selene;
@@ -56,6 +61,7 @@ public class Main
         options = new Options();
         parser = new DefaultParser();
         formatter = new HelpFormatter();
+        formatter.setOptionComparator(null);
         addOptions( options, args );
 
         try
@@ -107,6 +113,11 @@ public class Main
         {
             System.out.println( e.getMessage() );
             formatter.printHelp( "SeleniumAutomationTest", options );
+            System.out.println("Example:\n"
+                    + "java -jar SeleneiumAutomationTest.jar -g -x -f Testcase.xls -F script -b chrome -d driver/chromedriver.exe\n"
+                    + "java -jar SeleneiumAutomationTest.jar -g -x to generate and execute with default parameters\n"
+                    + "java -jar SeleneiumAutomationTest.jar -g -F script to generate script files only\n"
+                    + "java -jar SeleneiumAutomationTest.jar -x script to execute");
             System.exit( 1 );
         }
     }
@@ -116,7 +127,7 @@ public class Main
         Option generateOption = new Option( "g", "generate-script-files", false,
                 "Generate Test script files from testcases file into folder\n"
                         + "Optional: -f | --file <testcase_file.xls> -F | --Folder <output folder of Test script files>"
-                        + "Default: -f Testcases.xls -F scripts" + "Example: -f Testcases.xls -F scripts" );
+                        + "Default: -f Testcase.xls -F script" + "Example: -f Testcases.xls -F script" );
         generateOption.setRequired( false );
         options.addOption( generateOption );
 
@@ -127,20 +138,25 @@ public class Main
         executeOption.setRequired( false );
         options.addOption( executeOption );
 
-        Option fileOption = new Option( "f", "file", true, "" );
+        Option fileOption = new Option( "f", "file", true, "path/to/testcase_file.\nDefault: Testcase.xls" );
         fileOption.setRequired( false );
         options.addOption( fileOption );
 
-        Option folderOption = new Option( "F", "Folder", true, "" );
+        Option folderOption = new Option( "F", "Folder", true, "path/to/folder that contains scipt files\n"
+                + "Default: script" );
         folderOption.setRequired( false );
         options.addOption( folderOption );
 
-        Option browserOption = new Option( "b", "browser", true, "" );
+        Option browserOption = new Option( "b", "browser", true, "browser type.\n"
+                + "Accept: chrome | googlechrome | ie | internetexplorer | ff | firefox\n"
+                + "Default: chrome" );
         browserOption.setRequired( false );
         options.addOption( browserOption );
 
-        Option driverOption = new Option( "d", "driver-path", true, "" );
+        Option driverOption = new Option( "d", "driver-path", true, "path/to/driver/file.\n"
+                + "Default: driver/chromedriver.exe" );
         driverOption.setRequired( false );
         options.addOption( driverOption );
+
     }
 }

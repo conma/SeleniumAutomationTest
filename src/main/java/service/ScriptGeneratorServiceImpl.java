@@ -22,18 +22,6 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
 
     private final String NEW_LINE = "\n";
 
-    public static void main( String[] args )
-    {
-        try
-        {
-            new ScriptGeneratorServiceImpl().scriptGenerator( "testcases/Testcases.xls", "scripts" );
-        }
-        catch ( EncryptedDocumentException | IOException e )
-        {
-            System.out.println( "File not found or can't read!" );
-        }
-    }
-
     @Override
     public void generateScriptFiles( String testcaseFilePath, String scriptFolderPath ) throws EncryptedDocumentException, IOException
     {
