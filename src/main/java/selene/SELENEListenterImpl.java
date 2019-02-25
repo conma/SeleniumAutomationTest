@@ -72,7 +72,8 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitSendKeys( SendKeysContext ctx )
     {
         String element = trimHeadAndTailQuot(ctx.element().getText());
-        seleneRunner.sendKeys( element, ctx.string().getText().replaceAll( "\"", "" ) );
+        String string = trimHeadAndTailQuot(ctx.string().getText() );
+        seleneRunner.sendKeys( element, string);
     }
 
     @Override
