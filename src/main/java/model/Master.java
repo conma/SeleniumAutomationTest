@@ -27,7 +27,7 @@ public class Master
         return autoColumn;
     }
 
-    public void setAutoColumn(int autoColumn)
+    public void setAutoColumn( int autoColumn )
     {
         this.autoColumn = autoColumn;
     }
@@ -37,7 +37,7 @@ public class Master
         return updateTC;
     }
 
-    public void setUpdateTC(boolean updateTC)
+    public void setUpdateTC( boolean updateTC )
     {
         this.updateTC = updateTC;
     }
@@ -47,7 +47,7 @@ public class Master
         return firstRowOfTestcase;
     }
 
-    public void setFirstRowOfTestcase(int firstRowOfTestcase)
+    public void setFirstRowOfTestcase( int firstRowOfTestcase )
     {
         this.firstRowOfTestcase = firstRowOfTestcase;
     }
@@ -57,7 +57,7 @@ public class Master
         return lastRowOfTestcase;
     }
 
-    public void setLastRowOfTestcase(int lastRowOfTestcase)
+    public void setLastRowOfTestcase( int lastRowOfTestcase )
     {
         this.lastRowOfTestcase = lastRowOfTestcase;
     }
@@ -67,7 +67,7 @@ public class Master
         return idColumn;
     }
 
-    public void setIdColumn(int idColumn)
+    public void setIdColumn( int idColumn )
     {
         this.idColumn = idColumn;
     }
@@ -77,7 +77,7 @@ public class Master
         return stepColumn;
     }
 
-    public void setStepsColumn(int stepsColumn)
+    public void setStepsColumn( int stepsColumn )
     {
         this.stepColumn = stepsColumn;
     }
@@ -87,7 +87,7 @@ public class Master
         return expectColumn;
     }
 
-    public void setExpectColumn(int expectColumn)
+    public void setExpectColumn( int expectColumn )
     {
         this.expectColumn = expectColumn;
     }
@@ -97,7 +97,7 @@ public class Master
         return resultColumn;
     }
 
-    public void setResultColumn(int resultColumn)
+    public void setResultColumn( int resultColumn )
     {
         this.resultColumn = resultColumn;
     }
@@ -107,7 +107,7 @@ public class Master
         return noteColumn;
     }
 
-    public void setNoteColumn(int noteColumn)
+    public void setNoteColumn( int noteColumn )
     {
         this.noteColumn = noteColumn;
     }

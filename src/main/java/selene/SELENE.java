@@ -26,20 +26,25 @@ import model.Testcase;
  */
 
 @Component
-public class SELENE {
+public class SELENE
+{
     private static WebDriver driver;
+
     private static String scriptFolderPath;
 
-    public void run() {
-        File scriptFolder = new File(scriptFolderPath);
+    public void run()
+    {
+        File scriptFolder = new File( scriptFolderPath );
         String[] scriptFileNames = scriptFolder.list();
-        for(String scriptFileName : scriptFileNames ) {
+        for ( String scriptFileName : scriptFileNames )
+        {
             Testcase testCase = new Testcase( scriptFileName.split( "-" )[0], scriptFileName.split( "-" )[1] );
-            try {
-                ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(scriptFolder + "/" + scriptFileName));
-                SELENELexer lexer = new SELENELexer(input);
-                SELENEParser parser = new SELENEParser(new CommonTokenStream(lexer));
-                parser.addParseListener(new SELENEListenterImpl(driver));
+            try
+            {
+                ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + scriptFileName ) );
+                SELENELexer lexer = new SELENELexer( input );
+                SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
+                parser.addParseListener( new SELENEListenterImpl( driver ) );
                 parser.program();
             }
             catch ( IOException e )
@@ -49,7 +54,8 @@ public class SELENE {
         }
     }
 
-    public void init(String browserType, String driverFilePath, String scriptFolderPath) {
+    public void init( String browserType, String driverFilePath, String scriptFolderPath )
+    {
         String driverType = browserType;
         SELENE.scriptFolderPath = scriptFolderPath;
 

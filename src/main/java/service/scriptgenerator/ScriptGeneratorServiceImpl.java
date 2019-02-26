@@ -27,9 +27,9 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
     public void generateScriptFiles( String testcaseFilePath, String scriptFolderPath ) throws EncryptedDocumentException, IOException
     {
         // Xóa hết các TCs cũ
-        File scriptDir = new File(scriptFolderPath);
-        for(File file: scriptDir.listFiles()) 
-                file.delete();
+        File scriptDir = new File( scriptFolderPath );
+        for ( File file : scriptDir.listFiles() )
+            file.delete();
 
         InputStream testcasesInputStream = new FileInputStream( testcaseFilePath );
         Workbook wb = WorkbookFactory.create( testcasesInputStream );
@@ -46,7 +46,8 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
             Row tcRow = sheet.getRow( i );
 
             String testcaseAutoStep = tcRow.getCell( AutoStepColumn ).getStringCellValue();
-            if ( testcaseAutoStep.equals( null ) || testcaseAutoStep.equals( "" ) ) {
+            if ( testcaseAutoStep.equals( null ) || testcaseAutoStep.equals( "" ) )
+            {
                 return;
             }
 
