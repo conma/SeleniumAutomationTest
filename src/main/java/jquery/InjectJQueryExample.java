@@ -6,14 +6,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class InjectJQuery
+public class InjectJQueryExample
 {
     // lenh height() trong JQuery
     private static String HEIGHT_JQ = "return $(document ).height();";
     private static String JQUERY_FILE = "src\\test\\selenium\\injectjquery\\script.txt";
     private static String ENABLE_ELEMENT = "var value = $(\"[name='_eventId_modify']\");"
             + "value[0].disabled = false;";
-    public void main(WebDriver driver) throws IOException {
+    public static void main(WebDriver driver) throws IOException {
         driver.manage().window().maximize();
         WebElement editE = driver.findElement( By.id( "_edit" ) );
         editE.click();
