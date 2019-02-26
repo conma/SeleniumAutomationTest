@@ -1,4 +1,4 @@
-package selenium;
+package service.seleneiumrunner;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,11 +10,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SeleniumRunner {
+public class SeleniumRunnerService {
     private WebDriver webDriver;
     private Actions action;
-
-    public SeleniumRunner(WebDriver webDriver) {
+    public SeleniumRunnerService() {}
+    public SeleniumRunnerService(WebDriver webDriver) {
         this.webDriver = webDriver;
         this.action = new Actions(webDriver);
     }

@@ -1,4 +1,4 @@
-package service;
+package service.scriptgenerator;
 
 import java.io.IOException;
 

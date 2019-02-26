@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import selene.SELENE;
-import service.ScriptGeneratorService;
+import service.scriptgenerator.ScriptGeneratorService;
 import spring.config.AppConfiguration;
 
 public class Main

@@ -13,17 +13,17 @@ import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 import selene.SELENEParser.WaitSecondContext;
-import selenium.SeleniumRunner;
+import service.seleneiumrunner.SeleniumRunnerService;
 
 @Component
 public class SELENEListenterImpl extends SELENEBaseListener
 {
     private Actions action;
 
-    private SeleniumRunner seleneRunner;
+    private SeleniumRunnerService seleneRunner;
     public SELENEListenterImpl() {}
     public SELENEListenterImpl(WebDriver driver) {
-        seleneRunner = new SeleniumRunner( driver );
+        seleneRunner = new SeleniumRunnerService( driver );
         action = new Actions( driver );
     }
 
@@ -37,12 +37,12 @@ public class SELENEListenterImpl extends SELENEBaseListener
         this.action = action;
     }
 
-    public SeleniumRunner getSeleneRunner()
+    public SeleniumRunnerService getSeleneRunner()
     {
         return seleneRunner;
     }
 
-    public void setSeleneRunner( SeleniumRunner seleneRunner )
+    public void setSeleneRunner( SeleniumRunnerService seleneRunner )
     {
         this.seleneRunner = seleneRunner;
     }
