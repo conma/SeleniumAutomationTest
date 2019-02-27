@@ -6,12 +6,14 @@ import java.io.IOException;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.stereotype.Component;
 
+import model.ErrorCode;
 import model.Testcase;
 
 /*
@@ -58,24 +60,47 @@ public class SELENE
     {
         String driverType = browserType;
         SELENE.scriptFolderPath = scriptFolderPath;
-
-        if ( driverType.equalsIgnoreCase( "firefox" ) || driverType.equalsIgnoreCase( "ff" ) )
+        try
         {
-            System.setProperty( "webdriver.gecko.driver", driverFilePath );
-            driver = new FirefoxDriver();
+            if ( driverType.equalsIgnoreCase( "firefox" ) || driverType.equalsIgnoreCase( "ff" ) )
+            {
+                System.setProperty( "webdriver.gecko.driver", driverFilePath );
+                driver = new FirefoxDriver();
+            }
+            else if ( driverType.equalsIgnoreCase( "internetexplorer" ) || driverType.equalsIgnoreCase( "ie" ) )
+            {
+                System.setProperty( "webdriver.ie.driver", driverFilePath );
+                System.setProperty( "webdriver.ie.driver.host", "127.0.0.1" );
+                driver = new InternetExplorerDriver();
+                 System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
+                 System.setProperty( "webdriver.ie.driver.logfile", "D:/var/log/ie-selenium.log" );
+            }
+            else if ( driverType.equalsIgnoreCase( "googlechrome" ) || driverType.equalsIgnoreCase( "chrome" ) )
+            {
+                System.setProperty( "webdriver.chrome.driver", driverFilePath );
+                driver = new ChromeDriver();
+            }
+            else
+            {
+                System.out.println( "Wrong browser name. Only accept: ff | firefox | chrome | googlechrome | ie | internetexplorer"
+                        + " but found: " + browserType );
+                System.out.println( "Error code: " + ErrorCode.WRONG_BROWSER_NAME );
+                System.exit( ErrorCode.WRONG_BROWSER_NAME );
+            }
         }
-        else if ( driverType.equalsIgnoreCase( "internetexplorer" ) || driverType.equalsIgnoreCase( "ie" ) )
+        catch ( IllegalStateException illegalStateException )
         {
-            System.setProperty( "webdriver.ie.driver", driverFilePath );
-            System.setProperty( "webdriver.ie.driver.host", "127.0.0.1" );
-            driver = new InternetExplorerDriver();
-            // System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
-            // System.setProperty( "webdriver.ie.driver.logfile", "D:/var/log/ie-selenium.log" );
+            System.out.println( "Driver file path not found at: " + driverFilePath );
+            System.out.println( "Error code: " + ErrorCode.DRIVER_NOT_FOUND );
+            System.exit( ErrorCode.DRIVER_NOT_FOUND );
         }
-        else if ( driverType.equalsIgnoreCase( "googlechrome" ) || driverType.equalsIgnoreCase( "chrome" ) )
+        catch (SessionNotCreatedException sessionNotCreatedException)
         {
-            System.setProperty( "webdriver.chrome.driver", driverFilePath );
-            driver = new ChromeDriver();
+            System.out.println( "BrowserType and Driver not matched\n"
+                    + "Browser: " + browserType + " but found " + driverFilePath );
+            System.out.println( "Error code: " + ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
+            System.exit( ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
+            
         }
     }
 }

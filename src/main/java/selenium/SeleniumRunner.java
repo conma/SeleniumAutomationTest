@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -100,7 +101,11 @@ public class SeleniumRunner
         {
             webElement = webDriver.findElement( By.id( element ) );
         }
-        catch ( NoSuchElementException e )
+        catch ( NoSuchElementException noSuchElementException )
+        {
+            return null;
+        }
+        catch ( NoSuchWindowException noSuchWindowException )
         {
             return null;
         }
@@ -114,7 +119,11 @@ public class SeleniumRunner
         {
             webElement = webDriver.findElement( By.name( element ) );
         }
-        catch ( NoSuchElementException e )
+        catch ( NoSuchElementException noSuchElementException )
+        {
+            return null;
+        }
+        catch ( NoSuchWindowException noSuchWindowException )
         {
             return null;
         }
@@ -128,7 +137,11 @@ public class SeleniumRunner
         {
             webElement = webDriver.findElement( By.xpath( element ) );
         }
-        catch ( NoSuchElementException e )
+        catch ( NoSuchElementException noSuchElementException )
+        {
+            return null;
+        }
+        catch ( NoSuchWindowException noSuchWindowException )
         {
             return null;
         }

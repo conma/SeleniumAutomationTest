@@ -168,6 +168,7 @@ public class Main
 
     private void executeAutoTest()
     {
+        System.out.println( "Executing the auto test" );
         selene.init( browserType, driverFilePath, scriptFolderPath );
         selene.run();
         System.out.println( "Executing scripts in folder " + scriptFolderPath );
