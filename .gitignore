@@ -1,10 +1,11 @@
 target/
-*.class
+src/main/java/test
 bin/
+scripts/ID*
+*.class
 .classpath
 .project
 .settings
-scripts/ID*
 *.tokens
 *.interp
 *Parser.java

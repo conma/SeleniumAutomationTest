@@ -71,8 +71,8 @@ public class SELENE
                 System.setProperty( "webdriver.ie.driver", driverFilePath );
                 System.setProperty( "webdriver.ie.driver.host", "127.0.0.1" );
                 driver = new InternetExplorerDriver();
-                 System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
-                 System.setProperty( "webdriver.ie.driver.logfile", "D:/var/log/ie-selenium.log" );
+//                 System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
+//                 System.setProperty( "webdriver.ie.driver.logfile", "D:/var/log/ie-selenium.log" );
             }
             else if ( driverType.equalsIgnoreCase( "googlechrome" ) || driverType.equalsIgnoreCase( "chrome" ) )
             {
