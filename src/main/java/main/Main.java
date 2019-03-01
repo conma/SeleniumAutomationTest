@@ -1,7 +1,5 @@
 package main;
 
-import java.io.IOException;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -9,11 +7,11 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.poi.EncryptedDocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import model.ErrorCode;
 import selene.SELENE;
 import service.scriptgenerator.ScriptGeneratorService;
 import spring.config.AppConfiguration;
@@ -108,8 +106,9 @@ public class Main
                     + "java -jar SeleneiumAutomationTest.jar -g -x to generate and execute with default parameters\n"
                     + "java -jar SeleneiumAutomationTest.jar -g -F script to generate script files only\n"
                     + "java -jar SeleneiumAutomationTest.jar -x script to execute" );
-            System.exit( 1 );
+            System.exit( ErrorCode.WRONG_PARAMETER );
         }
+        System.exit( ErrorCode.PROGRAM_EXCUTE_SUCCESSED );
     }
 
     private void addOptions( Options options, String[] args )
