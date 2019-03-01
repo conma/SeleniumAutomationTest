@@ -14,7 +14,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.stereotype.Component;
 
 import model.ErrorCode;
-import model.Testcase;
 
 /*
  * args[0]: Loại trình duyệt 
@@ -27,6 +26,7 @@ import model.Testcase;
  *      D:/scripts
  */
 
+@SuppressWarnings( "deprecation" )
 @Component
 public class SELENE
 {
@@ -40,7 +40,6 @@ public class SELENE
         String[] scriptFileNames = scriptFolder.list();
         for ( String scriptFileName : scriptFileNames )
         {
-            Testcase testCase = new Testcase( scriptFileName.split( "-" )[0], scriptFileName.split( "-" )[1] );
             try
             {
                 ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + scriptFileName ) );

@@ -148,22 +148,8 @@ public class Main
 
     private void generateScriptFile()
     {
-        try
-        {
-            scriptGeneratorService.generateScriptFiles( testcaseFilePath, scriptFolderPath );
-            System.out.println( "Generated script files in " + scriptFolderPath + " from " + testcaseFilePath );
-        }
-        catch ( EncryptedDocumentException e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch ( IOException e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+        scriptGeneratorService.generateScriptFiles( testcaseFilePath, scriptFolderPath );
+        System.out.println( "Generated script files in " + scriptFolderPath + " from " + testcaseFilePath );
     }
 
     private void executeAutoTest()
