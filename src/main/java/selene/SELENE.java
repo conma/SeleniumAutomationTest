@@ -14,6 +14,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.stereotype.Component;
 
 import model.ErrorCode;
+import model.Testcase;
 
 /*
  * args[0]: Loại trình duyệt 
@@ -40,6 +41,7 @@ public class SELENE
         String[] scriptFileNames = scriptFolder.list();
         for ( String scriptFileName : scriptFileNames )
         {
+            Testcase testcase = new Testcase( scriptFileName );
             try
             {
                 ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + scriptFileName ) );
@@ -51,6 +53,9 @@ public class SELENE
             catch ( IOException e )
             {
                 e.printStackTrace();
+            }
+            catch (Exception e) {
+                
             }
         }
     }

@@ -8,10 +8,17 @@ public class Testcase
 
     private String scriptFileName;
 
-    public Testcase( String id, String scriptFileName )
+    private boolean pass;
+
+    private String note;
+
+    public Testcase( String scriptFileName )
     {
-        this.id = id;
+        this.id = scriptFileName.split( "-" )[0];
+        this.row = Integer.parseInt( scriptFileName.split( "-" )[1] );
         this.scriptFileName = scriptFileName;
+        this.pass = false;
+        this.note = "";
     }
 
     public String getId()
@@ -42,6 +49,26 @@ public class Testcase
     public void setScriptFileName( String scriptFileName )
     {
         this.scriptFileName = scriptFileName;
+    }
+
+    public boolean isPass()
+    {
+        return pass;
+    }
+
+    public void setPass( boolean pass )
+    {
+        this.pass = pass;
+    }
+
+    public String getNote()
+    {
+        return note;
+    }
+
+    public void setNote( String note )
+    {
+        this.note = note;
     }
 
 }
