@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 
+import model.Testcase;
 import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
@@ -18,6 +19,8 @@ import selenium.SeleniumRunner;
 @Component
 public class SELENEListenterImpl extends SELENEBaseListener
 {
+    private Testcase testcase;
+
     private Actions action;
 
     private SeleniumRunner seleneRunner;
@@ -30,6 +33,23 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         seleneRunner = new SeleniumRunner( driver );
         action = new Actions( driver );
+    }
+
+    public SELENEListenterImpl( WebDriver driver, Testcase testcase )
+    {
+        this.seleneRunner = new SeleniumRunner( driver );
+        this.action = new Actions( driver );
+        this.testcase = testcase;
+    }
+
+    public Testcase getTestcase()
+    {
+        return testcase;
+    }
+
+    public void setTestcase( Testcase testcase )
+    {
+        this.testcase = testcase;
     }
 
     public Actions getAction()

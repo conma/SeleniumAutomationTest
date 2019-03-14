@@ -47,7 +47,7 @@ public class SELENE
                 ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + scriptFileName ) );
                 SELENELexer lexer = new SELENELexer( input );
                 SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
-                parser.addParseListener( new SELENEListenterImpl( driver ) );
+                parser.addParseListener( new SELENEListenterImpl( driver, testcase ) );
                 parser.program();
             }
             catch ( IOException e )
