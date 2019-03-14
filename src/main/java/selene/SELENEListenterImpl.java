@@ -76,7 +76,7 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitGet( GetContext ctx )
     {
         String url = trimHeadAndTailQuot( ctx.url().getText() );
-        seleneRunner.get( url );
+        seleneRunner.get( url, testcase );
     }
 
     @Override

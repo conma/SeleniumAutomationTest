@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import model.Testcase;
+
 public class SeleniumRunner
 {
     private WebDriver webDriver;
@@ -26,9 +28,10 @@ public class SeleniumRunner
         return false;
     }
 
-    public void get( String url )
+    public void get( String url, Testcase testcase )
     {
         webDriver.get( url );
+        testcase.setPass( true );
     }
 
     public void click( String element )

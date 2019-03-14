@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Testcase
 {
     private String id;
@@ -10,7 +13,9 @@ public class Testcase
 
     private boolean pass;
 
-    private String note;
+    private List<String> info;
+
+    private List<String> error;
 
     public Testcase( String scriptFileName )
     {
@@ -18,7 +23,8 @@ public class Testcase
         this.row = Integer.parseInt( scriptFileName.split( "-" )[1] );
         this.scriptFileName = scriptFileName;
         this.pass = false;
-        this.note = "";
+        this.info = new ArrayList<String>();
+        this.error = new ArrayList<String>();
     }
 
     public String getId()
@@ -61,14 +67,25 @@ public class Testcase
         this.pass = pass;
     }
 
-    public String getNote()
+    public List<String> getInfo()
     {
-        return note;
+        return info;
     }
 
-    public void setNote( String note )
+    public void setInfo( List<String> info )
     {
-        this.note = note;
+        this.info = info;
     }
+
+    public List<String> getError()
+    {
+        return error;
+    }
+
+    public void setError( List<String> error )
+    {
+        this.error = error;
+    }
+
 
 }
