@@ -3,12 +3,9 @@ package model;
 public class Master
 {
     private boolean updateTC;
-    private int autoColumn;
     private int firstRowOfTestcase;
     private int lastRowOfTestcase;
-    private int idColumn;
     private int stepColumn;
-    private int expectColumn;
     private int resultColumn;
     private int noteColumn;
 
@@ -20,16 +17,6 @@ public class Master
         this.stepColumn = stepColumn;
         this.resultColumn = resultColumn;
         this.noteColumn = noteColumn;
-    }
-
-    public int getAutoColumn()
-    {
-        return autoColumn;
-    }
-
-    public void setAutoColumn( int autoColumn )
-    {
-        this.autoColumn = autoColumn;
     }
 
     public boolean getUpdateTC()
@@ -62,16 +49,6 @@ public class Master
         this.lastRowOfTestcase = lastRowOfTestcase;
     }
 
-    public int getIdColumn()
-    {
-        return idColumn;
-    }
-
-    public void setIdColumn( int idColumn )
-    {
-        this.idColumn = idColumn;
-    }
-
     public int getStepColumn()
     {
         return stepColumn;
@@ -80,16 +57,6 @@ public class Master
     public void setStepsColumn( int stepsColumn )
     {
         this.stepColumn = stepsColumn;
-    }
-
-    public int getExpectColumn()
-    {
-        return expectColumn;
-    }
-
-    public void setExpectColumn( int expectColumn )
-    {
-        this.expectColumn = expectColumn;
     }
 
     public int getResultColumn()
