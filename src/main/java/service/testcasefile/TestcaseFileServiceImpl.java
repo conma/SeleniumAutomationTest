@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -13,6 +14,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.stereotype.Service;
 
 import model.Master;
+import model.Testcase;
 
 @Service
 public class TestcaseFileServiceImpl implements TestcaseFileService
@@ -42,10 +44,10 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
             int stepColumn = firstRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
             int resultColumn = secondRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
             int noteColumn = thirdRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
+            wb.close();
             testcasesInputStream.close();
 
             return new Master( updateTC, firstRowOfTestcase, lastRowOfTestcase, stepColumn, resultColumn, noteColumn );
-
         }
         catch ( FileNotFoundException e )
         {
@@ -56,6 +58,26 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
             // TODO Xử lý khi không đọc được file excel
         }
         return null;
+    }
+
+    @Override
+    public void updateTestcaseIdResult( Master master, Testcase testcase, String testcaseFilePath )
+    {
+        InputStream testcasesInputStream;
+        try
+        {
+            testcasesInputStream = new FileInputStream( testcaseFilePath );
+            Workbook wb = WorkbookFactory.create( testcasesInputStream );
+
+            Sheet testcaseSheet = wb.getSheetAt( 0 );
+            Row testcaseRow = testcaseSheet.getRow( testcase.getRow() );
+            Cell resultCell = testcaseRow.getCell( master.getResultColumn() );
+            resultCell.setCellValue( "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+        }
+        catch ( EncryptedDocumentException | IOException e )
+        {
+            System.err.println( e );
+        }
     }
 
 }

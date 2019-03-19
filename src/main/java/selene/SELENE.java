@@ -11,10 +11,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import model.ErrorCode;
+import model.Master;
 import model.Testcase;
+import model.TestcaseStatus;
+import service.testcasefile.TestcaseFileService;
 
 /*
  * args[0]: Loại trình duyệt 
@@ -35,8 +39,15 @@ public class SELENE
 
     private static String scriptFolderPath;
 
-    public void run()
+    private static Master master;
+
+    @Autowired
+    private TestcaseFileService testcaseFileService;
+
+    public void run( String testcaseFilePath )
     {
+        master = testcaseFileService.readMaster( testcaseFilePath );
+
         File scriptFolder = new File( scriptFolderPath );
         String[] scriptFileNames = scriptFolder.list();
         for ( String scriptFileName : scriptFileNames )
@@ -52,10 +63,22 @@ public class SELENE
             }
             catch ( IOException e )
             {
+                testcase.setTestcaseStatus( TestcaseStatus.ERROR );
                 e.printStackTrace();
+                continue;
             }
-            catch (Exception e) {
-                
+            catch ( Exception e )
+            {
+                testcase.setTestcaseStatus( TestcaseStatus.ERROR );
+                continue;
+            }
+            finally
+            {
+                System.out.println( testcase.getId() + " " + testcase.getTestcaseStatus().getName() );
+                if ( master.getUpdateTC() )
+                {
+                    testcaseFileService.updateTestcaseIdResult( master, testcase, testcaseFilePath );
+                }
             }
         }
     }
@@ -76,8 +99,8 @@ public class SELENE
                 System.setProperty( "webdriver.ie.driver", driverFilePath );
                 System.setProperty( "webdriver.ie.driver.host", "127.0.0.1" );
                 driver = new InternetExplorerDriver();
-//                 System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
-//                 System.setProperty( "webdriver.ie.driver.logfile", "D:/var/log/ie-selenium.log" );
+                // System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
+                // System.setProperty( "webdriver.ie.driver.logfile", "D:/var/log/ie-selenium.log" );
             }
             else if ( driverType.equalsIgnoreCase( "googlechrome" ) || driverType.equalsIgnoreCase( "chrome" ) )
             {
@@ -86,8 +109,8 @@ public class SELENE
             }
             else
             {
-                System.out.println( "Wrong browser name. Only accept: ff | firefox | chrome | googlechrome | ie | internetexplorer"
-                        + " but found: " + browserType );
+                System.out.println(
+                        "Wrong browser name. Only accept: ff | firefox | chrome | googlechrome | ie | internetexplorer" + " but found: " + browserType );
                 System.out.println( "Error code: " + ErrorCode.WRONG_BROWSER_NAME );
                 System.exit( ErrorCode.WRONG_BROWSER_NAME );
             }
@@ -98,13 +121,12 @@ public class SELENE
             System.out.println( "Error code: " + ErrorCode.DRIVER_NOT_FOUND );
             System.exit( ErrorCode.DRIVER_NOT_FOUND );
         }
-        catch (SessionNotCreatedException sessionNotCreatedException)
+        catch ( SessionNotCreatedException sessionNotCreatedException )
         {
-            System.out.println( "BrowserType and Driver not matched\n"
-                    + "Browser: " + browserType + " but found " + driverFilePath );
+            System.out.println( "BrowserType and Driver not matched\n" + "Browser: " + browserType + " but found " + driverFilePath );
             System.out.println( "Error code: " + ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
             System.exit( ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
-            
+
         }
     }
 }

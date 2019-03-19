@@ -12,10 +12,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import model.ErrorCode;
-import model.Master;
 import selene.SELENE;
 import service.scriptgenerator.ScriptGeneratorService;
-import service.testcasefile.TestcaseFileService;
 import spring.config.AppConfiguration;
 
 public class Main
@@ -46,16 +44,11 @@ public class Main
 
     private String driverFilePath = DEFAULT_DRIVER_FILE_PATH;
 
-    private Master master;
-
     @Autowired
     private SELENE selene;
 
     @Autowired
     private ScriptGeneratorService scriptGeneratorService;
-
-    @Autowired
-    private TestcaseFileService testcaseFileService;
 
     public static void main( String[] args )
     {
@@ -160,13 +153,12 @@ public class Main
 
     private void executeAutoTest()
     {
-        master = testcaseFileService.readMaster( testcaseFilePath );
         System.out.println( "Executing the auto test" );
         selene.init( browserType, driverFilePath, scriptFolderPath );
-        selene.run();
         System.out.println( "Executing scripts in folder " + scriptFolderPath );
         System.out.println( "\tBrowser type: " + browserType );
         System.out.println( "\tDriver file: " + driverFilePath );
+        selene.run( testcaseFilePath );
     }
 
 }

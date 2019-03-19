@@ -11,7 +11,7 @@ public class Testcase
 
     private String scriptFileName;
 
-    private boolean pass;
+    private TestcaseStatus testcaseStatus;
 
     private List<String> info;
 
@@ -22,7 +22,7 @@ public class Testcase
         this.id = scriptFileName.split( "-" )[0];
         this.row = Integer.parseInt( scriptFileName.split( "-" )[1] );
         this.scriptFileName = scriptFileName;
-        this.pass = false;
+        this.testcaseStatus = TestcaseStatus.PASSED;
         this.info = new ArrayList<String>();
         this.error = new ArrayList<String>();
     }
@@ -57,14 +57,14 @@ public class Testcase
         this.scriptFileName = scriptFileName;
     }
 
-    public boolean isPass()
+    public TestcaseStatus getTestcaseStatus()
     {
-        return pass;
+        return testcaseStatus;
     }
 
-    public void setPass( boolean pass )
+    public void setTestcaseStatus( TestcaseStatus testcaseStatus )
     {
-        this.pass = pass;
+        this.testcaseStatus = testcaseStatus;
     }
 
     public List<String> getInfo()
@@ -86,6 +86,5 @@ public class Testcase
     {
         this.error = error;
     }
-
 
 }

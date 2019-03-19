@@ -9,8 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import model.Testcase;
-
 public class SeleniumRunner
 {
     private WebDriver webDriver;
@@ -28,57 +26,59 @@ public class SeleniumRunner
         return false;
     }
 
-    public void get( String url, Testcase testcase )
+    public void get( String url )
     {
         webDriver.get( url );
-        testcase.setPass( true );
     }
 
     public void click( String element )
     {
-        System.out.println( "click at " + element );
         WebElement webElement = getElement( element );
+        if ( webElement == null )
+            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         action.click( webElement ).build().perform();
     }
 
     public void sendKeys( String element, String keywords )
     {
         WebElement webElement = getElement( element );
+        if ( webElement == null )
+            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         webElement.sendKeys( keywords );
     }
 
     public boolean verifyText( String element, String text )
     {
         WebElement webElement = getElement( element );
+        if ( webElement == null )
+            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         return webElement.getText().equals( text );
     }
 
     public boolean verifyTitle( String title )
     {
-        System.out.println( webDriver.getTitle() );
         return webDriver.getTitle().equals( title );
     }
 
     public void hover( String element )
     {
         WebElement webElement = getElement( element );
+        if ( webElement == null )
+            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         action.moveToElement( webElement ).build().perform();
     }
 
     public boolean verifyEnable( String element )
     {
         WebElement webElement = getElement( element );
+        if ( webElement == null )
+            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         return webElement.isEnabled();
     }
 
     public void access( String url )
     {
         webDriver.navigate().to( url );
-    }
-
-    public void endTC()
-    {
-        // updateTC
     }
 
     public void quit()
@@ -94,6 +94,8 @@ public class SeleniumRunner
             webElement = findElementByName( element );
         if ( webElement == null )
             webElement = findElementByXPath( element );
+        if (webElement == null)
+            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         return webElement;
     }
 

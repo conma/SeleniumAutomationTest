@@ -5,6 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 
 import model.Testcase;
+import model.TestcaseStatus;
 import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
 import selene.SELENEParser.GetContext;
@@ -76,7 +77,7 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitGet( GetContext ctx )
     {
         String url = trimHeadAndTailQuot( ctx.url().getText() );
-        seleneRunner.get( url, testcase );
+        seleneRunner.get( url );
     }
 
     @Override
@@ -113,7 +114,8 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitVerifyTitle( VerifyTitleContext ctx )
     {
         String title = trimHeadAndTailQuot( ctx.string().getText() );
-        seleneRunner.verifyTitle( title );
+        if ( !seleneRunner.verifyTitle( title ) )
+            testcase.setTestcaseStatus( TestcaseStatus.NOT_PASSED );
     }
 
     @Override
