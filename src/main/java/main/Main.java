@@ -68,6 +68,8 @@ public class Main
         try
         {
             cmd = parser.parse( options, args );
+            if ( cmd.getArgList().size() == 0 || cmd.hasOption( "h" ) )
+                printHelp();
             if ( cmd.hasOption( "g" ) )
             {
                 if ( cmd.hasOption( "f" ) )
@@ -101,12 +103,7 @@ public class Main
         catch ( ParseException e )
         {
             System.out.println( e.getMessage() );
-            formatter.printHelp( "SeleniumAutomationTest", options );
-            System.out.println( "Example:\n" + "java -jar SeleneiumAutomationTest.jar -g -x -f Testcase.xls -F script -b chrome -d chromedriver.exe\n"
-                    + "java -jar SeleneiumAutomationTest.jar -g -x to generate and execute with default parameters\n"
-                    + "java -jar SeleneiumAutomationTest.jar -g -F script to generate script files only\n"
-                    + "java -jar SeleneiumAutomationTest.jar -x script to execute" );
-            System.exit( ErrorCode.WRONG_PARAMETER );
+            printHelp();
         }
         System.exit( ErrorCode.PROGRAM_EXCUTE_SUCCESSED );
     }
@@ -143,6 +140,10 @@ public class Main
         Option driverOption = new Option( "d", "driver-path", true, "path/to/driver/file.\n" + "Default: chromedriver.exe" );
         driverOption.setRequired( false );
         options.addOption( driverOption );
+
+        Option helpOption = new Option( "h", "help", false, "print this help" );
+        helpOption.setRequired( false );
+        options.addOption( helpOption );
     }
 
     private void generateScriptFile()
@@ -161,4 +162,13 @@ public class Main
         selene.run( testcaseFilePath );
     }
 
+    private void printHelp()
+    {
+        formatter.printHelp( "SeleniumAutomationTest", options );
+        System.out.println( "Example:\n" + "java -jar SeleneiumAutomationTest.jar -g -x -f Testcase.xls -F script -b chrome -d chromedriver.exe\n"
+                + "java -jar SeleneiumAutomationTest.jar -g -x to generate and execute with default parameters\n"
+                + "java -jar SeleneiumAutomationTest.jar -g -F script to generate script files only\n"
+                + "java -jar SeleneiumAutomationTest.jar -x script to execute" );
+        System.exit( ErrorCode.WRONG_PARAMETER );
+    }
 }
