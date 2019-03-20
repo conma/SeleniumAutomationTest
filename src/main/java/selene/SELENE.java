@@ -2,7 +2,11 @@ package selene;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -41,46 +45,67 @@ public class SELENE
 
     private static Master master;
 
+    private static InputStream inputStream;
+
+    private static OutputStream outputStream;
+
     @Autowired
     private TestcaseFileService testcaseFileService;
 
     public void run( String testcaseFilePath )
     {
-        master = testcaseFileService.readMaster( testcaseFilePath );
-
-        File scriptFolder = new File( scriptFolderPath );
-        String[] scriptFileNames = scriptFolder.list();
-        for ( String scriptFileName : scriptFileNames )
+        try
         {
-            Testcase testcase = new Testcase( scriptFileName );
-            try
+            inputStream = new FileInputStream( testcaseFilePath );
+//            outputStream = new FileOutputStream( testcaseFilePath );
+            master = testcaseFileService.readMaster( inputStream );
+            File scriptFolder = new File( scriptFolderPath );
+            String[] scriptFileNames = scriptFolder.list();
+            for ( String scriptFileName : scriptFileNames )
             {
-                ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + scriptFileName ) );
-                SELENELexer lexer = new SELENELexer( input );
-                SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
-                parser.addParseListener( new SELENEListenterImpl( driver, testcase ) );
-                parser.program();
-            }
-            catch ( IOException e )
-            {
-                testcase.setTestcaseStatus( TestcaseStatus.ERROR );
-                e.printStackTrace();
-                continue;
-            }
-            catch ( Exception e )
-            {
-                testcase.setTestcaseStatus( TestcaseStatus.ERROR );
-                continue;
-            }
-            finally
-            {
-                System.out.println( testcase.getId() + " " + testcase.getTestcaseStatus().getName() );
-                if ( master.getUpdateTC() )
+                Testcase testcase = new Testcase( scriptFileName );
+                try
                 {
-                    testcaseFileService.updateTestcaseIdResult( master, testcase, testcaseFilePath );
+                    ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + scriptFileName ) );
+                    SELENELexer lexer = new SELENELexer( input );
+                    SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
+                    parser.addParseListener( new SELENEListenterImpl( driver, testcase ) );
+                    parser.program();
+                }
+                catch ( IOException e )
+                {
+                    testcase.setTestcaseStatus( TestcaseStatus.ERROR );
+                    e.printStackTrace();
+                    continue;
+                }
+                catch ( Exception e )
+                {
+                    testcase.setTestcaseStatus( TestcaseStatus.ERROR );
+                    continue;
+                }
+                finally
+                {
+                    System.out.println( testcase.getId() + " " + testcase.getTestcaseStatus().getName() );
+                    if ( master.getUpdateTC() )
+                    {
+                        //testcaseFileService.updateTestcaseIdResult( inputStream, outputStream, master, testcase);
+                    }
                 }
             }
+            inputStream.close();
+//            outputStream.close();
         }
+        catch ( FileNotFoundException e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch ( IOException e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     public void init( String browserType, String driverFilePath, String scriptFolderPath )

@@ -1,9 +1,9 @@
 package service.testcasefile;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -20,13 +20,11 @@ import model.Testcase;
 public class TestcaseFileServiceImpl implements TestcaseFileService
 {
     @Override
-    public Master readMaster( String testcaseFilePath )
+    public Master readMaster( InputStream inputStream )
     {
-        InputStream testcasesInputStream;
         try
         {
-            testcasesInputStream = new FileInputStream( testcaseFilePath );
-            Workbook wb = WorkbookFactory.create( testcasesInputStream );
+            Workbook wb = WorkbookFactory.create( inputStream );
 
             Sheet master = wb.getSheet( "Master" );
             Row firstRowMaster = master.getRow( 0 );
@@ -44,9 +42,6 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
             int stepColumn = firstRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
             int resultColumn = secondRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
             int noteColumn = thirdRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
-            wb.close();
-            testcasesInputStream.close();
-
             return new Master( updateTC, firstRowOfTestcase, lastRowOfTestcase, stepColumn, resultColumn, noteColumn );
         }
         catch ( FileNotFoundException e )
@@ -61,19 +56,17 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     }
 
     @Override
-    public void updateTestcaseIdResult( Master master, Testcase testcase, String testcaseFilePath )
+    public void updateTestcaseIdResult( InputStream inputStream, OutputStream outputStream, Master master, Testcase testcase )
     {
-        InputStream testcasesInputStream;
         try
         {
-            testcasesInputStream = new FileInputStream( testcaseFilePath );
-            Workbook wb = WorkbookFactory.create( testcasesInputStream );
+            Workbook wb = WorkbookFactory.create( inputStream );
 
             Sheet testcaseSheet = wb.getSheetAt( 0 );
-            System.out.println( testcaseSheet.getSheetName() );
             Row testcaseRow = testcaseSheet.getRow( testcase.getRow() );
             Cell resultCell = testcaseRow.getCell( master.getResultColumn() );
-            resultCell.setCellValue( "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" );
+            resultCell.setCellValue( testcase.getTestcaseStatus().getName() );
+            wb.write( outputStream );
         }
         catch ( EncryptedDocumentException | IOException e )
         {

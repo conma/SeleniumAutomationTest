@@ -12,11 +12,12 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.ErrorCode;
 import model.Master;
-import service.testcasefile.TestcaseFileServiceImpl;
+import service.testcasefile.TestcaseFileService;
 
 @Service
 public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
@@ -24,6 +25,9 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
     private Master master;
 
     private final String NEW_LINE = "\n";
+
+    @Autowired
+    private TestcaseFileService testcaseFileService;
 
     @Override
     public void generateScriptFiles( String testcaseFilePath, String scriptFolderPath )
@@ -35,12 +39,13 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
 
         try
         {
-            InputStream testcasesInputStream;
-            testcasesInputStream = new FileInputStream( testcaseFilePath );
+            InputStream testcaseInputStream;
+            testcaseInputStream = new FileInputStream( testcaseFilePath );
 
-            Workbook wb = WorkbookFactory.create( testcasesInputStream );
+            Workbook wb = WorkbookFactory.create( testcaseInputStream );
 
-            master = new TestcaseFileServiceImpl().readMaster( testcaseFilePath );
+            testcaseInputStream = new FileInputStream( testcaseFilePath );
+            master = testcaseFileService.readMaster( testcaseInputStream );
 
             int firstRowOfTestcase = master.getFirstRowOfTestcase();
             int lastRowOfTestcase = master.getLastRowOfTestcase();
@@ -65,10 +70,9 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
                 scriptFileWriter.write( testcaseAutoStep.replaceAll( "^", "\t" ).replaceAll( "\n", "\n\t" ) );
                 scriptFileWriter.write( NEW_LINE );
                 scriptFileWriter.write( "end" );
-
-                testcasesInputStream.close();
                 scriptFileWriter.close();
             }
+            testcaseInputStream.close();
         }
         catch ( FileNotFoundException e )
         {
