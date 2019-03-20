@@ -1,7 +1,6 @@
 package service.testcasefile;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.List;
 
 import model.Master;
 import model.Testcase;
@@ -9,7 +8,7 @@ import model.Testcase;
 public interface TestcaseFileService
 {
     // Đọc thông tin master
-    public Master readMaster( InputStream inputStream );
+    public Master readMaster( String testcaseFilePath );
     // Ghi kết quả ra file testcase
-    public void updateTestcaseIdResult( InputStream inputStream, OutputStream outputStream, Master master, Testcase testcase );
+    public void updateTestcaseIdResult( String testcaseFilePath, Master master, List<Testcase> testcases );
 }

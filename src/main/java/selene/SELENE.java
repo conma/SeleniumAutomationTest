@@ -2,11 +2,9 @@ package selene;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -45,20 +43,18 @@ public class SELENE
 
     private static Master master;
 
-    private static InputStream inputStream;
-
-    private static OutputStream outputStream;
+    private static List<Testcase> testcases;
 
     @Autowired
     private TestcaseFileService testcaseFileService;
 
     public void run( String testcaseFilePath )
     {
+        testcases = new ArrayList<Testcase>();
+
         try
         {
-            inputStream = new FileInputStream( testcaseFilePath );
-//            outputStream = new FileOutputStream( testcaseFilePath );
-            master = testcaseFileService.readMaster( inputStream );
+            master = testcaseFileService.readMaster( testcaseFilePath );
             File scriptFolder = new File( scriptFolderPath );
             String[] scriptFileNames = scriptFolder.list();
             for ( String scriptFileName : scriptFileNames )
@@ -85,22 +81,13 @@ public class SELENE
                 }
                 finally
                 {
+                    testcases.add( testcase );
                     System.out.println( testcase.getId() + " " + testcase.getTestcaseStatus().getName() );
-                    if ( master.getUpdateTC() )
-                    {
-                        //testcaseFileService.updateTestcaseIdResult( inputStream, outputStream, master, testcase);
-                    }
                 }
             }
-            inputStream.close();
-//            outputStream.close();
+            testcaseFileService.updateTestcaseIdResult( testcaseFilePath, master, testcases);
         }
-        catch ( FileNotFoundException e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch ( IOException e )
+        catch ( Exception e )
         {
             // TODO Auto-generated catch block
             e.printStackTrace();

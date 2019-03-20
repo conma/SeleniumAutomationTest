@@ -44,8 +44,7 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
 
             Workbook wb = WorkbookFactory.create( testcaseInputStream );
 
-            testcaseInputStream = new FileInputStream( testcaseFilePath );
-            master = testcaseFileService.readMaster( testcaseInputStream );
+            master = testcaseFileService.readMaster( testcaseFilePath );
 
             int firstRowOfTestcase = master.getFirstRowOfTestcase();
             int lastRowOfTestcase = master.getLastRowOfTestcase();

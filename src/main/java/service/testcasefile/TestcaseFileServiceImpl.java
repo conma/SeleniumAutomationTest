@@ -1,12 +1,12 @@
 package service.testcasefile;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,10 +20,11 @@ import model.Testcase;
 public class TestcaseFileServiceImpl implements TestcaseFileService
 {
     @Override
-    public Master readMaster( InputStream inputStream )
+    public Master readMaster( String testcaseFilePath )
     {
         try
         {
+            InputStream inputStream = new FileInputStream( testcaseFilePath );
             Workbook wb = WorkbookFactory.create( inputStream );
 
             Sheet master = wb.getSheet( "Master" );
@@ -56,22 +57,22 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     }
 
     @Override
-    public void updateTestcaseIdResult( InputStream inputStream, OutputStream outputStream, Master master, Testcase testcase )
+    public void updateTestcaseIdResult( String testcacseFilePath, Master master, List<Testcase> testcases )
     {
-        try
-        {
-            Workbook wb = WorkbookFactory.create( inputStream );
-
-            Sheet testcaseSheet = wb.getSheetAt( 0 );
-            Row testcaseRow = testcaseSheet.getRow( testcase.getRow() );
-            Cell resultCell = testcaseRow.getCell( master.getResultColumn() );
-            resultCell.setCellValue( testcase.getTestcaseStatus().getName() );
-            wb.write( outputStream );
-        }
-        catch ( EncryptedDocumentException | IOException e )
-        {
-            System.err.println( e );
-        }
+//        try
+//        {
+//            Workbook wb = WorkbookFactory.create( inputStream );
+//
+//            Sheet testcaseSheet = wb.getSheetAt( 0 );
+//            Row testcaseRow = testcaseSheet.getRow( testcase.getRow() );
+//            Cell resultCell = testcaseRow.getCell( master.getResultColumn() );
+//            resultCell.setCellValue( testcase.getTestcaseStatus().getName() );
+//            wb.write( outputStream );
+//        }
+//        catch ( EncryptedDocumentException | IOException e )
+//        {
+//            System.err.println( e );
+//        }
     }
 
 }
