@@ -48,22 +48,31 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     }
 
     @Override
-    public void updateTestcaseIdResult( String testcacseFilePath, Master master, List<Testcase> testcases )
+    public void updateTestcaseIdResult( String testcaseFilePath, Master master, List<Testcase> testcases )
             throws FileNotFoundException, IOException, EncryptedDocumentException
     {
         InputStream inputStream = null;
         OutputStream outputStream = null;
 
-        inputStream = new FileInputStream( testcacseFilePath );
+        inputStream = new FileInputStream( testcaseFilePath );
         Workbook wb = WorkbookFactory.create( inputStream );
         for ( Testcase testcase : testcases )
         {
             Sheet testcaseSheet = wb.getSheetAt( 0 );
-            Row testcaseRow = testcaseSheet.getRow( testcase.getRow() );
-            Cell resultCell = testcaseRow.getCell( master.getResultColumn() );
-            resultCell.setCellValue( testcase.getTestcaseStatus().getName() );
+            Row row = testcaseSheet.getRow( testcase.getRow() );
+            Cell cell = row.getCell( master.getResultColumn() );
+            cell.setCellValue( testcase.getTestcaseStatus().getName() );
+            cell = row.getCell( master.getNoteColumn() );
+            for ( String info : testcase.getInfo() )
+            {
+                row.getCell( master.getNoteColumn() ).setCellValue( info );
+            }
+            for ( String error : testcase.getError() )
+            {
+                row.getCell( master.getNoteColumn() ).setCellValue( error );
+            }
 
-            outputStream = new FileOutputStream( testcacseFilePath );
+            outputStream = new FileOutputStream( testcaseFilePath );
             wb.write( outputStream );
         }
         outputStream.close();

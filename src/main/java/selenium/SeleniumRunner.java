@@ -34,24 +34,18 @@ public class SeleniumRunner
     public void click( String element )
     {
         WebElement webElement = getElement( element );
-        if ( webElement == null )
-            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         action.click( webElement ).build().perform();
     }
 
     public void sendKeys( String element, String keywords )
     {
         WebElement webElement = getElement( element );
-        if ( webElement == null )
-            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         webElement.sendKeys( keywords );
     }
 
     public boolean verifyText( String element, String text )
     {
         WebElement webElement = getElement( element );
-        if ( webElement == null )
-            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         return webElement.getText().equals( text );
     }
 
@@ -63,16 +57,12 @@ public class SeleniumRunner
     public void hover( String element )
     {
         WebElement webElement = getElement( element );
-        if ( webElement == null )
-            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         action.moveToElement( webElement ).build().perform();
     }
 
     public boolean verifyEnable( String element )
     {
         WebElement webElement = getElement( element );
-        if ( webElement == null )
-            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
         return webElement.isEnabled();
     }
 
@@ -86,6 +76,12 @@ public class SeleniumRunner
         webDriver.quit();
     }
 
+    public void waitSecond( String seconds )
+    {
+        long time = Long.parseLong( seconds );
+        webDriver.manage().timeouts().implicitlyWait( time, TimeUnit.SECONDS );
+    }
+
     private WebElement getElement( String element )
     {
         WebElement webElement = null;
@@ -94,8 +90,8 @@ public class SeleniumRunner
             webElement = findElementByName( element );
         if ( webElement == null )
             webElement = findElementByXPath( element );
-        if (webElement == null)
-            throw new NoSuchElementException( "No such element name or id or xpath = " + element );
+        if ( webElement == null )
+            throw new NoSuchElementException( "No such element name or id or xpath = \"" + element + "\"" );
         return webElement;
     }
 
@@ -153,9 +149,4 @@ public class SeleniumRunner
         return webElement;
     }
 
-    public void waitSecond( String seconds )
-    {
-        long time = Long.parseLong( seconds );
-        webDriver.manage().timeouts().implicitlyWait( time, TimeUnit.SECONDS );
-    }
 }
