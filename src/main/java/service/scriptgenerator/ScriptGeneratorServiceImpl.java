@@ -34,6 +34,8 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
     {
         // Xóa hết các TCs cũ
         File scriptDir = new File( scriptFolderPath );
+        if ( !scriptDir.exists() )
+            scriptDir.mkdirs();
         for ( File file : scriptDir.listFiles() )
             file.delete();
 
@@ -74,8 +76,7 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
         }
         catch ( FileNotFoundException e )
         {
-            System.out.println( "Testcase file not found at: " + testcaseFilePath
-                    + "\nTry another path to Testcase file!");
+            System.out.println( "Testcase file not found at: " + testcaseFilePath + "\nTry another path to Testcase file!" );
             e.printStackTrace();
             System.exit( ErrorCode.TESTCASE_FILE_NOT_FOUND );
         }

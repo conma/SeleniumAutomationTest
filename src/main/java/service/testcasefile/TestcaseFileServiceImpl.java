@@ -60,7 +60,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
         {
             Row row = testcaseSheet.getRow( testcase.getRow() );
             row.getCell( master.getResultColumn() ).setCellValue( testcase.getTestcaseStatus().getName() );
-            row.getCell( master.getNoteColumn() ).setCellValue( testcase.getNote() );
+            row.getCell( master.getNoteColumn() ).setCellValue( row.getCell( master.getNoteColumn() ).getStringCellValue() + "\n" + testcase.getNote() );
 
             outputStream = new FileOutputStream( testcaseFilePath );
             wb.write( outputStream );

@@ -102,7 +102,7 @@ public class Main
         {
             System.out.println( e.getMessage() );
             formatter.printHelp( "SeleniumAutomationTest", options );
-            System.out.println( "Example:\n" + "java -jar SeleneiumAutomationTest.jar -g -x -f Testcase.xls -F script -b chrome -d driver/chromedriver.exe\n"
+            System.out.println( "Example:\n" + "java -jar SeleneiumAutomationTest.jar -g -x -f Testcase.xls -F script -b chrome -d chromedriver.exe\n"
                     + "java -jar SeleneiumAutomationTest.jar -g -x to generate and execute with default parameters\n"
                     + "java -jar SeleneiumAutomationTest.jar -g -F script to generate script files only\n"
                     + "java -jar SeleneiumAutomationTest.jar -x script to execute" );
@@ -140,7 +140,7 @@ public class Main
         browserOption.setRequired( false );
         options.addOption( browserOption );
 
-        Option driverOption = new Option( "d", "driver-path", true, "path/to/driver/file.\n" + "Default: driver/chromedriver.exe" );
+        Option driverOption = new Option( "d", "driver-path", true, "path/to/driver/file.\n" + "Default: chromedriver.exe" );
         driverOption.setRequired( false );
         options.addOption( driverOption );
     }
@@ -148,16 +148,16 @@ public class Main
     private void generateScriptFile()
     {
         scriptGeneratorService.generateScriptFiles( testcaseFilePath, scriptFolderPath );
-        System.out.println( "Generated script files in " + scriptFolderPath + " from " + testcaseFilePath );
+        System.out.println( "Generated script files in " + "'" + scriptFolderPath + "'" + " from " + "'" + testcaseFilePath + "'" );
     }
 
     private void executeAutoTest()
     {
         System.out.println( "Executing the auto test" );
         selene.init( browserType, driverFilePath, scriptFolderPath );
-        System.out.println( "Executing scripts in folder " + scriptFolderPath );
-        System.out.println( "\tBrowser type: " + browserType );
-        System.out.println( "\tDriver file: " + driverFilePath );
+        System.out.println( "Executing scripts in folder " + "'" + scriptFolderPath + "'" );
+        System.out.println( "\tBrowser type: " + "'" + browserType + "'" );
+        System.out.println( "\tDriver file: " + "'" + driverFilePath + "'" );
         selene.run( testcaseFilePath );
     }
 

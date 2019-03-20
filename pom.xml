@@ -15,7 +15,6 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<!-- <addClasspath>true</addClasspath> -->
 							<mainClass>main.Main</mainClass>
 						</manifest>
 					</archive>
