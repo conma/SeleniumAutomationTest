@@ -2,6 +2,7 @@ package selene;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,13 +93,17 @@ public class SELENE
         catch ( EncryptedDocumentException e )
         {
             System.out.println( "File " + testcaseFilePath + " is encrypted!" );
-            System.out.println( "Error code: " + ErrorCode.TESTCASE_FILE_ENCRYPTED );
-            System.exit( ErrorCode.TESTCASE_FILE_ENCRYPTED );
+            printErrorCodeAndExit( ErrorCode.TESTCASE_FILE_ENCRYPTED );
+        }
+        catch ( FileNotFoundException e )
+        {
+            System.out.println( e.getMessage().split( "\n" )[0] );
+            printErrorCodeAndExit( ErrorCode.TESTCASE_FILE_IN_USE );
         }
         catch ( Exception e )
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println( "UNKNOWN Error when SELENE is executing!" );
+            printErrorCodeAndExit( ErrorCode.UNKNOWN_SELENE_ERROR );
         }
 
     }
@@ -131,22 +136,24 @@ public class SELENE
             {
                 System.out.println(
                         "Wrong browser name. Only accept: ff | firefox | chrome | googlechrome | ie | internetexplorer" + " but found: " + browserType );
-                System.out.println( "Error code: " + ErrorCode.WRONG_BROWSER_NAME );
-                System.exit( ErrorCode.WRONG_BROWSER_NAME );
+                printErrorCodeAndExit( ErrorCode.WRONG_BROWSER_NAME );
             }
         }
         catch ( IllegalStateException illegalStateException )
         {
             System.out.println( "Driver file path not found at: " + driverFilePath );
-            System.out.println( "Error code: " + ErrorCode.DRIVER_NOT_FOUND );
-            System.exit( ErrorCode.DRIVER_NOT_FOUND );
+            printErrorCodeAndExit( ErrorCode.DRIVER_NOT_FOUND );
         }
         catch ( SessionNotCreatedException sessionNotCreatedException )
         {
             System.out.println( "BrowserType and Driver not matched\n" + "Browser: " + browserType + " but found " + driverFilePath );
-            System.out.println( "Error code: " + ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
-            System.exit( ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
-
+            printErrorCodeAndExit( ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
         }
+    }
+
+    private void printErrorCodeAndExit( int errorCode )
+    {
+        System.out.println( "Error code: " + errorCode );
+        System.exit( errorCode );
     }
 }
