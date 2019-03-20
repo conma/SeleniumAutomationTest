@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Testcase
 {
     private String id;
@@ -13,9 +10,7 @@ public class Testcase
 
     private TestcaseStatus testcaseStatus;
 
-    private List<String> info;
-
-    private List<String> error;
+    private String note;
 
     public Testcase( String scriptFileName )
     {
@@ -23,8 +18,7 @@ public class Testcase
         this.row = Integer.parseInt( scriptFileName.split( "-" )[1] );
         this.scriptFileName = scriptFileName;
         this.testcaseStatus = TestcaseStatus.PASSED;
-        this.info = new ArrayList<String>();
-        this.error = new ArrayList<String>();
+        this.note = "";
     }
 
     public String getId()
@@ -67,24 +61,14 @@ public class Testcase
         this.testcaseStatus = testcaseStatus;
     }
 
-    public List<String> getInfo()
+    public String getNote()
     {
-        return info;
+        return note;
     }
 
-    public void setInfo( List<String> info )
+    public void setNote( String note )
     {
-        this.info = info;
-    }
-
-    public List<String> getError()
-    {
-        return error;
-    }
-
-    public void setError( List<String> error )
-    {
-        this.error = error;
+        this.note = note;
     }
 
 }

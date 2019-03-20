@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -56,21 +55,12 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
 
         inputStream = new FileInputStream( testcaseFilePath );
         Workbook wb = WorkbookFactory.create( inputStream );
+        Sheet testcaseSheet = wb.getSheetAt( 0 );
         for ( Testcase testcase : testcases )
         {
-            Sheet testcaseSheet = wb.getSheetAt( 0 );
             Row row = testcaseSheet.getRow( testcase.getRow() );
-            Cell cell = row.getCell( master.getResultColumn() );
-            cell.setCellValue( testcase.getTestcaseStatus().getName() );
-            cell = row.getCell( master.getNoteColumn() );
-            for ( String info : testcase.getInfo() )
-            {
-                row.getCell( master.getNoteColumn() ).setCellValue( info );
-            }
-            for ( String error : testcase.getError() )
-            {
-                row.getCell( master.getNoteColumn() ).setCellValue( error );
-            }
+            row.getCell( master.getResultColumn() ).setCellValue( testcase.getTestcaseStatus().getName() );
+            row.getCell( master.getNoteColumn() ).setCellValue( testcase.getNote() );
 
             outputStream = new FileOutputStream( testcaseFilePath );
             wb.write( outputStream );

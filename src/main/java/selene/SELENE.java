@@ -72,13 +72,13 @@ public class SELENE
                 catch ( IOException e )
                 {
                     testcase.setTestcaseStatus( TestcaseStatus.ERROR );
-                    testcase.getError().add( e.getMessage() );
+                    testcase.setNote( testcase.getNote() + e.getMessage().split( "\n" )[0] + "\n" );
                     continue;
                 }
                 catch ( Exception e )
                 {
                     testcase.setTestcaseStatus( TestcaseStatus.ERROR );
-                    testcase.getError().add( e.getMessage().split( "\n" )[0] );
+                    testcase.setNote( testcase.getNote() + e.getMessage().split( "\n" )[0] + "\n" );
                     continue;
                 }
                 finally
