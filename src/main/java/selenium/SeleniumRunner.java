@@ -91,7 +91,9 @@ public class SeleniumRunner
         if ( webElement == null )
             webElement = findElementByXPath( element );
         if ( webElement == null )
-            throw new NoSuchElementException( "No such element name or id or xpath = \"" + element + "\"" );
+            webElement = getElementByCssSelector( element );
+        if ( webElement == null )
+            throw new NoSuchElementException( "No such element name/id/xpath/cssSelector = \"" + element + "\"" );
         return webElement;
     }
 
@@ -149,4 +151,21 @@ public class SeleniumRunner
         return webElement;
     }
 
+    private WebElement getElementByCssSelector( String element )
+    {
+        WebElement webElement;
+        try
+        {
+            webElement = webDriver.findElement( By.cssSelector( ( element ) ) );
+        }
+        catch ( NoSuchElementException noSuchElementException )
+        {
+            return null;
+        }
+        catch ( NoSuchWindowException noSuchWindowException )
+        {
+            return null;
+        }
+        return webElement;
+    }
 }
