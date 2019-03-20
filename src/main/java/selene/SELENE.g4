@@ -21,6 +21,7 @@ quit          : 'quit';
 /*
 * reference from
 * https://github.com/antlr/antlr4/blob/master/doc/wildcard.md
+* https://github.com/antlr/antlr4/blob/master/doc/lexer-rules.md
 */
 
 string
@@ -37,3 +38,4 @@ url
 
 STRING : '"' ( '\\"' | . )*? '"' ; // match "foo", "\"", "x\"\"y", ...
 WS : [ \r\t\n]+ -> skip ;
+COMMENT : '#' ~[\r\n]* '\r'? '\n' -> skip ;
