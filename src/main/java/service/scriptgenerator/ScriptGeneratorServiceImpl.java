@@ -71,7 +71,6 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
                 scriptFileWriter.write( "end" );
                 scriptFileWriter.close();
             }
-            testcaseInputStream.close();
         }
         catch ( FileNotFoundException e )
         {
@@ -82,8 +81,8 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
         }
         catch ( EncryptedDocumentException e )
         {
-            System.out.println( "Testcase file is encrypted!" );
-            e.printStackTrace();
+            System.out.println( "File " + testcaseFilePath + " is encrypted!" );
+            System.out.println( "Error code: " + ErrorCode.TESTCASE_FILE_ENCRYPTED );
             System.exit( ErrorCode.TESTCASE_FILE_ENCRYPTED );
         }
         catch ( IOException e )

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,9 +28,9 @@ import service.testcasefile.TestcaseFileService;
  *      ff      | firefox
  *      ie      | internetexplorer
  *      chrome  | googlechrome
- * args[1]: Đường dẫn tuyệt đối tới file driver tương ứng
+ * args[1]: Đường dẫn tới file driver tương ứng
  *       D:/driver/geckodriver.exe (geckodriver.exe dành cho ff)
- * args[2]: Đường dẫn tuyệt đối tới folder chứa script chạy
+ * args[2]: Đường dẫn tới folder chứa script chạy
  *      D:/scripts
  */
 
@@ -85,7 +86,13 @@ public class SELENE
                     System.out.println( testcase.getId() + " " + testcase.getTestcaseStatus().getName() );
                 }
             }
-            testcaseFileService.updateTestcaseIdResult( testcaseFilePath, master, testcases);
+            testcaseFileService.updateTestcaseIdResult( testcaseFilePath, master, testcases );
+        }
+        catch ( EncryptedDocumentException e )
+        {
+            System.out.println( "File " + testcaseFilePath + " is encrypted!" );
+            System.out.println( "Error code: " + ErrorCode.TESTCASE_FILE_ENCRYPTED );
+            System.exit( ErrorCode.TESTCASE_FILE_ENCRYPTED );
         }
         catch ( Exception e )
         {
