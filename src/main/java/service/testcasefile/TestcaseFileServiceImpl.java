@@ -50,22 +50,29 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     public void updateTestcaseIdResult( String testcaseFilePath, Master master, List<Testcase> testcases )
             throws FileNotFoundException, IOException, EncryptedDocumentException
     {
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-
-        inputStream = new FileInputStream( testcaseFilePath );
-        Workbook wb = WorkbookFactory.create( inputStream );
-        Sheet testcaseSheet = wb.getSheetAt( 0 );
-        for ( Testcase testcase : testcases )
+        if ( master.isUpdateTC() )
         {
-            Row row = testcaseSheet.getRow( testcase.getRow() );
-            row.getCell( master.getResultColumn() ).setCellValue( testcase.getTestcaseStatus().getName() );
-            row.getCell( master.getNoteColumn() ).setCellValue( row.getCell( master.getNoteColumn() ).getStringCellValue() + "\n" + testcase.getNote() );
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
 
-            outputStream = new FileOutputStream( testcaseFilePath );
-            wb.write( outputStream );
+            inputStream = new FileInputStream( testcaseFilePath );
+            Workbook wb = WorkbookFactory.create( inputStream );
+            Sheet testcaseSheet = wb.getSheetAt( 0 );
+            for ( Testcase testcase : testcases )
+            {
+                Row row = testcaseSheet.getRow( testcase.getRow() );
+                row.getCell( master.getResultColumn() ).setCellValue( testcase.getTestcaseStatus().getName() );
+                row.getCell( master.getNoteColumn() ).setCellValue( row.getCell( master.getNoteColumn() ).getStringCellValue() + "\n" + testcase.getNote() );
+
+                outputStream = new FileOutputStream( testcaseFilePath );
+                wb.write( outputStream );
+            }
+            outputStream.close();
         }
-        outputStream.close();
+        else
+        {
+            System.out.println( "[info] Auto update testcase is now false!" );
+        }
     }
 
 }

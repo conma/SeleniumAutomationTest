@@ -19,7 +19,7 @@ public class Master
         this.noteColumn = noteColumn;
     }
 
-    public boolean getUpdateTC()
+    public boolean isUpdateTC()
     {
         return updateTC;
     }
