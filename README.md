@@ -16,6 +16,7 @@ SeleniumAutomationTest
 - Run
 
 	Requirement:
+		a empty 'script' folder in same folder with jar file (we will delete all files and folders in 'script')
 		browser (ff/ie/chrome) is installed
 		webdriver file in same folder with jar file
 		test case file in same folder with jar file, has structure like this https://github.com/conma/SeleniumAutomationTest/blob/master/testcases/Testcase.xls
