@@ -106,7 +106,6 @@ public class SELENE
             System.out.println( "UNKNOWN Error when SELENE is executing!" );
             printErrorCodeAndExit( ErrorCode.UNKNOWN_SELENE_ERROR );
         }
-
     }
 
     public void init( String browserType, String driverFilePath, String scriptFolderPath )

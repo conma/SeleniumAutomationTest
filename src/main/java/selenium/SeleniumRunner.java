@@ -16,13 +16,18 @@ public class SeleniumRunner
 
     private Actions action;
 
-    private JavascriptExecutor jse;
+    private JavascriptExecutor javascriptexcutor;
 
     public SeleniumRunner( WebDriver webDriver )
     {
         this.webDriver = webDriver;
         this.action = new Actions( webDriver );
-        jse = ( (JavascriptExecutor) webDriver );
+        this.javascriptexcutor = ( (JavascriptExecutor) webDriver );
+    }
+
+    public String getTitle()
+    {
+        return webDriver.getTitle();
     }
 
     public void get( String url )
@@ -79,19 +84,22 @@ public class SeleniumRunner
     public void enableElementByName( String elementName )
     {
         String enableElementByName = "document.getElementsByName('" + elementName + "')[0].removeAttribute('disabled');";
-        jse.executeScript( enableElementByName );
+        javascriptexcutor.executeScript( enableElementByName );
     }
 
     public void enableElementById( String elementId )
     {
         String enableElementById = "document.getElementById('" + elementId + "').removeAttribute('disabled');";
-        jse.executeScript( enableElementById );
+        javascriptexcutor.executeScript( enableElementById );
     }
 
     public void enableElementByXPath( String elementXPath )
     {
-        String enableElementByXPath = "document.evaluate(\"" + elementXPath + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.removeAttribute('disabled')";
-        jse.executeScript( enableElementByXPath );
+        /* reference
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_using_XPath_in_JavaScript
+         */
+        String enableElementByXPath = "document.evaluate(\"" + elementXPath + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.removeAttribute('disabled');";
+        javascriptexcutor.executeScript( enableElementByXPath );
     }
 
     public void quit()

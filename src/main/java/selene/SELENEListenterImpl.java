@@ -120,7 +120,11 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         String title = trimHeadAndTailQuot( ctx.string().getText() );
         if ( !seleneRunner.verifyTitle( title ) )
+        {
+            String webPagetitle = seleneRunner.getTitle();
+            testcase.setNote( testcase.getNote() + "\nWeb page Title = '" + webPagetitle + "', compare with '" + title + "'");
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
     }
 
     @Override
