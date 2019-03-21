@@ -2,7 +2,7 @@ package model;
 
 public enum TestcaseStatus
 {
-    ERROR("Error"), PASSED("Passed"), NOT_PASSED("Failed");
+    ERROR("Error"), PASSED("Passed"), FAILED("Failed");
     private String name;
 
     private TestcaseStatus( String name )
