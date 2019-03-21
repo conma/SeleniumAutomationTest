@@ -2,7 +2,7 @@ grammar SELENE;
 program   : 'begin' statement+ 'end';
 
 statement : get  | access | click | sendKeys | verifyText | verifyTitle |
-            hover | verifyEnable| waitSecond |
+            hover | verifyEnable| verifyDisable | enableElement | waitSecond |
             quit;
 
 get           : 'get' url;
@@ -13,7 +13,8 @@ verifyText    : 'verifyText' element string;
 verifyTitle   : 'verifyTitle' string;
 hover         : 'hover' element;
 verifyEnable  : 'verifyEnable' element;
-enableElement : element;
+verifyDisable : 'verifyDisable' element;
+enableElement : 'enableElement' element;
 waitSecond    : 'waitSecond' string;
 
 quit          : 'quit';

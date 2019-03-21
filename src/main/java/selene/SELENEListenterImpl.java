@@ -12,6 +12,8 @@ import selene.SELENEParser.GetContext;
 import selene.SELENEParser.HoverContext;
 import selene.SELENEParser.QuitContext;
 import selene.SELENEParser.SendKeysContext;
+import selene.SELENEParser.VerifyDisableContext;
+import selene.SELENEParser.VerifyEnableContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 import selene.SELENEParser.WaitSecondContext;
@@ -115,7 +117,7 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         String title = trimHeadAndTailQuot( ctx.string().getText() );
         if ( !seleneRunner.verifyTitle( title ) )
-            testcase.setTestcaseStatus( TestcaseStatus.NOT_PASSED );
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
     }
 
     @Override
@@ -123,6 +125,22 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         String element = trimHeadAndTailQuot( ctx.element().getText() );
         seleneRunner.hover( element );
+    }
+
+    @Override
+    public void exitVerifyEnable( VerifyEnableContext ctx )
+    {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        if ( !seleneRunner.verifyEnable( element ) )
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+    }
+
+    @Override
+    public void exitVerifyDisable( VerifyDisableContext ctx )
+    {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        if ( seleneRunner.verifyEnable( element ) )
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
     }
 
     @Override

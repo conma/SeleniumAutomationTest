@@ -21,14 +21,14 @@ public class SeleniumRunner
         this.action = new Actions( webDriver );
     }
 
-    public static boolean updateTCs()
-    {
-        return false;
-    }
-
     public void get( String url )
     {
         webDriver.get( url );
+    }
+
+    public void access( String url )
+    {
+        webDriver.navigate().to( url );
     }
 
     public void click( String element )
@@ -66,20 +66,20 @@ public class SeleniumRunner
         return webElement.isEnabled();
     }
 
-    public void access( String url )
+    public void waitSecond( String seconds )
     {
-        webDriver.navigate().to( url );
+        long time = Long.parseLong( seconds );
+        webDriver.manage().timeouts().implicitlyWait( time, TimeUnit.SECONDS );
+    }
+
+    public void enableElement (String element)
+    {
+        WebElement webElement = getElement( element );
     }
 
     public void quit()
     {
         webDriver.quit();
-    }
-
-    public void waitSecond( String seconds )
-    {
-        long time = Long.parseLong( seconds );
-        webDriver.manage().timeouts().implicitlyWait( time, TimeUnit.SECONDS );
     }
 
     private WebElement getElement( String element )
