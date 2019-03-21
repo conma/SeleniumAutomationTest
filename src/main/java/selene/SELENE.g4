@@ -2,7 +2,9 @@ grammar SELENE;
 program   : 'begin' statement+ 'end';
 
 statement : get  | access | click | sendKeys | verifyText | verifyTitle |
-            hover | verifyEnable| verifyDisable | enableElement | waitSecond |
+            hover | verifyEnable| verifyDisable |
+            enableElementByName | enableElementById | enableElementByXPath |
+            waitSecond |
             quit;
 
 get           : 'get' url;
@@ -14,7 +16,9 @@ verifyTitle   : 'verifyTitle' string;
 hover         : 'hover' element;
 verifyEnable  : 'verifyEnable' element;
 verifyDisable : 'verifyDisable' element;
-enableElement : 'enableElement' element;
+enableElementByName  : 'enableElementByName' element;
+enableElementById    : 'enableElementById' element;
+enableElementByXPath : 'enableElementByXPath' element;
 waitSecond    : 'waitSecond' string;
 
 quit          : 'quit';

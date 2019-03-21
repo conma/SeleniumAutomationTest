@@ -7,34 +7,43 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
- 
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-public class JQueryUtils {
+public class JQueryUtils
+{
+    private static String JQUERY_FILE = "src/main/java/jquery/jquery-script.txt";
 
-    public static String readFile(String file) throws IOException {
-        Charset cs = Charset.forName("UTF-8");
-        FileInputStream stream = new FileInputStream(file);
-        try {
-            Reader reader = new BufferedReader(new InputStreamReader(stream, cs));
+    public static String readFile( String file )
+    {
+        try
+        {
+            Charset cs = Charset.forName( "UTF-8" );
+            FileInputStream stream = new FileInputStream( file );
+            Reader reader = new BufferedReader( new InputStreamReader( stream, cs ) );
             StringBuilder builder = new StringBuilder();
             char[] buffer = new char[8192];
             int read;
-            while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
-                builder.append(buffer, 0, read);
+            while ( ( read = reader.read( buffer, 0, buffer.length ) ) > 0 )
+            {
+                builder.append( buffer, 0, read );
             }
-            return builder.toString();
-        } finally {
             stream.close();
+            return builder.toString();
+        }
+        catch ( IOException e )
+        {
+            return "";
         }
     }
 
-    public static void injectJQuery(WebDriver driver, String jQueryStr) 
-            throws IOException {
-        String jQueryLoader = JQueryUtils.readFile(jQueryStr);
-        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+    public static void injectJQuery( WebDriver driver )
+    {
+        String jQueryLoader;
+        jQueryLoader = JQueryUtils.readFile( JQUERY_FILE );
+        driver.manage().timeouts().setScriptTimeout( 10, TimeUnit.SECONDS );
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeAsyncScript(jQueryLoader);
+        js.executeAsyncScript( jQueryLoader );
     }
 }

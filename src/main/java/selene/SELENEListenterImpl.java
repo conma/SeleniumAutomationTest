@@ -8,6 +8,9 @@ import model.Testcase;
 import model.TestcaseStatus;
 import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
+import selene.SELENEParser.EnableElementByIdContext;
+import selene.SELENEParser.EnableElementByNameContext;
+import selene.SELENEParser.EnableElementByXPathContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.HoverContext;
 import selene.SELENEParser.QuitContext;
@@ -141,6 +144,24 @@ public class SELENEListenterImpl extends SELENEBaseListener
         String element = trimHeadAndTailQuot( ctx.element().getText() );
         if ( seleneRunner.verifyEnable( element ) )
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+    }
+
+    @Override
+    public void exitEnableElementByName( EnableElementByNameContext ctx )
+    {
+        seleneRunner.enableElementByName( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
+
+    @Override
+    public void exitEnableElementById( EnableElementByIdContext ctx )
+    {
+        seleneRunner.enableElementById( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
+
+    @Override
+    public void exitEnableElementByXPath( EnableElementByXPathContext ctx )
+    {
+        seleneRunner.enableElementByXPath( trimHeadAndTailQuot( ctx.element().getText() ) );
     }
 
     @Override

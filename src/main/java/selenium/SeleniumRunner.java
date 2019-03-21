@@ -3,6 +3,7 @@ package selenium;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +16,13 @@ public class SeleniumRunner
 
     private Actions action;
 
+    private JavascriptExecutor jse;
+
     public SeleniumRunner( WebDriver webDriver )
     {
         this.webDriver = webDriver;
         this.action = new Actions( webDriver );
+        jse = ( (JavascriptExecutor) webDriver );
     }
 
     public void get( String url )
@@ -72,9 +76,22 @@ public class SeleniumRunner
         webDriver.manage().timeouts().implicitlyWait( time, TimeUnit.SECONDS );
     }
 
-    public void enableElement (String element)
+    public void enableElementByName( String elementName )
     {
-        WebElement webElement = getElement( element );
+        String enableElementByName = "document.getElementsByName('" + elementName + "')[0].removeAttribute('disabled');";
+        jse.executeScript( enableElementByName );
+    }
+
+    public void enableElementById( String elementId )
+    {
+        String enableElementById = "document.getElementById('" + elementId + "').removeAttribute('disabled');";
+        jse.executeScript( enableElementById );
+    }
+
+    public void enableElementByXPath( String elementXPath )
+    {
+        String enableElementByXPath = "document.evaluate(\"" + elementXPath + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.removeAttribute('disabled')";
+        jse.executeScript( enableElementByXPath );
     }
 
     public void quit()
@@ -168,4 +185,5 @@ public class SeleniumRunner
         }
         return webElement;
     }
+
 }
