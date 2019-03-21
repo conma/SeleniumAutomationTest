@@ -68,7 +68,7 @@ public class Main
         try
         {
             cmd = parser.parse( options, args );
-            if ( cmd.getArgList().size() == 0 || cmd.hasOption( "h" ) )
+            if ( cmd.hasOption( "h" ) )
                 printHelp();
             if ( cmd.hasOption( "g" ) )
             {
