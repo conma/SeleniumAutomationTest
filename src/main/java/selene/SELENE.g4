@@ -1,7 +1,11 @@
+// generate code for SELENE:
+// cd /path/to/project/src/main/java/selene/
+// java -cp "../../../../lib/antlr-4.7.1-complete.jar"  org.antlr.v4.Tool -package selene SELENE.g4
+
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get  | access | click | sendKeys | verifyText | verifyTitle |
+statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyTitle |
             hover | verifyEnable| verifyDisable |
             enableElementByName | enableElementById | enableElementByXPath |
             waitSecond |
