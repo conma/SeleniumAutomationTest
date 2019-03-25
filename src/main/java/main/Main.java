@@ -188,17 +188,17 @@ public class Main
 
     private void outTestcaseFile()
     {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
         try
         {
-            InputStream inputStream = this.getClass().getResourceAsStream( "/Testcase.xls" );
-            OutputStream outputStream = new FileOutputStream( new File( "Testcase-example.xls" ) );
+            inputStream = this.getClass().getResourceAsStream( "/Testcase.xls" );
+            outputStream = new FileOutputStream( new File( "Testcase-example.xls" ) );
             int c;
             while ( ( c = inputStream.read() ) != -1 )
             {
                 outputStream.write( c );
             }
-            inputStream.close();
-            outputStream.close();
         }
         catch ( FileNotFoundException e )
         {
@@ -211,6 +211,21 @@ public class Main
         catch ( Exception e )
         {
             e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                if ( inputStream != null )
+                    inputStream.close();
+                if ( outputStream != null )
+                    outputStream.close();
+            }
+            catch ( IOException e )
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 }
