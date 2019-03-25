@@ -24,17 +24,6 @@ import model.Testcase;
 import model.TestcaseStatus;
 import service.testcasefile.TestcaseFileService;
 
-/*
- * args[0]: Loại trình duyệt 
- *      ff      | firefox
- *      ie      | internetexplorer
- *      chrome  | googlechrome
- * args[1]: Đường dẫn tới file driver tương ứng
- *       D:/driver/geckodriver.exe (geckodriver.exe dành cho ff)
- * args[2]: Đường dẫn tới folder chứa script chạy
- *      D:/scripts
- */
-
 @SuppressWarnings( "deprecation" )
 @Component
 public class SELENE

@@ -8,6 +8,7 @@ program   : 'begin' statement+ 'end';
 statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyTitle |
             hover | verifyEnable| verifyDisable |
             enableElementByName | enableElementById | enableElementByXPath |
+            selectByIndex | selectByText |
             waitSecond |
             quit;
 
@@ -24,6 +25,8 @@ verifyDisable : 'verifyDisable' element;
 enableElementByName  : 'enableElementByName' element;
 enableElementById    : 'enableElementById' element;
 enableElementByXPath : 'enableElementByXPath' element;
+selectByIndex : 'selectByIndex' element string;
+selectByText  : 'selectByText' element string;
 waitSecond    : 'waitSecond' string;
 
 quit          : 'quit';

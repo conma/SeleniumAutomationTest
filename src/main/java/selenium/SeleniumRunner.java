@@ -9,6 +9,7 @@ import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 public class SeleniumRunner
 {
@@ -105,7 +106,21 @@ public class SeleniumRunner
     public void doubleClick(String element)
     {
         WebElement webElement = getElement( element );
-        action.doubleClick(webElement).perform();
+        action.doubleClick(webElement).build().perform();
+    }
+
+    public void selectByIndex( String element, String index )
+    {
+        WebElement webElement = getElement( element );
+        Select selectElement = new Select( webElement );
+        selectElement.selectByIndex( Integer.parseInt( index ) );
+    }
+
+    public void selectByText( String element, String text )
+    {
+        WebElement webElement = getElement( element );
+        Select selectElement = new Select( webElement );
+        selectElement.selectByVisibleText( text );
     }
 
     public void quit()

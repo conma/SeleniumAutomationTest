@@ -15,6 +15,8 @@ import selene.SELENEParser.EnableElementByXPathContext;
 import selene.SELENEParser.GetContext;
 import selene.SELENEParser.HoverContext;
 import selene.SELENEParser.QuitContext;
+import selene.SELENEParser.SelectByIndexContext;
+import selene.SELENEParser.SelectByTextContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.VerifyDisableContext;
 import selene.SELENEParser.VerifyEnableContext;
@@ -173,6 +175,18 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitDoubleClick( DoubleClickContext ctx )
     {
         seleneRunner.doubleClick( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
+
+    @Override
+    public void exitSelectByIndex( SelectByIndexContext ctx )
+    {
+        seleneRunner.selectByIndex( trimHeadAndTailQuot( ctx.element().getText() ), trimHeadAndTailQuot( ctx.string().getText() ) );
+    }
+
+    @Override
+    public void exitSelectByText( SelectByTextContext ctx )
+    {
+        seleneRunner.selectByText( trimHeadAndTailQuot( ctx.element().getText() ), trimHeadAndTailQuot( ctx.string().getText() ) );
     }
 
     @Override
