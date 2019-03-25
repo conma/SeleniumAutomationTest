@@ -118,14 +118,14 @@ public class SELENE
             {
                 System.setProperty( "webdriver.gecko.driver", driverFilePath );
                 driver = new FirefoxDriver();
-                JQueryUtils.injectJQuery( driver );
+                //JQueryUtils.injectJQuery( driver );
             }
             else if ( driverType.equalsIgnoreCase( "internetexplorer" ) || driverType.equalsIgnoreCase( "ie" ) )
             {
                 System.setProperty( "webdriver.ie.driver", driverFilePath );
                 System.setProperty( "webdriver.ie.driver.host", "127.0.0.1" );
                 driver = new InternetExplorerDriver();
-                JQueryUtils.injectJQuery( driver );
+                //JQueryUtils.injectJQuery( driver );
                 // System.setProperty( "webdriver.ie.driver.loglevel", "INFO" );
                 // System.setProperty( "webdriver.ie.driver.logfile", "D:/var/log/ie-selenium.log" );
             }
@@ -133,7 +133,7 @@ public class SELENE
             {
                 System.setProperty( "webdriver.chrome.driver", driverFilePath );
                 driver = new ChromeDriver();
-                JQueryUtils.injectJQuery( driver );
+                //JQueryUtils.injectJQuery( driver );
             }
             else
             {
