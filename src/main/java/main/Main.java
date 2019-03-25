@@ -1,5 +1,12 @@
 package main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -70,6 +77,10 @@ public class Main
             cmd = parser.parse( options, args );
             if ( cmd.hasOption( "h" ) )
                 printHelp();
+            if (cmd.hasOption( "o" ))
+            {
+                outTestcaseFile();
+            }
             if ( cmd.hasOption( "g" ) )
             {
                 if ( cmd.hasOption( "f" ) )
@@ -141,6 +152,10 @@ public class Main
         driverOption.setRequired( false );
         options.addOption( driverOption );
 
+        Option outFileOption = new Option("o", "out-testcase-file", false, "Output example testcase file to current directory");
+        outFileOption.setRequired( false );
+        options.addOption( outFileOption );
+
         Option helpOption = new Option( "h", "help", false, "print this help" );
         helpOption.setRequired( false );
         options.addOption( helpOption );
@@ -169,6 +184,33 @@ public class Main
                 + "java -jar SeleneiumAutomationTest.jar -g -x to generate and execute with default parameters\n"
                 + "java -jar SeleneiumAutomationTest.jar -g -F script to generate script files only\n"
                 + "java -jar SeleneiumAutomationTest.jar -x script to execute" );
-        System.exit( ErrorCode.WRONG_PARAMETER );
+    }
+
+    private void outTestcaseFile()
+    {
+        try
+        {
+            InputStream inputStream = this.getClass().getResourceAsStream( "/Testcase.xls" );
+            OutputStream outputStream = new FileOutputStream( new File( "Testcase-example.xls" ) );
+            int c;
+            while ( ( c = inputStream.read() ) != -1 )
+            {
+                outputStream.write( c );
+            }
+            inputStream.close();
+            outputStream.close();
+        }
+        catch ( FileNotFoundException e )
+        {
+            e.printStackTrace();
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
     }
 }
