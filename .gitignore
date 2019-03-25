@@ -3,7 +3,6 @@ src/main/java/test
 bin/
 scripts/ID*
 *.class
-.classpath
 .project
 .settings
 *.tokens
