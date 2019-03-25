@@ -102,6 +102,12 @@ public class SeleniumRunner
         javascriptexcutor.executeScript( enableElementByXPath );
     }
 
+    public void doubleClick(String element)
+    {
+        WebElement webElement = getElement( element );
+        action.doubleClick(webElement).perform();
+    }
+
     public void quit()
     {
         webDriver.quit();

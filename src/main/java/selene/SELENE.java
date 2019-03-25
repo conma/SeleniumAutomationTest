@@ -18,7 +18,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jquery.JQueryUtils;
 import model.ErrorCode;
 import model.Master;
 import model.Testcase;

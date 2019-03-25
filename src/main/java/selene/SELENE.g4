@@ -14,6 +14,7 @@ statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyT
 get           : 'get' url;
 access        : 'access' url;
 click         : 'click' element;
+doubleClick   : 'doubleClick' element;
 sendKeys      : 'sendKeys' element string;
 verifyText    : 'verifyText' element string;
 verifyTitle   : 'verifyTitle' string;

@@ -8,6 +8,7 @@ import model.Testcase;
 import model.TestcaseStatus;
 import selene.SELENEParser.AccessContext;
 import selene.SELENEParser.ClickContext;
+import selene.SELENEParser.DoubleClickContext;
 import selene.SELENEParser.EnableElementByIdContext;
 import selene.SELENEParser.EnableElementByNameContext;
 import selene.SELENEParser.EnableElementByXPathContext;
@@ -166,6 +167,12 @@ public class SELENEListenterImpl extends SELENEBaseListener
     public void exitEnableElementByXPath( EnableElementByXPathContext ctx )
     {
         seleneRunner.enableElementByXPath( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
+
+    @Override
+    public void exitDoubleClick( DoubleClickContext ctx )
+    {
+        seleneRunner.doubleClick( trimHeadAndTailQuot( ctx.element().getText() ) );
     }
 
     @Override
