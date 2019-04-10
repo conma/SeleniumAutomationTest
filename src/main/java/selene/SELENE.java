@@ -18,7 +18,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import model.ErrorCode;
+import model.ExitCode;
 import model.Master;
 import model.Testcase;
 import model.TestcaseStatus;
@@ -82,17 +82,17 @@ public class SELENE
         catch ( EncryptedDocumentException e )
         {
             System.out.println( "File " + testcaseFilePath + " is encrypted!" );
-            printErrorCodeAndExit( ErrorCode.TESTCASE_FILE_ENCRYPTED );
+            printErrorCodeAndExit( ExitCode.TESTCASE_FILE_ENCRYPTED );
         }
         catch ( FileNotFoundException e )
         {
             System.out.println( e.getMessage().split( "\n" )[0] );
-            printErrorCodeAndExit( ErrorCode.TESTCASE_FILE_IN_USE );
+            printErrorCodeAndExit( ExitCode.TESTCASE_FILE_IN_USE );
         }
         catch ( Exception e )
         {
             System.out.println( "UNKNOWN Error when SELENE is executing!" );
-            printErrorCodeAndExit( ErrorCode.UNKNOWN_SELENE_ERROR );
+            printErrorCodeAndExit( ExitCode.UNKNOWN_SELENE_ERROR );
         }
     }
 
@@ -127,18 +127,18 @@ public class SELENE
             {
                 System.out.println(
                         "Wrong browser name. Only accept: ff | firefox | chrome | googlechrome | ie | internetexplorer" + " but found: " + browserType );
-                printErrorCodeAndExit( ErrorCode.WRONG_BROWSER_NAME );
+                printErrorCodeAndExit( ExitCode.WRONG_BROWSER_NAME );
             }
         }
         catch ( IllegalStateException illegalStateException )
         {
             System.out.println( "Driver file path not found at: " + driverFilePath );
-            printErrorCodeAndExit( ErrorCode.DRIVER_NOT_FOUND );
+            printErrorCodeAndExit( ExitCode.DRIVER_NOT_FOUND );
         }
         catch ( SessionNotCreatedException sessionNotCreatedException )
         {
             System.out.println( "BrowserType and Driver not matched\n" + "Browser: " + browserType + " but found " + driverFilePath );
-            printErrorCodeAndExit( ErrorCode.BROWSER_AND_DRIVER_NOT_MATCH );
+            printErrorCodeAndExit( ExitCode.BROWSER_AND_DRIVER_NOT_MATCH );
         }
     }
 

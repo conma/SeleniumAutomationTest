@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import model.ErrorCode;
+import model.ExitCode;
 import model.Master;
 import service.testcasefile.TestcaseFileService;
 
@@ -78,19 +78,19 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
         {
             System.out.println( "Testcase file not found at: " + testcaseFilePath + "\nTry another path to Testcase file!" );
             e.printStackTrace();
-            System.exit( ErrorCode.TESTCASE_FILE_NOT_FOUND );
+            System.exit( ExitCode.TESTCASE_FILE_NOT_FOUND );
         }
         catch ( EncryptedDocumentException e )
         {
             System.out.println( "File " + testcaseFilePath + " is encrypted!" );
-            System.out.println( "Error code: " + ErrorCode.TESTCASE_FILE_ENCRYPTED );
-            System.exit( ErrorCode.TESTCASE_FILE_ENCRYPTED );
+            System.out.println( "Error code: " + ExitCode.TESTCASE_FILE_ENCRYPTED );
+            System.exit( ExitCode.TESTCASE_FILE_ENCRYPTED );
         }
         catch ( IOException e )
         {
             System.out.println( "Error when generating scritp files!" );
             e.printStackTrace();
-            System.exit( ErrorCode.IO_EXCEPTION_SCRIPT_GENERATOR );
+            System.exit( ExitCode.IO_EXCEPTION_SCRIPT_GENERATOR );
         }
 
     }

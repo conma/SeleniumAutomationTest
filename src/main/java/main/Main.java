@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import model.ErrorCode;
+import model.ExitCode;
 import selene.SELENE;
 import service.scriptgenerator.ScriptGeneratorService;
 import spring.config.AppConfiguration;
@@ -76,10 +76,15 @@ public class Main
         {
             cmd = parser.parse( options, args );
             if ( cmd.hasOption( "h" ) )
+            {
                 printHelp();
+                System.exit( ExitCode.PROGRAM_EXCUTE_SUCCESSED );
+            }
+
             if (cmd.hasOption( "o" ))
             {
                 outTestcaseFile();
+                System.exit( ExitCode.PROGRAM_EXCUTE_SUCCESSED );
             }
             if ( cmd.hasOption( "g" ) )
             {
@@ -116,7 +121,7 @@ public class Main
             System.out.println( e.getMessage() );
             printHelp();
         }
-        System.exit( ErrorCode.PROGRAM_EXCUTE_SUCCESSED );
+        System.exit( ExitCode.PROGRAM_EXCUTE_SUCCESSED );
     }
 
     private void addOptions( Options options, String[] args )
@@ -156,7 +161,7 @@ public class Main
         outFileOption.setRequired( false );
         options.addOption( outFileOption );
 
-        Option helpOption = new Option( "h", "help", false, "print this help" );
+        Option helpOption = new Option( "h", "help", false, "print this help and exit" );
         helpOption.setRequired( false );
         options.addOption( helpOption );
     }
@@ -225,7 +230,6 @@ public class Main
             {
                 e.printStackTrace();
             }
-
         }
     }
 }

@@ -1,6 +1,6 @@
 package model;
 
-public class ErrorCode
+public class ExitCode
 {
     /*
      * Program: 0-9
