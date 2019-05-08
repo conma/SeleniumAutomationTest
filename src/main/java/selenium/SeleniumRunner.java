@@ -43,19 +43,19 @@ public class SeleniumRunner
 
     public void click( String element )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         action.click( webElement ).build().perform();
     }
 
     public void sendKeys( String element, String keywords )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         webElement.sendKeys( keywords );
     }
 
     public boolean verifyText( String element, String text )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         return webElement.getText().equals( text );
     }
 
@@ -66,13 +66,13 @@ public class SeleniumRunner
 
     public void hover( String element )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         action.moveToElement( webElement ).build().perform();
     }
 
     public boolean verifyEnable( String element )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         return webElement.isEnabled();
     }
 
@@ -112,20 +112,20 @@ public class SeleniumRunner
 
     public void doubleClick( String element )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         action.doubleClick( webElement ).build().perform();
     }
 
     public void selectByIndex( String element, String index )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         Select selectElement = new Select( webElement );
         selectElement.selectByIndex( Integer.parseInt( index ) );
     }
 
     public void selectByText( String element, String text )
     {
-        WebElement webElement = getElement( element, false );
+        WebElement webElement = getElement( element, true );
         Select selectElement = new Select( webElement );
         selectElement.selectByVisibleText( text );
     }
