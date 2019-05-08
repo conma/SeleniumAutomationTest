@@ -159,7 +159,10 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         String element = trimHeadAndTailQuot( ctx.element().getText() );
         if ( !seleneRunner.verifyNotFound( element ) )
+        {
+            testcase.setNote( testcase.getNote() + "\nThe Web Element " + ctx.element().getText() + " is found!" );
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
     }
 
     @Override
