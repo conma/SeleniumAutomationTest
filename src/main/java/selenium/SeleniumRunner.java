@@ -43,19 +43,19 @@ public class SeleniumRunner
 
     public void click( String element )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         action.click( webElement ).build().perform();
     }
 
     public void sendKeys( String element, String keywords )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         webElement.sendKeys( keywords );
     }
 
     public boolean verifyText( String element, String text )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         return webElement.getText().equals( text );
     }
 
@@ -66,19 +66,19 @@ public class SeleniumRunner
 
     public void hover( String element )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         action.moveToElement( webElement ).build().perform();
     }
 
     public boolean verifyEnable( String element )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         return webElement.isEnabled();
     }
 
     public boolean verifyNotFound( String element )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         return webElement == null;
     }
 
@@ -112,20 +112,20 @@ public class SeleniumRunner
 
     public void doubleClick( String element )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         action.doubleClick( webElement ).build().perform();
     }
 
     public void selectByIndex( String element, String index )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         Select selectElement = new Select( webElement );
         selectElement.selectByIndex( Integer.parseInt( index ) );
     }
 
     public void selectByText( String element, String text )
     {
-        WebElement webElement = getElement( element );
+        WebElement webElement = getElement( element, false );
         Select selectElement = new Select( webElement );
         selectElement.selectByVisibleText( text );
     }
@@ -135,7 +135,7 @@ public class SeleniumRunner
         webDriver.quit();
     }
 
-    private WebElement getElement( String element )
+    private WebElement getElement( String element, boolean throwException )
     {
         WebElement webElement = null;
         webElement = findElementById( element );
@@ -146,7 +146,8 @@ public class SeleniumRunner
         if ( webElement == null )
             webElement = getElementByCssSelector( element );
         if ( webElement == null )
-            throw new NoSuchElementException( "No such element name/id/xpath/cssSelector = \"" + element + "\"" );
+            if ( throwException )
+                throw new NoSuchElementException( "No such element name/id/xpath/cssSelector = \"" + element + "\"" );
         return webElement;
     }
 
