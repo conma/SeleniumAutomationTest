@@ -20,6 +20,7 @@ import selene.SELENEParser.SelectByTextContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.VerifyDisableContext;
 import selene.SELENEParser.VerifyEnableContext;
+import selene.SELENEParser.VerifyNotFoundContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 import selene.SELENEParser.WaitSecondContext;
@@ -125,7 +126,7 @@ public class SELENEListenterImpl extends SELENEBaseListener
         if ( !seleneRunner.verifyTitle( title ) )
         {
             String webPagetitle = seleneRunner.getTitle();
-            testcase.setNote( testcase.getNote() + "\nWeb page Title = '" + webPagetitle + "', compare with '" + title + "'");
+            testcase.setNote( testcase.getNote() + "\nWeb page Title = '" + webPagetitle + "', compare with '" + title + "'" );
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
         }
     }
@@ -150,6 +151,14 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         String element = trimHeadAndTailQuot( ctx.element().getText() );
         if ( seleneRunner.verifyEnable( element ) )
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+    }
+
+    @Override
+    public void exitVerifyNotFound( VerifyNotFoundContext ctx )
+    {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        if ( !seleneRunner.verifyNotFound( element ) )
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
     }
 

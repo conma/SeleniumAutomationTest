@@ -76,6 +76,12 @@ public class SeleniumRunner
         return webElement.isEnabled();
     }
 
+    public boolean verifyNotFound( String element )
+    {
+        WebElement webElement = getElement( element );
+        return webElement == null;
+    }
+
     public void waitSecond( String seconds )
     {
         long time = Long.parseLong( seconds );
@@ -96,17 +102,18 @@ public class SeleniumRunner
 
     public void enableElementByXPath( String elementXPath )
     {
-        /* reference
-         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_using_XPath_in_JavaScript
+        /*
+         * reference https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_using_XPath_in_JavaScript
          */
-        String enableElementByXPath = "document.evaluate(\"" + elementXPath + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.removeAttribute('disabled');";
+        String enableElementByXPath = "document.evaluate(\"" + elementXPath
+                + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.removeAttribute('disabled');";
         javascriptexcutor.executeScript( enableElementByXPath );
     }
 
-    public void doubleClick(String element)
+    public void doubleClick( String element )
     {
         WebElement webElement = getElement( element );
-        action.doubleClick(webElement).build().perform();
+        action.doubleClick( webElement ).build().perform();
     }
 
     public void selectByIndex( String element, String index )

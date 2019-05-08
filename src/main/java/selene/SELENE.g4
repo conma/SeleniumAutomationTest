@@ -6,7 +6,7 @@ grammar SELENE;
 program   : 'begin' statement+ 'end';
 
 statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyTitle |
-            hover | verifyEnable| verifyDisable |
+            hover | verifyEnable| verifyDisable | verifyNotFound |
             enableElementByName | enableElementById | enableElementByXPath |
             selectByIndex | selectByText |
             waitSecond |
@@ -22,6 +22,7 @@ verifyTitle   : 'verifyTitle' string;
 hover         : 'hover' element;
 verifyEnable  : 'verifyEnable' element;
 verifyDisable : 'verifyDisable' element;
+verifyNotFound: 'verifyNotFound' element;
 enableElementByName  : 'enableElementByName' element;
 enableElementById    : 'enableElementById' element;
 enableElementByXPath : 'enableElementByXPath' element;
