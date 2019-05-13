@@ -57,10 +57,10 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
             {
                 Row tcRow = sheet.getRow( i );
 
-                String testcaseAutoStep = tcRow.getCell( AutoStepColumn ).getStringCellValue();
+                String testcaseAutoStep = tcRow.getCell( AutoStepColumn ).getStringCellValue().trim();
                 if ( testcaseAutoStep.equals( null ) || testcaseAutoStep.equals( "" ) )
                 {
-                    return;
+                    continue;
                 }
 
                 String testcaseId = tcRow.getCell( 0 ).getStringCellValue();
