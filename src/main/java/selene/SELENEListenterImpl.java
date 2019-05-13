@@ -18,6 +18,7 @@ import selene.SELENEParser.QuitContext;
 import selene.SELENEParser.SelectByIndexContext;
 import selene.SELENEParser.SelectByTextContext;
 import selene.SELENEParser.SendKeysContext;
+import selene.SELENEParser.VerifyCheckedContext;
 import selene.SELENEParser.VerifyDisableContext;
 import selene.SELENEParser.VerifyEnableContext;
 import selene.SELENEParser.VerifyNotFoundContext;
@@ -163,6 +164,18 @@ public class SELENEListenterImpl extends SELENEBaseListener
             testcase.setNote( testcase.getNote() + "\nThe Web Element " + ctx.element().getText() + " is found!" );
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
         }
+    }
+
+    @Override
+    public void exitVerifyChecked( VerifyCheckedContext ctx )
+    {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        if ( !seleneRunner.verifyChecked( element ) )
+        {
+            testcase.setNote( testcase.getNote() + "\nThe Web Element " + ctx.element().getText() + " is checked!" );
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
+
     }
 
     @Override

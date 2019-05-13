@@ -82,6 +82,17 @@ public class SeleniumRunner
         return webElement == null;
     }
 
+    public boolean verifyChecked( String element )
+    {
+        WebElement webElement = getElement( element, true );
+        return webElement.isSelected();
+    }
+
+    public boolean verifyNotChecked( String element )
+    {
+        return verifyChecked( element );
+    }
+
     public void waitSecond( String seconds )
     {
         long time = Long.parseLong( seconds );

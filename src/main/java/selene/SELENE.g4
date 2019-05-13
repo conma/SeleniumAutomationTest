@@ -7,6 +7,7 @@ program   : 'begin' statement+ 'end';
 
 statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyTitle |
             hover | verifyEnable| verifyDisable | verifyNotFound |
+            verifyChecked | verifyCheckeds | verifyNotChecked | verifyNotCheckeds |
             enableElementByName | enableElementById | enableElementByXPath |
             selectByIndex | selectByText |
             waitSecond |
@@ -23,6 +24,10 @@ hover         : 'hover' element;
 verifyEnable  : 'verifyEnable' element;
 verifyDisable : 'verifyDisable' element;
 verifyNotFound: 'verifyNotFound' element;
+verifyChecked : 'verifyChecked' element;
+verifyCheckeds: 'verifyCheckeds' elements;
+verifyNotChecked : 'verifyNotChecked' element;
+verifyNotCheckeds : 'verifyNotCheckeds' elements;
 enableElementByName  : 'enableElementByName' element;
 enableElementById    : 'enableElementById' element;
 enableElementByXPath : 'enableElementByXPath' element;
@@ -43,6 +48,10 @@ string
   ;
 
 element
+  : string
+  ;
+
+elements
   : string
   ;
 
