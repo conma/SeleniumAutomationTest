@@ -88,9 +88,28 @@ public class SeleniumRunner
         return webElement.isSelected();
     }
 
-    public boolean verifyNotChecked( String element )
+    public boolean verifyCheckeds( String elements )
     {
-        return verifyChecked( element );
+        String[] elementArray = elements.split( "," );
+        for ( String element : elementArray )
+        {
+            WebElement webElement = getElement( element.trim(), true );
+            if ( !webElement.isSelected() )
+                return false;
+        }
+        return true;
+    }
+
+    public boolean verifyNotCheckeds( String elements )
+    {
+        String[] elementArray = elements.split( "," );
+        for ( String element : elementArray )
+        {
+            WebElement webElement = getElement( element.trim(), true );
+            if ( webElement.isSelected() )
+                return false;
+        }
+        return true;
     }
 
     public void waitSecond( String seconds )

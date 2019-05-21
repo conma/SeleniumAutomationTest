@@ -19,8 +19,11 @@ import selene.SELENEParser.SelectByIndexContext;
 import selene.SELENEParser.SelectByTextContext;
 import selene.SELENEParser.SendKeysContext;
 import selene.SELENEParser.VerifyCheckedContext;
+import selene.SELENEParser.VerifyCheckedsContext;
 import selene.SELENEParser.VerifyDisableContext;
 import selene.SELENEParser.VerifyEnableContext;
+import selene.SELENEParser.VerifyNotCheckedContext;
+import selene.SELENEParser.VerifyNotCheckedsContext;
 import selene.SELENEParser.VerifyNotFoundContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
@@ -172,10 +175,40 @@ public class SELENEListenterImpl extends SELENEBaseListener
         String element = trimHeadAndTailQuot( ctx.element().getText() );
         if ( !seleneRunner.verifyChecked( element ) )
         {
+            testcase.setNote( testcase.getNote() + "\nThe Web Element " + ctx.element().getText() + " is not checked!" );
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
+    }
+
+    @Override
+    public void exitVerifyNotChecked( VerifyNotCheckedContext ctx )
+    {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        if ( seleneRunner.verifyChecked( element ) )
+        {
             testcase.setNote( testcase.getNote() + "\nThe Web Element " + ctx.element().getText() + " is checked!" );
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
         }
+    }
 
+    @Override
+    public void exitVerifyCheckeds( VerifyCheckedsContext ctx )
+    {
+        String elements = trimHeadAndTailQuot( ctx.elements().getText() );
+        if( !seleneRunner.verifyCheckeds( elements )) {
+            testcase.setNote( testcase.getNote() + "\nThe Web Elements: " + ctx.elements().getText() + " at least one is not checked!" );
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
+    }
+
+    @Override
+    public void exitVerifyNotCheckeds( VerifyNotCheckedsContext ctx )
+    {
+        String elements = trimHeadAndTailQuot( ctx.elements().getText() );
+        if( !seleneRunner.verifyNotCheckeds( elements )) {
+            testcase.setNote( testcase.getNote() + "\nThe Web Elements: " + ctx.elements().getText() + " at least one is checked!" );
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
     }
 
     @Override
