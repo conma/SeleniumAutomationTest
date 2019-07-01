@@ -10,3 +10,4 @@ scripts/ID*
 *Parser.java
 *Listener.java
 *Lexer.java
+.gradle/
