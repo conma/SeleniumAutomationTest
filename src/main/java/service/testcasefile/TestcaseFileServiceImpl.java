@@ -6,13 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Iterator;
 import java.util.List;
 
+import model.MacroMap;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import model.Master;
@@ -21,13 +21,16 @@ import model.Testcase;
 @Service
 public class TestcaseFileServiceImpl implements TestcaseFileService
 {
+    private static final String MASTER_SHEET_NAME = "Master";
+    private static final String MACRO_SHEET_NAME = "Macro";
+
     @Override
     public Master readMaster( String testcaseFilePath ) throws FileNotFoundException, IOException, EncryptedDocumentException
     {
         InputStream inputStream = new FileInputStream( testcaseFilePath );
-        Workbook wb = WorkbookFactory.create( inputStream );
+        Workbook wb = new XSSFWorkbook( inputStream );
 
-        Sheet master = wb.getSheet( "Master" );
+        Sheet master = wb.getSheet( MASTER_SHEET_NAME );
         Row firstRowMaster = master.getRow( 0 );
         Row secondRowMaster = master.getRow( 1 );
         Row thirdRowMaster = master.getRow( 2 );
@@ -44,6 +47,25 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
         int resultColumn = secondRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
         int noteColumn = thirdRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
         return new Master( updateTC, firstRowOfTestcase, lastRowOfTestcase, stepColumn, resultColumn, noteColumn );
+    }
+
+    @Override
+    public MacroMap readMacro( String testcaseFilePath ) throws FileNotFoundException, IOException, EncryptedDocumentException
+    {
+        MacroMap macroMap = new MacroMap();
+
+        InputStream inputStream = new FileInputStream( testcaseFilePath );
+        Workbook wb = new XSSFWorkbook( inputStream );
+        Sheet macroSheet = wb.getSheet( MACRO_SHEET_NAME );
+        Iterator<Row> iterator = macroSheet.iterator();
+        String macroName, macroValue;
+        while ( iterator.hasNext() ) {
+            Row currentRow = iterator.next();
+            macroName = currentRow.getCell(0).getStringCellValue();
+            macroValue = currentRow.getCell(1).getStringCellValue();
+            macroMap.addMacro(macroName, macroValue);
+        }
+        return macroMap;
     }
 
     @Override

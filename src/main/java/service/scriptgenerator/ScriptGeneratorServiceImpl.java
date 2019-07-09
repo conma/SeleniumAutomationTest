@@ -6,12 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
+import model.MacroMap;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +35,7 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
     @Override
     public void generateScriptFiles( String testcaseFilePath, String scriptFolderPath )
     {
-        // Xóa hết các TCs cũ
+        // Xóa hết các TCs, script cũ
         File scriptDir = new File( scriptFolderPath );
         if ( !scriptDir.exists() )
             scriptDir.mkdirs();
@@ -44,8 +47,9 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
             InputStream testcaseInputStream;
             testcaseInputStream = new FileInputStream( testcaseFilePath );
 
-            Workbook wb = WorkbookFactory.create( testcaseInputStream );
+            Workbook wb = new XSSFWorkbook( testcaseInputStream );
 
+            // Generate Testcase Script files
             master = testcaseFileService.readMaster( testcaseFilePath );
 
             int firstRowOfTestcase = master.getFirstRowOfTestcase();
@@ -73,6 +77,21 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
                 scriptFileWriter.write( "end" );
                 scriptFileWriter.close();
             }
+
+            // Generate Macro files
+            MacroMap macroMap = testcaseFileService.readMacro( testcaseFilePath );
+            for ( Map.Entry<String, String> entry : macroMap.getMacro().entrySet())
+            {
+                File file = new File( scriptFolderPath + "/" + entry.getKey() );
+                FileWriter scriptFileWriter = new FileWriter( file );
+
+                scriptFileWriter.write( "begin" + NEW_LINE );
+                scriptFileWriter.write( entry.getValue().replaceAll( "^", "\t" ).replaceAll( "\n", "\n\t" ) );
+                scriptFileWriter.write( NEW_LINE );
+                scriptFileWriter.write( "end" );
+                scriptFileWriter.close();
+            }
+
         }
         catch ( FileNotFoundException e )
         {

@@ -11,6 +11,7 @@ statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyT
             enableElementByName | enableElementById | enableElementByXPath |
             selectByIndex | selectByText |
             waitSecond |
+            exec |
             quit;
 
 get           : 'get' url;
@@ -34,6 +35,8 @@ enableElementByXPath : 'enableElementByXPath' element;
 selectByIndex : 'selectByIndex' element string;
 selectByText  : 'selectByText' element string;
 waitSecond    : 'waitSecond' string;
+
+exec          : 'exec' string;
 
 quit          : 'quit';
 

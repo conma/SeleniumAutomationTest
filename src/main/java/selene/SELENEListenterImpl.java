@@ -28,6 +28,7 @@ import selene.SELENEParser.VerifyNotFoundContext;
 import selene.SELENEParser.VerifyTextContext;
 import selene.SELENEParser.VerifyTitleContext;
 import selene.SELENEParser.WaitSecondContext;
+import selene.SELENEParser.ExecContext;
 import selenium.SeleniumRunner;
 
 @Component
@@ -252,6 +253,12 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         String seconds = trimHeadAndTailQuot( ctx.string().getText() );
         seleneRunner.waitSecond( seconds );
+    }
+
+    @Override
+    public void exitExec(ExecContext ctx)
+    {
+        
     }
 
     @Override
