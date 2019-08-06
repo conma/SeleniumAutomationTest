@@ -6,10 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import model.MacroMap;
+import model.command.Command;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -23,6 +25,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
 {
     private static final String MASTER_SHEET_NAME = "Master";
     private static final String MACRO_SHEET_NAME = "Macro";
+    private static final String COMMANDS_SHEET_NAME = "Commands";
 
     @Override
     public Master readMaster( String testcaseFilePath ) throws FileNotFoundException, IOException, EncryptedDocumentException
@@ -50,7 +53,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     }
 
     @Override
-    public MacroMap readMacro( String testcaseFilePath ) throws FileNotFoundException, IOException, EncryptedDocumentException
+    public MacroMap readMacro( String testcaseFilePath ) throws IOException, EncryptedDocumentException
     {
         MacroMap macroMap = new MacroMap();
 
@@ -69,11 +72,63 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     }
 
     @Override
+    public void writeCommands() throws IOException, EncryptedDocumentException
+    {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        Row row;
+        Cell cellCommand, cellParam, cellDescription;
+        int i = 3;
+        final int COMMAND = 0, PARAMS = 1, DESCRIPTION = 2;
+
+        inputStream = inputStream = new FileInputStream("testcase/Testcase.xlsx");
+
+        Workbook wb = WorkbookFactory.create( inputStream );
+
+        CellStyle style = wb.createCellStyle();
+        short BLACK = 0;
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBottomBorderColor(BLACK);
+        style.setRightBorderColor(BLACK);
+        style.setLeftBorderColor(BLACK);
+        style.setTopBorderColor(BLACK);
+        style.setShrinkToFit(true);
+        style.setWrapText(true);
+
+        Sheet commandsSheet = wb.getSheet(COMMANDS_SHEET_NAME);
+
+        for ( Command command : Command.values() )
+        {
+            row = commandsSheet.createRow(i);
+
+            cellCommand = row.createCell(COMMAND);
+            cellCommand.setCellValue(command.getValue());
+            cellCommand.setCellStyle(style);
+
+            cellParam = row.createCell(PARAMS);
+            cellParam.setCellValue(Arrays.toString(command.getParams()));
+            cellParam.setCellStyle(style);
+
+            cellDescription = row.createCell(DESCRIPTION);
+            cellDescription.setCellValue(command.getDescription());
+            cellDescription.setCellStyle(style);
+
+            i++;
+        }
+        outputStream = new FileOutputStream( "testcase/Testcase.xlsx" );
+        wb.write( outputStream );
+        outputStream.close();
+        inputStream.close();
+    }
+
+    @Override
     public void updateTestcaseIdResult( String testcaseFilePath, Master master, List<Testcase> testcases )
             throws FileNotFoundException, IOException, EncryptedDocumentException
     {
         if ( master.isUpdateTC() )
         {
+            Row row;
             InputStream inputStream = null;
             OutputStream outputStream = null;
 
@@ -82,7 +137,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
             Sheet testcaseSheet = wb.getSheetAt( 0 );
             for ( Testcase testcase : testcases )
             {
-                Row row = testcaseSheet.getRow( testcase.getRow() );
+                row = testcaseSheet.getRow( testcase.getRow() );
                 row.getCell( master.getResultColumn() ).setCellValue( testcase.getTestcaseStatus().getName() );
                 row.getCell( master.getNoteColumn() ).setCellValue( row.getCell( master.getNoteColumn() ).getStringCellValue() + testcase.getNote() );
 

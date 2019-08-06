@@ -21,11 +21,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import model.ExitCode;
 import selene.SELENE;
 import service.scriptgenerator.ScriptGeneratorService;
+import service.testcasefile.TestcaseFileService;
 import spring.config.AppConfiguration;
 
 public class Main
 {
-    private final String DEFAULT_TESTCASE_FILE_PATH = "Testcase.xls";
+    private final String DEFAULT_TESTCASE_FILE_PATH = "Testcase.xlsx";
 
     private final String DEFAULT_SCRIPT_FOLDER_PATH = "script";
 
@@ -56,6 +57,9 @@ public class Main
 
     @Autowired
     private ScriptGeneratorService scriptGeneratorService;
+
+    @Autowired
+    private TestcaseFileService testcaseFileService;
 
     public static void main( String[] args )
     {
@@ -197,8 +201,9 @@ public class Main
         OutputStream outputStream = null;
         try
         {
-            inputStream = this.getClass().getResourceAsStream( "/Testcase.xls" );
-            outputStream = new FileOutputStream( new File( "Testcase-example.xls" ) );
+            testcaseFileService.writeCommands();
+            inputStream = this.getClass().getResourceAsStream( "/Testcase.xlsx" );
+            outputStream = new FileOutputStream( new File( "Testcase-example.xlsx" ) );
             int c;
             while ( ( c = inputStream.read() ) != -1 )
             {
@@ -225,6 +230,7 @@ public class Main
                     inputStream.close();
                 if ( outputStream != null )
                     outputStream.close();
+                System.exit(ExitCode.PROGRAM_EXCUTE_SUCCESSED);
             }
             catch ( IOException e )
             {

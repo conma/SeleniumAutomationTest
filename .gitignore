@@ -13,3 +13,4 @@ scripts/ID*
 .gradle/
 .idea/
 *.iml
+Testcase-example.xlsx
