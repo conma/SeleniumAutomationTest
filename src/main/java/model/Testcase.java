@@ -2,6 +2,10 @@ package model;
 
 public class Testcase
 {
+    private static final int TESTCASE_ID = 0;
+    private static final int ROW = 1;
+    private static final String HYPHEN = "-";
+
     private String id;
 
     private int row;
@@ -14,8 +18,8 @@ public class Testcase
 
     public Testcase( String scriptFileName )
     {
-        this.id = scriptFileName.split( "-" )[0];
-        this.row = Integer.parseInt( scriptFileName.split( "-" )[1] );
+        this.id = scriptFileName.split( HYPHEN )[TESTCASE_ID];
+        this.row = Integer.parseInt( scriptFileName.split( HYPHEN )[ROW] );
         this.scriptFileName = scriptFileName;
         this.testcaseStatus = TestcaseStatus.PASSED;
         this.note = "";

@@ -1,5 +1,7 @@
 package selene;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,9 @@ import selene.SELENEParser.VerifyTitleContext;
 import selene.SELENEParser.WaitSecondContext;
 import selene.SELENEParser.ExecContext;
 import selenium.SeleniumRunner;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 
 @Component
 public class SELENEListenterImpl extends SELENEBaseListener
@@ -258,7 +263,8 @@ public class SELENEListenterImpl extends SELENEBaseListener
     @Override
     public void exitExec(ExecContext ctx)
     {
-
+        String macroFileName = trimHeadAndTailQuot( ctx.string().getText());
+        seleneRunner.exec(macroFileName);
     }
 
     @Override

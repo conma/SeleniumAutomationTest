@@ -28,6 +28,8 @@ import service.testcasefile.TestcaseFileService;
 @Component
 public class SELENE
 {
+    private static final String HYPHEN = "-";
+
     private static WebDriver driver;
 
     private static String scriptFolderPath;
@@ -50,6 +52,8 @@ public class SELENE
             String[] scriptFileNames = scriptFolder.list();
             for ( String scriptFileName : scriptFileNames )
             {
+                if ( !scriptFileName.contains(HYPHEN) ) return;
+
                 Testcase testcase = new Testcase( scriptFileName );
                 try
                 {
@@ -146,5 +150,15 @@ public class SELENE
     {
         System.out.println( "Error code: " + errorCode );
         System.exit( errorCode );
+    }
+
+    public static WebDriver getDriver()
+    {
+        return driver;
+    }
+
+    public static String getScriptFolderPath()
+    {
+        return scriptFolderPath;
     }
 }

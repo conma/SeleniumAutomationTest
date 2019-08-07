@@ -66,7 +66,8 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
             Row currentRow = iterator.next();
             macroName = currentRow.getCell(0).getStringCellValue();
             macroValue = currentRow.getCell(1).getStringCellValue();
-            macroMap.addMacro(macroName, macroValue);
+            if ( macroName != null && !macroName.isEmpty() )
+                macroMap.addMacro(macroName, macroValue);
         }
         return macroMap;
     }
@@ -74,14 +75,17 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     @Override
     public void writeCommands() throws IOException, EncryptedDocumentException
     {
+        String originalTestcaseFile = getClass().getClassLoader().getResource( "Testcase.xlsx" ).getFile();
+
         InputStream inputStream = null;
         OutputStream outputStream = null;
+
         Row row;
         Cell cellCommand, cellParam, cellDescription;
         int i = 3;
         final int COMMAND = 0, PARAMS = 1, DESCRIPTION = 2;
 
-        inputStream = inputStream = new FileInputStream("testcase/Testcase.xlsx");
+        inputStream = inputStream = new FileInputStream(originalTestcaseFile);
 
         Workbook wb = WorkbookFactory.create( inputStream );
 
@@ -116,7 +120,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
 
             i++;
         }
-        outputStream = new FileOutputStream( "testcase/Testcase.xlsx" );
+        outputStream = new FileOutputStream(originalTestcaseFile);
         wb.write( outputStream );
         outputStream.close();
         inputStream.close();
@@ -124,7 +128,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
 
     @Override
     public void updateTestcaseIdResult( String testcaseFilePath, Master master, List<Testcase> testcases )
-            throws FileNotFoundException, IOException, EncryptedDocumentException
+            throws IOException, EncryptedDocumentException
     {
         if ( master.isUpdateTC() )
         {

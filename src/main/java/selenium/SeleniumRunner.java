@@ -1,7 +1,11 @@
 package selenium;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,6 +14,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import selene.SELENE;
+import selene.SELENELexer;
+import selene.SELENEListenterImpl;
+import selene.SELENEParser;
 
 public class SeleniumRunner
 {
@@ -253,4 +261,20 @@ public class SeleniumRunner
         return webElement;
     }
 
+    public void exec( String macroFileName )
+    {
+        ANTLRInputStream input = null;
+        try
+        {
+            input = new ANTLRInputStream( new FileInputStream( SELENE.getScriptFolderPath() + "/" + macroFileName )) ;
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
+        SELENELexer lexer = new SELENELexer( input );
+        SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
+        parser.addParseListener( new SELENEListenterImpl(SELENE.getDriver()) );
+        parser.program();
+    }
 }
