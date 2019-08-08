@@ -132,19 +132,19 @@ public class Main
     {
         Option generateOption = new Option( "g", "generate-script-files", false,
                 "Generate Test script files from testcases file into folder\n"
-                        + "Optional: -f | --file <testcase_file.xls> -F | --Folder <output folder of Test script files>" + "Default: -f Testcase.xls -F script"
-                        + "Example: -f Testcases.xls -F script" );
+                        + "Optional: -f | --file <testcase_file.xlsx> -F | --Folder <output folder of Test script files>" + "Default: -f Testcase.xlsx -F script"
+                        + "Example: -f Testcases.xlsx -F script" );
         generateOption.setRequired( false );
         options.addOption( generateOption );
 
         Option executeOption = new Option( "x", "execute-test", false,
                 "Execute the test.\n" + "Optional:" + "\t-b | --browser <chrome | googlechrome | firefox | ff | ie | internetexplorer>"
                         + "\t-d | --driver-path <path/to/driver file>" + "\t-F | --Folder <path/to/script_file/folder>"
-                        + "\t-f | -- file <path/to/testcase_file.xls>" );
+                        + "\t-f | -- file <path/to/testcase_file.xlsx>" );
         executeOption.setRequired( false );
         options.addOption( executeOption );
 
-        Option fileOption = new Option( "f", "file", true, "path/to/testcase_file.\nDefault: Testcase.xls" );
+        Option fileOption = new Option( "f", "file", true, "path/to/testcase_file.\nDefault: Testcase.xlsx" );
         fileOption.setRequired( false );
         options.addOption( fileOption );
 
@@ -189,7 +189,7 @@ public class Main
     private void printHelp()
     {
         formatter.printHelp( "SeleniumAutomationTest", options );
-        System.out.println( "Example:\n" + "java -jar SeleneiumAutomationTest.jar -g -x -f Testcase.xls -F script -b chrome -d chromedriver.exe\n"
+        System.out.println( "Example:\n" + "java -jar SeleneiumAutomationTest.jar -g -x -f Testcase.xlsx -F script -b chrome -d chromedriver.exe\n"
                 + "java -jar SeleneiumAutomationTest.jar -g -x to generate and execute with default parameters\n"
                 + "java -jar SeleneiumAutomationTest.jar -g -F script to generate script files only\n"
                 + "java -jar SeleneiumAutomationTest.jar -x script to execute" );
