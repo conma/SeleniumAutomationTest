@@ -31,4 +31,5 @@ SeleniumAutomationTest
 
 		test case file in same folder with jar file, has structure like this https://github.com/conma/SeleniumAutomationTest/blob/master/testcase/Testcase.xlsx
 
+
 	java -jar SeleniumAutomationTest-{version}.jar -g -x
