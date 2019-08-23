@@ -149,6 +149,19 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
+    public void exitClear( SELENEParser.ClearContext ctx ) {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        seleneRunner.clear( element );
+    }
+
+    @Override
+    public void exitRemoveAttr( SELENEParser.RemoveAttrContext ctx ) {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        String attr = trimHeadAndTailQuot( ctx.attribute().getText() );
+        seleneRunner.removeAttr( element, attr );
+    }
+
+    @Override
     public void exitVerifyEnable( VerifyEnableContext ctx )
     {
         String element = trimHeadAndTailQuot( ctx.element().getText() );

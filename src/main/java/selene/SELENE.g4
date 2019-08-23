@@ -5,8 +5,9 @@
 grammar SELENE;
 program   : 'begin' statement+ 'end';
 
-statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyTitle |
-            hover | verifyEnable| verifyDisable | verifyNotFound |
+statement : get  | access | click | doubleClick |sendKeys | hover |
+            clear | removeAttr |
+            verifyText | verifyTitle | verifyEnable| verifyDisable | verifyNotFound |
             verifyChecked | verifyCheckeds | verifyNotChecked | verifyNotCheckeds |
             enableElementByName | enableElementById | enableElementByXPath |
             selectByIndex | selectByText |
@@ -14,31 +15,35 @@ statement : get  | access | click | doubleClick |sendKeys | verifyText | verifyT
             exec |
             quit;
 
-get           : 'get' url;
-access        : 'access' url;
-click         : 'click' element;
-doubleClick   : 'doubleClick' element;
-sendKeys      : 'sendKeys' element string;
-verifyText    : 'verifyText' element string;
-verifyTitle   : 'verifyTitle' string;
-hover         : 'hover' element;
-verifyEnable  : 'verifyEnable' element;
-verifyDisable : 'verifyDisable' element;
-verifyNotFound: 'verifyNotFound' element;
-verifyChecked : 'verifyChecked' element;
-verifyCheckeds: 'verifyCheckeds' elements;
-verifyNotChecked : 'verifyNotChecked' element;
-verifyNotCheckeds : 'verifyNotCheckeds' elements;
-enableElementByName  : 'enableElementByName' element;
-enableElementById    : 'enableElementById' element;
-enableElementByXPath : 'enableElementByXPath' element;
-selectByIndex : 'selectByIndex' element string;
-selectByText  : 'selectByText' element string;
-waitSecond    : 'waitSecond' string;
+get                 : 'get' url;
+access              : 'access' url;
+click               : 'click' element;
+doubleClick         : 'doubleClick' element;
+sendKeys            : 'sendKeys' element string;
+hover               : 'hover' element;
+clear               : 'clear' element;
+removeAttr          : 'removeAttr' element attribute;
 
-exec          : 'exec' string;
+verifyText          : 'verifyText' element string;
+verifyTitle         : 'verifyTitle' string;
+verifyEnable        : 'verifyEnable' element;
+verifyDisable       : 'verifyDisable' element;
+verifyNotFound      : 'verifyNotFound' element;
+verifyChecked       : 'verifyChecked' element;
+verifyCheckeds      : 'verifyCheckeds' elements;
+verifyNotChecked    : 'verifyNotChecked' element;
+verifyNotCheckeds   : 'verifyNotCheckeds' elements;
 
-quit          : 'quit';
+enableElementByName : 'enableElementByName' element;
+enableElementById   : 'enableElementById' element;
+enableElementByXPath: 'enableElementByXPath' element;
+selectByIndex       : 'selectByIndex' element string;
+selectByText        : 'selectByText' element string;
+waitSecond          : 'waitSecond' string;
+
+exec                : 'exec' string;
+
+quit                : 'quit';
 
 /*
 * reference from
@@ -55,6 +60,10 @@ element
   ;
 
 elements
+  : string
+  ;
+
+attribute
   : string
   ;
 

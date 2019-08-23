@@ -173,6 +173,33 @@ public class SeleniumRunner
         webDriver.quit();
     }
 
+    public void exec( String macroFileName )
+    {
+        ANTLRInputStream input = null;
+        try
+        {
+            input = new ANTLRInputStream( new FileInputStream( SELENE.getScriptFolderPath() + "/" + macroFileName )) ;
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
+        SELENELexer lexer = new SELENELexer( input );
+        SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
+        parser.addParseListener( new SELENEListenterImpl(SELENE.getDriver()) );
+        parser.program();
+    }
+
+    public void clear( String element ) {
+        WebElement webElement = getElement( element, true );
+        webElement.clear();
+    }
+
+    public void removeAttr( String element, String attr ) {
+        WebElement webElement = getElement( element, true );
+        
+    }
+
     private WebElement getElement( String element, boolean throwException )
     {
         WebElement webElement = null;
@@ -259,22 +286,5 @@ public class SeleniumRunner
             return null;
         }
         return webElement;
-    }
-
-    public void exec( String macroFileName )
-    {
-        ANTLRInputStream input = null;
-        try
-        {
-            input = new ANTLRInputStream( new FileInputStream( SELENE.getScriptFolderPath() + "/" + macroFileName )) ;
-        }
-        catch ( IOException e )
-        {
-            e.printStackTrace();
-        }
-        SELENELexer lexer = new SELENELexer( input );
-        SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
-        parser.addParseListener( new SELENEListenterImpl(SELENE.getDriver()) );
-        parser.program();
     }
 }
