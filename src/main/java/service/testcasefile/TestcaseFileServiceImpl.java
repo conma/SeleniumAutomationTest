@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -21,15 +22,13 @@ import model.Master;
 import model.Testcase;
 
 @Service
-public class TestcaseFileServiceImpl implements TestcaseFileService
-{
+public class TestcaseFileServiceImpl implements TestcaseFileService {
     private static final String MASTER_SHEET_NAME = "Master";
     private static final String MACRO_SHEET_NAME = "Macro";
     private static final String COMMANDS_SHEET_NAME = "Commands";
 
     @Override
-    public Master readMaster( String testcaseFilePath ) throws FileNotFoundException, IOException, EncryptedDocumentException
-    {
+    public Master readMaster( String testcaseFilePath ) throws IOException, EncryptedDocumentException {
         InputStream inputStream = new FileInputStream( testcaseFilePath );
         Workbook wb = new XSSFWorkbook( inputStream );
 
@@ -40,8 +39,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
 
         boolean updateTC = true;
         String updateTcValue = thirdRowMaster.getCell( 1 ).getStringCellValue();
-        if ( updateTcValue.equalsIgnoreCase( "f" ) || updateTcValue.equalsIgnoreCase( "false" ) )
-        {
+        if ( updateTcValue.equalsIgnoreCase( "f" ) || updateTcValue.equalsIgnoreCase( "false" ) ) {
             updateTC = false;
         }
         int firstRowOfTestcase = (int) firstRowMaster.getCell( 1 ).getNumericCellValue() - 1;
@@ -53,8 +51,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
     }
 
     @Override
-    public MacroMap readMacro( String testcaseFilePath ) throws IOException, EncryptedDocumentException
-    {
+    public MacroMap readMacro( String testcaseFilePath ) throws IOException, EncryptedDocumentException {
         MacroMap macroMap = new MacroMap();
 
         InputStream inputStream = new FileInputStream( testcaseFilePath );
@@ -64,17 +61,16 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
         String macroName, macroValue;
         while ( iterator.hasNext() ) {
             Row currentRow = iterator.next();
-            macroName = currentRow.getCell(0).getStringCellValue();
-            macroValue = currentRow.getCell(1).getStringCellValue();
+            macroName = currentRow.getCell( 0 ).getStringCellValue();
+            macroValue = currentRow.getCell( 1 ).getStringCellValue();
             if ( macroName != null && !macroName.isEmpty() )
-                macroMap.addMacro(macroName, macroValue);
+                macroMap.addMacro( macroName, macroValue );
         }
         return macroMap;
     }
 
     @Override
-    public void writeCommands() throws IOException, EncryptedDocumentException
-    {
+    public void writeCommands() throws IOException, EncryptedDocumentException {
         String originalTestcaseFile = getClass().getClassLoader().getResource( "Testcase.xlsx" ).getFile();
 
         InputStream inputStream = null;
@@ -85,42 +81,41 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
         int i = 3;
         final int COMMAND = 0, PARAMS = 1, DESCRIPTION = 2;
 
-        inputStream = inputStream = new FileInputStream(originalTestcaseFile);
+        inputStream = inputStream = new FileInputStream( originalTestcaseFile );
 
         Workbook wb = WorkbookFactory.create( inputStream );
 
         CellStyle style = wb.createCellStyle();
         short BLACK = 0;
-        style.setBorderBottom(BorderStyle.THIN);
-        style.setBorderRight(BorderStyle.THIN);
-        style.setBottomBorderColor(BLACK);
-        style.setRightBorderColor(BLACK);
-        style.setLeftBorderColor(BLACK);
-        style.setTopBorderColor(BLACK);
-        style.setShrinkToFit(true);
-        style.setWrapText(true);
+        style.setBorderBottom( BorderStyle.THIN );
+        style.setBorderRight( BorderStyle.THIN );
+        style.setBottomBorderColor( BLACK );
+        style.setRightBorderColor( BLACK );
+        style.setLeftBorderColor( BLACK );
+        style.setTopBorderColor( BLACK );
+        style.setShrinkToFit( true );
+        style.setWrapText( true );
 
-        Sheet commandsSheet = wb.getSheet(COMMANDS_SHEET_NAME);
+        Sheet commandsSheet = wb.getSheet( COMMANDS_SHEET_NAME );
 
-        for ( Command command : Command.values() )
-        {
-            row = commandsSheet.createRow(i);
+        for ( Command command : Command.values() ) {
+            row = commandsSheet.createRow( i );
 
-            cellCommand = row.createCell(COMMAND);
-            cellCommand.setCellValue(command.getValue());
-            cellCommand.setCellStyle(style);
+            cellCommand = row.createCell( COMMAND );
+            cellCommand.setCellValue( command.getValue() );
+            cellCommand.setCellStyle( style );
 
-            cellParam = row.createCell(PARAMS);
-            cellParam.setCellValue(Arrays.toString(command.getParams()));
-            cellParam.setCellStyle(style);
+            cellParam = row.createCell( PARAMS );
+            cellParam.setCellValue( Arrays.toString( command.getParams() ) );
+            cellParam.setCellStyle( style );
 
-            cellDescription = row.createCell(DESCRIPTION);
-            cellDescription.setCellValue(command.getDescription());
-            cellDescription.setCellStyle(style);
+            cellDescription = row.createCell( DESCRIPTION );
+            cellDescription.setCellValue( command.getDescription() );
+            cellDescription.setCellStyle( style );
 
             i++;
         }
-        outputStream = new FileOutputStream(originalTestcaseFile);
+        outputStream = new FileOutputStream( originalTestcaseFile );
         wb.write( outputStream );
         outputStream.close();
         inputStream.close();
@@ -128,10 +123,8 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
 
     @Override
     public void updateTestcaseIdResult( String testcaseFilePath, Master master, List<Testcase> testcases )
-            throws IOException, EncryptedDocumentException
-    {
-        if ( master.isUpdateTC() )
-        {
+            throws IOException, EncryptedDocumentException {
+        if ( master.isUpdateTC() ) {
             Row row;
             InputStream inputStream = null;
             OutputStream outputStream = null;
@@ -139,8 +132,7 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
             inputStream = new FileInputStream( testcaseFilePath );
             Workbook wb = WorkbookFactory.create( inputStream );
             Sheet testcaseSheet = wb.getSheetAt( 0 );
-            for ( Testcase testcase : testcases )
-            {
+            for ( Testcase testcase : testcases ) {
                 row = testcaseSheet.getRow( testcase.getRow() );
                 row.getCell( master.getResultColumn() ).setCellValue( testcase.getTestcaseStatus().getName() );
                 row.getCell( master.getNoteColumn() ).setCellValue( row.getCell( master.getNoteColumn() ).getStringCellValue() + testcase.getNote() );
@@ -149,11 +141,30 @@ public class TestcaseFileServiceImpl implements TestcaseFileService
                 wb.write( outputStream );
             }
             outputStream.close();
-        }
-        else
-        {
+        } else {
             System.out.println( "[info] Auto update testcase is now false!" );
         }
+    }
+
+    @Override
+    public List<Testcase> initTestcaseList( String testcaseFilePath, Master master ) throws IOException {
+        List<Testcase> testcases = new ArrayList<>();
+        Row row;
+        InputStream inputStream = new FileInputStream( testcaseFilePath );
+        Workbook wb = WorkbookFactory.create( inputStream );
+        Sheet testcaseSheet = wb.getSheetAt( 0 );
+        String tcId, tcStep;
+
+        for ( int i = master.getFirstRowOfTestcase(); i < master.getLastRowOfTestcase(); i++ ) {
+            row = testcaseSheet.getRow( i );
+            tcId = row.getCell( 0 ).getStringCellValue();
+            tcStep = row.getCell( master.getStepColumn() ).getStringCellValue();
+            if ( !tcId.isEmpty() && !tcStep.isEmpty() ) {
+                Testcase testcase = new Testcase( row.getCell( 0 ).getStringCellValue(), i );
+                testcases.add( testcase );
+            }
+        }
+        return testcases;
     }
 
 }

@@ -23,4 +23,6 @@ public interface TestcaseFileService
 
     // Ghi kết quả ra file testcase
     public void updateTestcaseIdResult( String testcaseFilePath, Master master, List<Testcase> testcases ) throws IOException, EncryptedDocumentException;
+
+    List<Testcase> initTestcaseList( String testcaseFilePath, Master master ) throws IOException;
 }

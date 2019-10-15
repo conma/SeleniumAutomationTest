@@ -197,7 +197,7 @@ public class SeleniumRunner
 
     public void removeAttr( String element, String attr ) {
         WebElement webElement = getElement( element, true );
-        
+
     }
 
     private WebElement getElement( String element, boolean throwException )

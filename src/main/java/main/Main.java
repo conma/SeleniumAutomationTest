@@ -179,7 +179,7 @@ public class Main
     private void executeAutoTest()
     {
         System.out.println( "Executing the auto test" );
-        selene.init( browserType, driverFilePath, scriptFolderPath );
+        selene.init( testcaseFilePath, browserType, driverFilePath, scriptFolderPath );
         System.out.println( "Executing scripts in folder " + "'" + scriptFolderPath + "'" );
         System.out.println( "\tBrowser type: " + "'" + browserType + "'" );
         System.out.println( "\tDriver file: " + "'" + driverFilePath + "'" );

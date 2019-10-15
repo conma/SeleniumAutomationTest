@@ -25,6 +25,14 @@ public class Testcase
         this.note = "";
     }
 
+    public Testcase(String id, int row) {
+        this.id = id;
+        this.row = row;
+        this.scriptFileName = id;
+        this.testcaseStatus = TestcaseStatus.PASSED;
+        this.note = "";
+    }
+
     public String getId()
     {
         return id;

@@ -67,7 +67,7 @@ public class ScriptGeneratorServiceImpl implements ScriptGeneratorService
                 }
 
                 String testcaseId = tcRow.getCell( 0 ).getStringCellValue();
-                File file = new File( scriptFolderPath + "/" + testcaseId + "-" + i );
+                File file = new File( scriptFolderPath + "/" + testcaseId );
                 FileWriter scriptFileWriter = new FileWriter( file );
 
                 scriptFileWriter.write( "begin" + NEW_LINE );
