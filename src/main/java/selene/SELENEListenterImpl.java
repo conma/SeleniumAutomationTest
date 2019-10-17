@@ -1,7 +1,5 @@
 package selene;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
@@ -32,9 +30,6 @@ import selene.SELENEParser.VerifyTitleContext;
 import selene.SELENEParser.WaitSecondContext;
 import selene.SELENEParser.ExecContext;
 import selenium.SeleniumRunner;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 @Component
 public class SELENEListenterImpl extends SELENEBaseListener
@@ -126,7 +121,8 @@ public class SELENEListenterImpl extends SELENEBaseListener
     {
         String element = trimHeadAndTailQuot( ctx.element().getText() );
         String string = trimHeadAndTailQuot( ctx.string().getText() );
-        seleneRunner.verifyText( element, string );
+        if ( !seleneRunner.verifyText( element, string ) )
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
     }
 
     @Override
