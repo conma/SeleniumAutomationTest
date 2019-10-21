@@ -7,12 +7,15 @@ program   : 'begin' statement+ 'end';
 
 statement : get  | access | click | doubleClick |sendKeys | hover |
             clear | removeAttr |
-            verifyText | verifyTitle | verifyEnable| verifyDisable | verifyNotFound |
-            verifyChecked | verifyCheckeds | verifyNotChecked | verifyNotCheckeds |
-            enableElementByName | enableElementById | enableElementByXPath |
             selectByIndex | selectByText |
             waitSecond |
+            enableElementByName | enableElementById | enableElementByXPath |
+            createNewTab | switchNextTab |
             exec |
+
+            verifyText | verifyTitle | verifyEnable| verifyDisable | verifyNotFound |
+            verifyChecked | verifyCheckeds | verifyNotChecked | verifyNotCheckeds |
+
             quit;
 
 get                 : 'get' url;
@@ -24,6 +27,15 @@ hover               : 'hover' element;
 clear               : 'clear' element;
 removeAttr          : 'removeAttr' element attribute;
 
+enableElementByName : 'enableElementByName' element;
+enableElementById   : 'enableElementById' element;
+enableElementByXPath: 'enableElementByXPath' element;
+selectByIndex       : 'selectByIndex' element string;
+selectByText        : 'selectByText' element string;
+waitSecond          : 'waitSecond' string;
+createNewTab        : 'createNewTab';
+switchNextTab       : 'switchNextTab';
+
 verifyText          : 'verifyText' element string;
 verifyTitle         : 'verifyTitle' string;
 verifyEnable        : 'verifyEnable' element;
@@ -33,13 +45,6 @@ verifyChecked       : 'verifyChecked' element;
 verifyCheckeds      : 'verifyCheckeds' elements;
 verifyNotChecked    : 'verifyNotChecked' element;
 verifyNotCheckeds   : 'verifyNotCheckeds' elements;
-
-enableElementByName : 'enableElementByName' element;
-enableElementById   : 'enableElementById' element;
-enableElementByXPath: 'enableElementByXPath' element;
-selectByIndex       : 'selectByIndex' element string;
-selectByText        : 'selectByText' element string;
-waitSecond          : 'waitSecond' string;
 
 exec                : 'exec' string;
 

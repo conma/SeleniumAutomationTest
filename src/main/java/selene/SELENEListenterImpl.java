@@ -156,7 +156,60 @@ public class SELENEListenterImpl extends SELENEBaseListener
         String attr = trimHeadAndTailQuot( ctx.attribute().getText() );
         seleneRunner.removeAttr( element, attr );
     }
+    @Override
+    public void exitEnableElementByName( EnableElementByNameContext ctx )
+    {
+        seleneRunner.enableElementByName( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
 
+    @Override
+    public void exitEnableElementById( EnableElementByIdContext ctx )
+    {
+        seleneRunner.enableElementById( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
+
+    @Override
+    public void exitEnableElementByXPath( EnableElementByXPathContext ctx )
+    {
+        seleneRunner.enableElementByXPath( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
+
+    @Override
+    public void exitDoubleClick( DoubleClickContext ctx )
+    {
+        seleneRunner.doubleClick( trimHeadAndTailQuot( ctx.element().getText() ) );
+    }
+
+    @Override
+    public void exitSelectByIndex( SelectByIndexContext ctx )
+    {
+        seleneRunner.selectByIndex( trimHeadAndTailQuot( ctx.element().getText() ), trimHeadAndTailQuot( ctx.string().getText() ) );
+    }
+
+    @Override
+    public void exitSelectByText( SelectByTextContext ctx )
+    {
+        seleneRunner.selectByText( trimHeadAndTailQuot( ctx.element().getText() ), trimHeadAndTailQuot( ctx.string().getText() ) );
+    }
+
+    @Override
+    public void exitWaitSecond( WaitSecondContext ctx )
+    {
+        String seconds = trimHeadAndTailQuot( ctx.string().getText() );
+        seleneRunner.waitSecond( seconds );
+    }
+
+    @Override
+    public void exitCreateNewTab( SELENEParser.CreateNewTabContext ctx ) {
+        seleneRunner.createNewTab();
+    }
+
+    @Override
+    public void exitSwitchNextTab( SELENEParser.SwitchNextTabContext ctx ) {
+        seleneRunner.switchNextTab();
+    }
+
+    // verify
     @Override
     public void exitVerifyEnable( VerifyEnableContext ctx )
     {
@@ -224,49 +277,6 @@ public class SELENEListenterImpl extends SELENEBaseListener
             testcase.setNote( testcase.getNote() + "\nThe Web Elements: " + ctx.elements().getText() + " at least one is checked!" );
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
         }
-    }
-
-    @Override
-    public void exitEnableElementByName( EnableElementByNameContext ctx )
-    {
-        seleneRunner.enableElementByName( trimHeadAndTailQuot( ctx.element().getText() ) );
-    }
-
-    @Override
-    public void exitEnableElementById( EnableElementByIdContext ctx )
-    {
-        seleneRunner.enableElementById( trimHeadAndTailQuot( ctx.element().getText() ) );
-    }
-
-    @Override
-    public void exitEnableElementByXPath( EnableElementByXPathContext ctx )
-    {
-        seleneRunner.enableElementByXPath( trimHeadAndTailQuot( ctx.element().getText() ) );
-    }
-
-    @Override
-    public void exitDoubleClick( DoubleClickContext ctx )
-    {
-        seleneRunner.doubleClick( trimHeadAndTailQuot( ctx.element().getText() ) );
-    }
-
-    @Override
-    public void exitSelectByIndex( SelectByIndexContext ctx )
-    {
-        seleneRunner.selectByIndex( trimHeadAndTailQuot( ctx.element().getText() ), trimHeadAndTailQuot( ctx.string().getText() ) );
-    }
-
-    @Override
-    public void exitSelectByText( SelectByTextContext ctx )
-    {
-        seleneRunner.selectByText( trimHeadAndTailQuot( ctx.element().getText() ), trimHeadAndTailQuot( ctx.string().getText() ) );
-    }
-
-    @Override
-    public void exitWaitSecond( WaitSecondContext ctx )
-    {
-        String seconds = trimHeadAndTailQuot( ctx.string().getText() );
-        seleneRunner.waitSecond( seconds );
     }
 
     @Override

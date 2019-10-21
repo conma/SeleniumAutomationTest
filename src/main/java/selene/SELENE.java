@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -26,7 +25,6 @@ import service.testcasefile.TestcaseFileService;
 
 @Component
 public class SELENE {
-    private static final String HYPHEN = "-";
 
     private static WebDriver driver;
 
@@ -44,7 +42,7 @@ public class SELENE {
             File scriptFolder = new File( scriptFolderPath );
             for ( Testcase testcase : testcases ) {
                 try {
-                    ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + testcase.getScriptFileName() ) );
+                    ANTLRInputStream input = new ANTLRInputStream( new FileInputStream( scriptFolder + "/" + testcase.getId() ) );
                     SELENELexer lexer = new SELENELexer( input );
                     SELENEParser parser = new SELENEParser( new CommonTokenStream( lexer ) );
                     parser.addParseListener( new SELENEListenterImpl( driver, testcase ) );
