@@ -13,7 +13,7 @@ statement : get  | access | click | doubleClick |sendKeys | hover |
             createNewTab | switchNextTab |
             exec |
 
-            verifyText | verifyTitle | verifyEnable| verifyDisable | verifyNotFound |
+            verifyText | verifyValue | verifyTitle | verifyEnable| verifyDisable | verifyNotFound |
             verifyChecked | verifyCheckeds | verifyNotChecked | verifyNotCheckeds |
 
             quit;
@@ -37,6 +37,7 @@ createNewTab        : 'createNewTab';
 switchNextTab       : 'switchNextTab';
 
 verifyText          : 'verifyText' element string;
+verifyValue         : 'verifyValue' element string;
 verifyTitle         : 'verifyTitle' string;
 verifyEnable        : 'verifyEnable' element;
 verifyDisable       : 'verifyDisable' element;

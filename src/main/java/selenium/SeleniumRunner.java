@@ -21,6 +21,8 @@ import selene.SELENEListenterImpl;
 import selene.SELENEParser;
 
 public class SeleniumRunner {
+    private static final String VALUE = "value";
+
     private WebDriver webDriver;
 
     private Actions action;
@@ -140,10 +142,14 @@ public class SeleniumRunner {
         parser.program();
     }
 
-    public String getText(String element)
-    {
+    public String getText( String element ) {
         WebElement webElement = getElement( element, true );
         return webElement.getText();
+    }
+
+    public String getValue( String element ) {
+        WebElement webElement = getElement( element, true );
+        return webElement.getAttribute( VALUE );
     }
 
     public void quit() {
@@ -156,8 +162,13 @@ public class SeleniumRunner {
     }
 
     public boolean verifyText( String element, String text ) {
-        WebElement webElement = getElement( element, true );
-        return webElement.getText().equals( text );
+        String elementText = getText( element );
+        return elementText.equals( text );
+    }
+
+    public boolean verifyValue( String element, String value ) {
+        String elementValue = getValue( element );
+        return elementValue.equals( value );
     }
 
     public boolean verifyEnable( String element ) {

@@ -129,6 +129,17 @@ public class SELENEListenterImpl extends SELENEBaseListener
     }
 
     @Override
+    public void exitVerifyValue( SELENEParser.VerifyValueContext ctx ) {
+        String element = trimHeadAndTailQuot( ctx.element().getText() );
+        String string = trimHeadAndTailQuot( ctx.string().getText() );
+        if ( !seleneRunner.verifyValue( element, string ) )
+        {
+            testcase.setNote( testcase.getNote() + "Value of element: '" + seleneRunner.getValue( element ) + "', compare with '" + string + "'" );
+            testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
+    }
+
+    @Override
     public void exitVerifyTitle( VerifyTitleContext ctx )
     {
         String title = trimHeadAndTailQuot( ctx.string().getText() );
