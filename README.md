@@ -32,4 +32,6 @@ SeleniumAutomationTest
 		test case file in same folder with jar file, has structure like this https://github.com/conma/SeleniumAutomationTest/blob/master/testcase/Testcase.xlsx
 
 
-	java -jar SeleniumAutomationTest-{version}.jar -g -x
+	java -Dfile.encoding=UTF-8 -jar SeleniumAutomationTest-{version}.jar -g -x
+	java -Dfile.encoding=UTF-8 -jar SeleniumAutomationTest-{version}.jar -g -x -f Testcase.xlsx
+	java -Dfile.encoding=UTF-8 -jar SeleniumAutomationTest-{version}.jar -g -x -f Testcase.xlsx -F script

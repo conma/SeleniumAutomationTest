@@ -59,15 +59,6 @@ public class SeleniumRunner {
         webElement.sendKeys( keywords );
     }
 
-    public boolean verifyText( String element, String text ) {
-        WebElement webElement = getElement( element, true );
-        return webElement.getText().equals( text );
-    }
-
-    public boolean verifyTitle( String title ) {
-        return webDriver.getTitle().equals( title );
-    }
-
     public void hover( String element ) {
         WebElement webElement = getElement( element, true );
         action.moveToElement( webElement ).build().perform();
@@ -149,11 +140,26 @@ public class SeleniumRunner {
         parser.program();
     }
 
+    public String getText(String element)
+    {
+        WebElement webElement = getElement( element, true );
+        return webElement.getText();
+    }
+
     public void quit() {
         webDriver.quit();
     }
 
     // verify
+    public boolean verifyTitle( String title ) {
+        return webDriver.getTitle().equals( title );
+    }
+
+    public boolean verifyText( String element, String text ) {
+        WebElement webElement = getElement( element, true );
+        return webElement.getText().equals( text );
+    }
+
     public boolean verifyEnable( String element ) {
         WebElement webElement = getElement( element, true );
         return webElement.isEnabled();

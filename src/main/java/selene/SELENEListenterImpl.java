@@ -122,7 +122,10 @@ public class SELENEListenterImpl extends SELENEBaseListener
         String element = trimHeadAndTailQuot( ctx.element().getText() );
         String string = trimHeadAndTailQuot( ctx.string().getText() );
         if ( !seleneRunner.verifyText( element, string ) )
+        {
+            testcase.setNote( testcase.getNote() + "Text of element: '" + seleneRunner.getText( element ) + "', compare with '" + string + "'" );
             testcase.setTestcaseStatus( TestcaseStatus.FAILED );
+        }
     }
 
     @Override
