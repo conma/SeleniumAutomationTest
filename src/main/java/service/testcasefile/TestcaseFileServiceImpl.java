@@ -37,10 +37,15 @@ public class TestcaseFileServiceImpl implements TestcaseFileService {
         Row thirdRowMaster = master.getRow( 2 );
 
         boolean updateTC = true;
-        String updateTcValue = thirdRowMaster.getCell( 1 ).getStringCellValue();
-        if ( updateTcValue.equalsIgnoreCase( "f" ) || updateTcValue.equalsIgnoreCase( "false" ) ) {
-            updateTC = false;
+        try {
+            updateTC  = thirdRowMaster.getCell( 1 ).getBooleanCellValue();
+        } catch ( Exception e ) {
+            String updateTcValue = thirdRowMaster.getCell( 1 ).getStringCellValue();
+            if ( updateTcValue.equalsIgnoreCase( "f" ) || updateTcValue.equalsIgnoreCase( "false" ) ) {
+                updateTC = false;
+            }
         }
+
         int firstRowOfTestcase = (int) firstRowMaster.getCell( 1 ).getNumericCellValue() - 1;
         int lastRowOfTestcase = (int) secondRowMaster.getCell( 1 ).getNumericCellValue() - 1;
         int stepColumn = firstRowMaster.getCell( 4 ).getStringCellValue().toCharArray()[0] - 'A';
